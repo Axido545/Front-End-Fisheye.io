@@ -10,6 +10,8 @@ Pour ajouter une requête Fetch pour récupérer les données des photographes a
 
 async function getPhotographers() {
 
+
+
     try {
 
         /*
@@ -18,7 +20,7 @@ async function getPhotographers() {
            du fichier JSON.
 
         */
-        const response = await fetch('data/photographers.json'); // Remplacez "chemin_vers_le_fichier_JSON" par le chemin réel de votre fichier JSON
+        const response = await fetch('https://axido545.github.io/Front-End-Fisheye.io/data/photographers.json'); // Remplacez "chemin_vers_le_fichier_JSON" par le chemin réel de votre fichier JSON
         
         
         // Si la requête est réussie (response.ok est true),
@@ -47,6 +49,8 @@ console.log(response)
 
 
         const data = await response.json();
+
+        console.log(data)
         return { photographers: data };
     } catch (error) {
         console.error(error);
@@ -54,17 +58,25 @@ console.log(response)
     }
 }
 
-
-
 async function displayData(photographers) {
-            const photographersSection = document.querySelector(".photographer_section");
+    const photographersSection = document.querySelector(".photographer_section");
+
+    photographers.photographers.forEach((photographer) => {
+        const photographerModel = photographerFactory(photographer);
+        const userCardDOM = photographerModel.getUserCardDOM();
+        photographersSection.appendChild(userCardDOM);
+    });
+};
+
+// async function displayData(photographers) {
+//             const photographersSection = document.querySelector(".photographer_section");
     
-            photographers.forEach((photographer) => {
-                const photographerModel = photographerFactory(photographer);
-                const userCardDOM = photographerModel.getUserCardDOM();
-                photographersSection.appendChild(userCardDOM);
-            });
-        };
+//             photographers.forEach((photographer) => {
+//                 const photographerModel = photographerFactory(photographer);
+//                 const userCardDOM = photographerModel.getUserCardDOM();
+//                 photographersSection.appendChild(userCardDOM);
+//             });
+//         };
 
 
 
