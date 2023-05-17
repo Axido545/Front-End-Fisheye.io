@@ -9,7 +9,6 @@ Pour ajouter une requête Fetch pour récupérer les données des photographes a
 
 
 async function getPhotographers() {
-    console.log("ouiiiiiiiiiiinnnnnnnnnnn dans la fonction")
 
     try {
 
@@ -31,7 +30,7 @@ Si une erreur se produit lors de la requête ou de la conversion en JSON,
 l'erreur est capturée et affichée dans la console, et la fonction renvoie
  un objet avec un tableau vide de photographes.
         */
-
+console.log(response)
         
         
         if (!response.ok) {
