@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-content: center;
+  flex-direction: row;
 }
 
 .contact_button {
@@ -24,6 +25,24 @@
   cursor: pointer;
   -ms-flex-align: center;
   margin: auto;
+  justify-content: center;
+  order: 2;
+}
+.info-photograph {
+  margin: auto;
+  -ms-flex-align: start;
+  justify-content: flex-start;
+  order: 1;
+}
+
+.picture-photograph {
+  border-radius: 100%;
+  justify-content: flex-end;
+  order: 3;
+}
+
+.picture-photograph img {
+  border-radius: 100%;
 }
 
 .modal {

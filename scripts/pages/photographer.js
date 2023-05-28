@@ -56,11 +56,28 @@ async function displayPhotographerInfo() {
 
   if (photographer) {
     const photographerInfoSection = document.querySelector(".photograph-header");
+    const portrait = photographer.portrait
 
-    // Création des éléments HTML pour afficher les informations du photographe
-    // const photographerName = document.createElement("h2");
-    // photographerName.textContent = photographer.name;
-    // photographerInfoSection.appendChild(photographerName);
+    // partie info du photograph
+    const sectionInfo = document.createElement('section')
+    sectionInfo.setAttribute("class","info-photograph")
+    photographerInfoSection.appendChild(sectionInfo); 
+
+
+    const sectionPicture = document.createElement('section')
+    sectionPicture.setAttribute("class","picture-photograph container-img img")
+    photographerInfoSection.appendChild(sectionPicture);
+
+    const photographerPortrait = document.createElement("img");
+    photographerPortrait.src = `assets/photographers/${portrait}`;
+     sectionPicture.appendChild(photographerPortrait);
+
+
+
+    // 
+    const photographerName = document.createElement("h2");
+    photographerName.textContent = photographer.name;
+    sectionInfo.appendChild(photographerName);
 
     // const photographerCity = document.createElement("p");
     // photographerCity.textContent = `City: ${photographer.city}`;
@@ -78,10 +95,7 @@ async function displayPhotographerInfo() {
     // photographerPrice.textContent = `Price: ${photographer.price}`;
     // photographerInfoSection.appendChild(photographerPrice);
 
-    // const photographerPortrait = document.createElement("img");
-    // photographerPortrait.src = `path/to/portraits/${photographer.portrait}`;
-    // photographerPortrait.alt = photographer.name;
-    // photographerInfoSection.appendChild(photographerPortrait);
+    // 
   } else {
     console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
   }
