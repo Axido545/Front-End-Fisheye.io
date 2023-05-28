@@ -6,6 +6,9 @@
   background-color: #fafafa;
   height: 300px;
   margin: 0 100px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 .contact_button {
@@ -19,6 +22,8 @@
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+  -ms-flex-align: center;
+  margin: auto;
 }
 
 .modal {
