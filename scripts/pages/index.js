@@ -1,27 +1,13 @@
-
-// 1- Ajouter fetch dans la fonction getPhotographers pour récupérer
-// vos datas, 
-/*
-Pour ajouter une requête Fetch pour récupérer les données des photographes au lieu de les définir
- directement dans la fonction getPhotographers, vous pouvez modifier la fonction de la manière suivante :
-*/
 async function getPhotographers() {
     try {
-
-        /*
-         Dans cette version modifiée, la fonction utilise l'opérateur await pour attendre la résolution
-          de la promesse renvoyée par fetch, qui effectue une requête HTTP pour récupérer les données
-           du fichier JSON.
-        */
-        const response = await fetch('data/photographers.json'); // Remplacez "chemin_vers_le_fichier_JSON" par le chemin réel de votre fichier JSON
-        // Si la requête est réussie (response.ok est true),
-        // les données sont extraites de la réponse en utilisant response.json()
+        /*l'opérateur await attendre la résolution
+        de la promesse renvoyée par fetch, qui effectue une requête HTTP pour récupérer les données
+        du fichier JSON.*/
+        const response = await fetch('data/photographers.json'); 
+        // données  extraites de la réponse en utilisant response.json()
         // et renvoyées sous la forme d'un objet contenant le tableau de photographes.
-        /*
-Si une erreur se produit lors de la requête ou de la conversion en JSON,
-l'erreur est capturée et affichée dans la console, et la fonction renvoie
- un objet avec un tableau vide de photographes.
-        */
+        
+        // Si erreur renvoie tableau vide
 console.log(response)
         if (!response.ok) {
             throw new Error('Une erreur s\'est produite lors de la récupération des données des photographes.');
@@ -36,7 +22,6 @@ console.log(response)
         return { photographers: [] }; // Retourne un tableau vide en cas d'erreur
     }
 }
-
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
 
@@ -46,27 +31,12 @@ async function displayData(photographers) {
         photographersSection.appendChild(userCardDOM);
     });
 };
-
-// async function displayData(photographers) {
-//             const photographersSection = document.querySelector(".photographer_section");
-    
-//             photographers.forEach((photographer) => {
-//                 const photographerModel = photographerFactory(photographer);
-//                 const userCardDOM = photographerModel.getUserCardDOM();
-//                 photographersSection.appendChild(userCardDOM);
-//             });
-//         };
         async function init() {
                     // Récupère les datas des photographes
                     const { photographers } = await getPhotographers();
                     displayData(photographers);
                 };
-            
-                /*
-            Enfin, la fonction init est appelée pour démarrer l'application et afficher les photographes
-            dès que le script est exécuté.
-                */
-                
+            //affichage photograph des que script executé
                 init();
                 
 

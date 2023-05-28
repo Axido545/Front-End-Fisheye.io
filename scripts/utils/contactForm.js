@@ -23,3 +23,4 @@ function closeModal() {
 Ces deux fonctions sont utilisées généralement en conjonction
 pour afficher et masquer une fenêtre modale dans une application web.
 */
+

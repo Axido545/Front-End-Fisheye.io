@@ -2,7 +2,7 @@
 function photographerFactory(data) {
 
 // l'intérieur de la fonction, l'objet data est destructuré pour extraire les propriétés name et portrait.
-    const { name, portrait, city, country,tagline, price } = data;   
+    const { name, portrait, city, country,tagline, price, id } = data;   
 
     //c'est le chemin de l'image
     const picture = `assets/photographers/${portrait}`;
@@ -40,8 +40,11 @@ function photographerFactory(data) {
         article.appendChild(pTagline);
         article.appendChild(pPrice);
 
-        //l'élément article est renvoyé.
-        return (article);
+        const link = document.createElement('a');
+          link.setAttribute('href', `photographer.html?id=${id}`); // ajout de l'id
+         link.appendChild(article);
+
+        return link;
         
     }
 
@@ -52,3 +55,5 @@ function photographerFactory(data) {
   // picture (qui est la valeur de la variable picture), 
  // et getUserCardDOM (qui est la fonction getUserCardDOM définie à l'intérieur de photographerFactory)
 }
+
+
