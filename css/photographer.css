@@ -10,6 +10,7 @@
   justify-content: center;
   align-content: center;
   flex-direction: row;
+  padding: 15px;
 }
 
 .contact_button {
@@ -30,6 +31,7 @@
 }
 .info-photograph {
   margin: auto;
+  margin-left: 0;
   -ms-flex-align: start;
   justify-content: flex-start;
   order: 1;
@@ -39,6 +41,8 @@
   border-radius: 100%;
   justify-content: flex-end;
   order: 3;
+  margin: auto;
+  margin-right: 0;
 }
 
 .picture-photograph img {
