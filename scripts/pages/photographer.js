@@ -60,7 +60,7 @@ async function displayPhotographerInfo() {
 
     // partie info du photograph
     const sectionInfo = document.createElement('section')
-    sectionInfo.setAttribute("class","info-photograph")
+    sectionInfo.setAttribute("class","info-photograph .photographer_section article")
     photographerInfoSection.appendChild(sectionInfo); 
 
 
@@ -73,27 +73,22 @@ async function displayPhotographerInfo() {
      sectionPicture.appendChild(photographerPortrait);
 
 
-
-    // 
     const photographerName = document.createElement("h2");
+    photographerName.setAttribute('class','photographer-name')
     photographerName.textContent = photographer.name;
     sectionInfo.appendChild(photographerName);
 
-    // const photographerCity = document.createElement("p");
-    // photographerCity.textContent = `City: ${photographer.city}`;
-    // photographerInfoSection.appendChild(photographerCity);
+    const photographerLocation = document.createElement("p");
+    photographerLocation.setAttribute('class','location')
+    photographerLocation.textContent = ` ${photographer.city} , ${photographer.country}`;
+    sectionInfo.appendChild(photographerLocation);
 
-    // const photographerCountry = document.createElement("p");
-    // photographerCountry.textContent = `Country: ${photographer.country}`;
-    // photographerInfoSection.appendChild(photographerCountry);
+    const photographerTagline = document.createElement("p");
+    photographerTagline.setAttribute('class', 'tagline')
+    photographerTagline.textContent = `${photographer.tagline}`;
+    sectionInfo.appendChild(photographerTagline);
 
-    // const photographerTagline = document.createElement("p");
-    // photographerTagline.textContent = `Tagline: ${photographer.tagline}`;
-    // photographerInfoSection.appendChild(photographerTagline);
 
-    // const photographerPrice = document.createElement("p");
-    // photographerPrice.textContent = `Price: ${photographer.price}`;
-    // photographerInfoSection.appendChild(photographerPrice);
 
     // 
   } else {
