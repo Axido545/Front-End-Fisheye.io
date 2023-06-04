@@ -84,9 +84,32 @@ async function displayPhotographerInfo() {
     sectionPicture.setAttribute("class", "picture-photograph container-img img");
     photographerInfoSection.appendChild(sectionPicture);
 
-    const photographerPortrait = document.createElement("img");
-    photographerPortrait.src = `assets/photographers/${portrait}`;
-    sectionPicture.appendChild(photographerPortrait);
+    // const photographerPortrait = document.createElement("img");
+    // photographerPortrait.src = `assets/photographers/${portrait}`;
+    // sectionPicture.appendChild(photographerPortrait);
+
+
+
+const mediaContainer = document.createElement("div");
+const media = document.createElement("div");
+
+const fileExtension = portrait.split('.').pop().toLowerCase();
+
+if (fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png") {
+  const image = document.createElement("img");
+  image.src = `assets/photographers/${portrait}`;
+  media.appendChild(image);
+} else if (fileExtension === "mp4" || fileExtension === "webm" || fileExtension === "ogg") {
+  const video = document.createElement("video");
+  video.src = `assets/photographers/${portrait}`;
+  video.controls = true; // Ajouter des contrôles vidéo
+  media.appendChild(video);
+}
+
+mediaContainer.appendChild(media);
+sectionPicture.appendChild(mediaContainer);
+
+
 
     const photographerName = document.createElement("h2");
     photographerName.setAttribute("class", "photographer-name");
@@ -103,8 +126,42 @@ async function displayPhotographerInfo() {
     photographerTagline.textContent = `${photographer.tagline}`;
     sectionInfo.appendChild(photographerTagline);
 
-    // Galerie de photos
     const mainContent = document.getElementById("main");
+
+    //filtre
+    const filtrePhotos = document.createElement("section")
+    filtrePhotos.setAttribute("class","filtre");
+    mainContent.appendChild(filtrePhotos);
+
+    const labelFiltre = document.createElement("section")
+    filtrePhotos.setAttribute("for","select-filter");
+    filtrePhotos.textContent ="Trier par";
+    filtrePhotos.appendChild(labelFiltre);
+
+    const selectFiltre = document.createElement('select')
+    selectFiltre.setAttribute("id","select-filter");
+    selectFiltre.setAttribute("name","select-filter");
+    filtrePhotos.appendChild(selectFiltre);
+
+
+    const optionOne = document.createElement('option')
+    optionOne.setAttribute("value","popular");
+    optionOne.textContent = "Popularité";
+    selectFiltre.appendChild(optionOne);
+
+    const optionTwo = document.createElement('option')
+    optionTwo.setAttribute("value","date");
+    optionTwo.textContent = "Date";
+    selectFiltre.appendChild(optionTwo);
+
+    const optionTree = document.createElement('option')
+    optionTree.setAttribute("value","Titre");
+    optionTree.textContent = "Titre";
+    selectFiltre.appendChild(optionTree);
+
+
+    // Galerie de photos
+  
     const photoGallery = document.createElement("section");
     photoGallery.setAttribute("class", "photo-gallery");
     mainContent.appendChild(photoGallery);
