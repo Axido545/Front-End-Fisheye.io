@@ -1,5 +1,11 @@
 #contact_modal {
   display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.466);
 }
 
 .photograph-header {
@@ -11,6 +17,7 @@
   align-content: center;
   flex-direction: row;
   padding: 15px;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .contact_button {
@@ -29,6 +36,13 @@
   justify-content: center;
   order: 2;
 }
+
+.contact_button:hover,
+.contact_button:focus {
+  background-color: #db8876;
+  color: black;
+}
+
 .info-photograph {
   margin: auto;
   margin-left: 0;
@@ -47,6 +61,27 @@
 
 .picture-photograph img {
   border-radius: 100%;
+}
+
+#main {
+  justify-content: center;
+  align-items: center;
+}
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 100px;
+  grid-auto-rows: minmax(100px, auto);
+  margin-left: 100px;
+  margin-top: 90px;
+}
+
+.photo-container {
+  width: 350px;
+  height: 300px;
+  border-radius: 5px;
+  background-color: #c4c4c4;
+  margin-top: -40px;
 }
 
 .modal {
@@ -73,7 +108,8 @@
 .modal header h2 {
   font-size: 64px;
   font-weight: normal;
-  text-align: center;
+  text-align: left;
+  margin-bottom: 10px;
 }
 
 form {
@@ -81,6 +117,7 @@ form {
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 50px;
 }
 
 form label {
@@ -101,4 +138,66 @@ form input {
   height: 68px;
   border: none;
   border-radius: 5px;
+  font-size: 2em;
+}
+
+.box-img {
+  object-fit: cover;
+  height: 300px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 5px;
+}
+
+.photographer-name {
+  font-size: 64px;
+  color: #d3573c;
+  font-weight: lighter;
+}
+
+.info-photograph .location {
+  font-size: 24px;
+}
+
+.info-photograph .tagline {
+  font-size: 18px;
+}
+
+.photo-container h3 {
+  color: #d3573c;
+  margin-left: 0;
+  font-size: 24px;
+  font-weight: lighter;
+}
+
+.likes {
+  margin-right: 0;
+  margin-top: 0;
+  color: #901c1c;
+}
+
+.hearth {
+  color: #901c1c;
+}
+
+.info-photo {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  justify-items: center;
+  align-items: center;
+  height: 24px;
+}
+
+.like-photo {
+  justify-content: flex-end;
+}
+
+.title-photo {
+  justify-content: flex-start;
+}
+
+.title-name-contact {
+  padding: 10px;
+  text-align: left;
 }

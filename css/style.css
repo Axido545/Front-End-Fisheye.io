@@ -43,8 +43,7 @@ a {
   flex-direction: column;
 }
 
-.photographer_section article h2,
-.photographer-name {
+.photographer_section article h2 {
   color: #d3573c;
   font-size: 36px;
   font-weight: lighter;

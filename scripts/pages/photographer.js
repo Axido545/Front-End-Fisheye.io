@@ -46,7 +46,24 @@ async function init() {
 
 init();
 
-/////////////////////////////////////affichage des éléments///////////////////////////////////////
+
+
+
+async function getPhotographerPhotos(photographerId) {
+  try {
+    const response = await fetch('data/photographers.json');
+    if (!response.ok) {
+      throw new Error("Une erreur s'est produite lors de la récupération des données des photographes.");
+    }
+    const data = await response.json();
+    const photographerPhotos = data.media.filter(photo => photo.photographerId === photographerId);
+    return photographerPhotos;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+}
+/////////////////////////////////////affichage des éléments header ///////////////////////////////////////
 
 
 //fonction  photographerFactory, paramètre data.
@@ -56,44 +73,93 @@ async function displayPhotographerInfo() {
 
   if (photographer) {
     const photographerInfoSection = document.querySelector(".photograph-header");
-    const portrait = photographer.portrait
+    const portrait = photographer.portrait;
 
-    // partie info du photograph
-    const sectionInfo = document.createElement('section')
-    sectionInfo.setAttribute("class","info-photograph .photographer_section article")
-    photographerInfoSection.appendChild(sectionInfo); 
+    // Partie info du photographe
+    const sectionInfo = document.createElement("section");
+    sectionInfo.setAttribute("class", "info-photograph .photographer_section article");
+    photographerInfoSection.appendChild(sectionInfo);
 
-
-    const sectionPicture = document.createElement('section')
-    sectionPicture.setAttribute("class","picture-photograph container-img img")
+    const sectionPicture = document.createElement("section");
+    sectionPicture.setAttribute("class", "picture-photograph container-img img");
     photographerInfoSection.appendChild(sectionPicture);
 
     const photographerPortrait = document.createElement("img");
     photographerPortrait.src = `assets/photographers/${portrait}`;
-     sectionPicture.appendChild(photographerPortrait);
-
+    sectionPicture.appendChild(photographerPortrait);
 
     const photographerName = document.createElement("h2");
-    photographerName.setAttribute('class','photographer-name')
+    photographerName.setAttribute("class", "photographer-name");
     photographerName.textContent = photographer.name;
     sectionInfo.appendChild(photographerName);
 
     const photographerLocation = document.createElement("p");
-    photographerLocation.setAttribute('class','location')
-    photographerLocation.textContent = ` ${photographer.city} , ${photographer.country}`;
+    photographerLocation.setAttribute("class", "location");
+    photographerLocation.textContent = ` ${photographer.city}, ${photographer.country}`;
     sectionInfo.appendChild(photographerLocation);
 
     const photographerTagline = document.createElement("p");
-    photographerTagline.setAttribute('class', 'tagline')
+    photographerTagline.setAttribute("class", "tagline");
     photographerTagline.textContent = `${photographer.tagline}`;
     sectionInfo.appendChild(photographerTagline);
 
+    // Galerie de photos
+    const mainContent = document.getElementById("main");
+    const photoGallery = document.createElement("section");
+    photoGallery.setAttribute("class", "photo-gallery");
+    mainContent.appendChild(photoGallery);
+
+    const photographerPhotos = await getPhotographerPhotos(id);
+    photographerPhotos.forEach((photo) => {
+      const photoContainer = document.createElement("article");
+      photoContainer.setAttribute("class", "photo-container");
+      photoGallery.appendChild(photoContainer);
+
+      //chaque éléments
+
+      const photoImage = document.createElement("img");
+      photoImage.setAttribute("class","box-img")
+      photoImage.src = `assets/photographers/${photo.image}`;
+      photoImage.alt = photo.title;
+      photoContainer.appendChild(photoImage);
+
+      const footerArticleInfo = document.createElement("div")
+      footerArticleInfo.setAttribute("class","info-photo")
+      photoContainer.appendChild(footerArticleInfo)
+
+      const photoTitle = document.createElement("h3");
+      photoTitle.setAttribute("class","title-photo")
+      photoTitle.textContent = photo.title;
+      footerArticleInfo.appendChild(photoTitle);
+
+      const photoLikes = document.createElement("p");
+      photoLikes.setAttribute("class","like-photo")
+      footerArticleInfo.appendChild(photoLikes);
+
+      const iconLikes = document.createElement("i")
+      iconLikes.setAttribute("class","fa-solid fa-heart")
+      photoLikes.appendChild(iconLikes)
+
+      const numberLikes = document.createElement("span");
+      numberLikes.textContent = `${photo.likes}`
+      photoLikes.appendChild(numberLikes)
+
+      const modalContactName = document.querySelector(".modal header h2");
+      modalContactName.innerHTML =`Contactez-moi<br>${photographer.name}`;
+      modalContactName.setAttribute("class","title-name-contact")
+      
 
 
-    // 
+      // const photoDate = document.createElement("p");
+      // photoDate.textContent = `Date: ${photo.date}`;
+      // photoContainer.appendChild(photoDate);
+
+      // const photoPrice = document.createElement("p");
+      // photoPrice.textContent = `Price: $${photo.price}`;
+      // photoContainer.appendChild(photoPrice);
+    });
   } else {
     console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
   }
 }
-
 displayPhotographerInfo();
