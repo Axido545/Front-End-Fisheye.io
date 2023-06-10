@@ -18,6 +18,10 @@ const regexEmail = new RegExp("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
 const myForm = document.forms.namedItem('contact-photograph');
 
 
+
+
+
+
 form.first.addEventListener('change', function(){
     validFirst(this);
   });

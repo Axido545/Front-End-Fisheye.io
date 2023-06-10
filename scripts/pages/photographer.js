@@ -46,9 +46,6 @@ async function init() {
 
 init();
 
-
-
-
 async function getPhotographerPhotos(photographerId) {
   try {
     const response = await fetch('data/photographers.json');
@@ -74,42 +71,21 @@ async function displayPhotographerInfo() {
   if (photographer) {
     const photographerInfoSection = document.querySelector(".photograph-header");
     const portrait = photographer.portrait;
+  
 
     // Partie info du photographe
     const sectionInfo = document.createElement("section");
-    sectionInfo.setAttribute("class", "info-photograph .photographer_section article");
+    sectionInfo.setAttribute("class", "info-photograph article");
     photographerInfoSection.appendChild(sectionInfo);
 
     const sectionPicture = document.createElement("section");
     sectionPicture.setAttribute("class", "picture-photograph container-img img");
     photographerInfoSection.appendChild(sectionPicture);
 
-    // const photographerPortrait = document.createElement("img");
-    // photographerPortrait.src = `assets/photographers/${portrait}`;
-    // sectionPicture.appendChild(photographerPortrait);
-
-
-
-const mediaContainer = document.createElement("div");
-const media = document.createElement("div");
-
-const fileExtension = portrait.split('.').pop().toLowerCase();
-
-if (fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png") {
-  const image = document.createElement("img");
-  image.src = `assets/photographers/${portrait}`;
-  media.appendChild(image);
-} else if (fileExtension === "mp4" || fileExtension === "webm" || fileExtension === "ogg") {
-  const video = document.createElement("video");
-  video.src = `assets/photographers/${portrait}`;
-  video.controls = true; // Ajouter des contrôles vidéo
-  media.appendChild(video);
-}
-
-mediaContainer.appendChild(media);
-sectionPicture.appendChild(mediaContainer);
-
-
+    const img = document.createElement("img");
+    const picture = `assets/photographers/${portrait}`;
+    img.setAttribute("src", picture);
+    sectionPicture.appendChild(img);
 
     const photographerName = document.createElement("h2");
     photographerName.setAttribute("class", "photographer-name");
@@ -159,62 +135,22 @@ sectionPicture.appendChild(mediaContainer);
     optionTree.textContent = "Titre";
     selectFiltre.appendChild(optionTree);
 
+optionOne.addEventListener("click",
+function(){
+//affiche photo par popularite
+});
 
-    // Galerie de photos
-  
-    const photoGallery = document.createElement("section");
-    photoGallery.setAttribute("class", "photo-gallery");
-    mainContent.appendChild(photoGallery);
+optionTwo.addEventListener("click",
+function(){
+//affiche photo par date
 
-    const photographerPhotos = await getPhotographerPhotos(id);
-    photographerPhotos.forEach((photo) => {
-      const photoContainer = document.createElement("article");
-      photoContainer.setAttribute("class", "photo-container");
-      photoGallery.appendChild(photoContainer);
+});
+optionTree.addEventListener("click",
+function(){
+//affiche photo par titre
 
-      //chaque éléments
+});
 
-      const photoImage = document.createElement("img");
-      photoImage.setAttribute("class","box-img")
-      photoImage.src = `assets/photographers/${photo.image}`;
-      photoImage.alt = photo.title;
-      photoContainer.appendChild(photoImage);
-
-      const footerArticleInfo = document.createElement("div")
-      footerArticleInfo.setAttribute("class","info-photo")
-      photoContainer.appendChild(footerArticleInfo)
-
-      const photoTitle = document.createElement("h3");
-      photoTitle.setAttribute("class","title-photo")
-      photoTitle.textContent = photo.title;
-      footerArticleInfo.appendChild(photoTitle);
-
-      const photoLikes = document.createElement("p");
-      photoLikes.setAttribute("class","like-photo")
-      footerArticleInfo.appendChild(photoLikes);
-
-      const iconLikes = document.createElement("i")
-      iconLikes.setAttribute("class","fa-solid fa-heart")
-      photoLikes.appendChild(iconLikes)
-
-      const numberLikes = document.createElement("span");
-      numberLikes.textContent = `${photo.likes}`
-      photoLikes.appendChild(numberLikes)
-
-      const modalContactName = document.querySelector(".modal header h2");
-      modalContactName.innerHTML =`Contactez-moi<br>${photographer.name}`;
-      modalContactName.setAttribute("class","title-name-contact")
-      
-
-
-      // const photoDate = document.createElement("p");
-      // photoDate.textContent = `Date: ${photo.date}`;
-      // photoContainer.appendChild(photoDate);
-
-      // const photoPrice = document.createElement("p");
-      // photoPrice.textContent = `Price: $${photo.price}`;
-      // photoContainer.appendChild(photoPrice);
-    });
   } else {
     console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
   }

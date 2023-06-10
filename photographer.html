@@ -9,10 +9,6 @@
       rel="stylesheet"
     />
 
-    <script
-      src="https://kit.fontawesome.com/7d17636476.js"
-      crossorigin="anonymous"
-    ></script>
     <title>Fisheye - photographe</title>
   </head>
   <body>
@@ -58,12 +54,15 @@
           </div>
           <div class="formData">
             <label for="message">Votre message</label>
-            <input
+            <textarea
               class="text-control"
               id="message"
-              type="message"
               name="message"
-            />
+              rows="4"
+              cols="100"
+            >
+            </textarea>
+            <input />
             <span class="validator-message validator-custum"></span>
             <br />
           </div>
@@ -76,5 +75,10 @@
     </div>
     <script src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/factories/media.js"></script>
+    <script
+      src="https://kit.fontawesome.com/78279c6304.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

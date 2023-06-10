@@ -18,6 +18,7 @@
   flex-direction: row;
   padding: 15px;
   grid-template-columns: 1fr 1fr 1fr;
+  position: relative;
 }
 
 .contact_button {
@@ -35,6 +36,12 @@
   margin: auto;
   justify-content: center;
   order: 2;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 .contact_button:hover,
@@ -70,7 +77,7 @@
 .photo-gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 100px;
+  grid-gap: 131px;
   grid-auto-rows: minmax(100px, auto);
   margin-top: 70px;
   margin-right: 100px;
@@ -177,8 +184,9 @@ form input {
   color: #901c1c;
 }
 
-.hearth {
+.fa-heart {
   color: #901c1c;
+  margin-left: 5px;
 }
 
 .info-photo {
@@ -188,10 +196,12 @@ form input {
   justify-items: center;
   align-items: center;
   height: 24px;
+  color: #d3573c;
 }
 
 .like-photo {
   justify-content: flex-end;
+  color: #d3573c;
 }
 
 .title-photo {
@@ -221,4 +231,80 @@ form input {
   font-size: 25px;
   align-items: center;
   margin: 0 100px;
+}
+
+@media (max-width: 770px) {
+  header {
+    height: 0;
+  }
+
+  .photograph-header {
+    flex-direction: column;
+    margin: 0;
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+
+  .contact_button,
+  .contact_button:hover,
+  .contact_button:focus {
+    align-self: center;
+    margin: 30px;
+  }
+
+  .photographer-name {
+    font-size: 36px;
+  }
+
+  .photographer-name,
+  .info-photograph .location,
+  .info-photograph .tagline {
+    text-align: center;
+  }
+
+  .info-photograph {
+    margin: auto;
+    margin-left: 0;
+    -ms-flex-align: start;
+    justify-content: flex-start;
+    order: 1;
+    margin-top: 30px;
+    padding-left: 30px;
+  }
+
+  .picture-photograph {
+    border-radius: 100%;
+    justify-content: flex-end;
+    order: 3;
+    margin: auto;
+    margin-right: auto;
+  }
+
+  .picture-photograph img {
+    border-radius: 100%;
+  }
+
+  .filtre {
+    margin: 0 auto;
+  }
+
+  .photo-gallery {
+    grid-template-columns: repeat(1, 1fr);
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+}
+
+.section-total-price {
+  position: fixed;
+  bottom: 0;
+  right: 100px;
+  background-color: #db8876;
+  color: black;
+  padding: 20px 30px;
+  margin-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  justify-content: space-between;
+  width: 220px;
 }
