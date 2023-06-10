@@ -46,10 +46,6 @@ async function init() {
 
 init();
 
-
-
-
-
 async function getPhotographerPhotos(photographerId) {
   try {
     const response = await fetch('data/photographers.json');
@@ -91,11 +87,6 @@ async function displayPhotographerInfo() {
       photoContainer.setAttribute("class", "photo-container");
       photoGallery.appendChild(photoContainer);
 
-
-
-
-      
-
       if(photo.image == undefined){
         const photoVideo = document.createElement("video");
         photoVideo.setAttribute("class","box-img")
@@ -115,8 +106,6 @@ async function displayPhotographerInfo() {
 
       }
 
-
-  
       const footerArticleInfo = document.createElement("div")
       footerArticleInfo.setAttribute("class","info-photo")
       photoContainer.appendChild(footerArticleInfo)
@@ -134,7 +123,6 @@ async function displayPhotographerInfo() {
       numberLikes.textContent = `${photo.likes}`;
       photoLikes.appendChild(numberLikes);
    
-
       const iconLikes = document.createElement("i")
       iconLikes.setAttribute("class","fa-regular fa-heart")
       photoLikes.appendChild(iconLikes)
@@ -164,35 +152,32 @@ async function displayPhotographerInfo() {
       totalLikes += photo.likes;
     });
 
-    // Fonction pour mettre à jour l'affichage du total des likes
-    function updateTotalLikes() {
-      // likeValueSectionPrice.textContent = totalLikes.toString();
-      likeValueSectionPrice.textContent = totalLikes;
+var heartIcons = document.querySelectorAll(".fa-heart");
 
+// Parcourir tous les cœurs
+heartIcons.forEach(function(iconLikes) {
+  iconLikes.addEventListener("click", function() {
+    if (!iconLikes.classList.contains("fa-solid")) {
+      iconLikes.classList.remove("fa-regular");
+      iconLikes.classList.add("fa-solid");
+      photo.likes++; // Augmenter le nombre de likes dans l'objet photo
+      totalLikes++; // Augmenter le total des likes
+    } else {
+      iconLikes.classList.remove("fa-solid");
+      iconLikes.classList.add("fa-regular");
+      photo.likes--; // Diminuer le nombre de likes dans l'objet photo
+      totalLikes--; // Diminuer le total des likes
     }
-
-    iconLikes.addEventListener("click", function() {
-
-      if (!iconLikes.classList.contains("fa-solid")) {
-        iconLikes.classList.remove("fa-regular");
-        iconLikes.classList.add("fa-solid");
-        photo.likes++; // Augmenter le nombre de likes dans l'objet photo
-        totalLikes++; // Augmenter le total des likes
-      } else {
-        iconLikes.classList.remove("fa-solid");
-        iconLikes.classList.add("fa-regular");
-        photo.likes--; // Diminuer le nombre de likes dans l'objet photo
-        totalLikes--; // Diminuer le total des likes
-      }
-
-      // Mettre à jour le texte affichant le nombre de likes pour la photo spécifique
-      numberLikes.textContent = photo.likes;
-      // Mettre à jour l'affichage du total des likes
-      updateTotalLikes();
-    });
+    console.log(totalLikes);
+    // Mettre à jour le texte affichant le nombre de likes pour la photo spécifique
+    numberLikes.textContent = photo.likes;
+    // Mettre à jour l'affichage du total des likes
     updateTotalLikes();
-
-
+  });
+});
+function updateTotalLikes() {
+  likeValueSectionPrice.textContent = totalLikes;
+}
         });
 
       } else {
