@@ -149,6 +149,7 @@ optionTree.addEventListener("click",
 function(){
 //affiche photo par titre
 
+
 });
 
   } else {

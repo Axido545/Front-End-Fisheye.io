@@ -91,16 +91,12 @@ async function displayPhotographerInfo() {
       photoContainer.setAttribute("class", "photo-container");
       photoGallery.appendChild(photoContainer);
 
-    //   chaque éléments
+
+
+
       
-      const fileExtension = portrait.split('.').pop().toLowerCase();
-      
-      if (fileExtension === "jpg" || fileExtension === "jpeg" || fileExtension === "png") {
-        const photoImage = document.createElement("img");
-      photoImage.setAttribute("class","box-img")
-      photoImage.src = `assets/photographers/${photo.image}`;
-      photoContainer.appendChild(photoImage);
-      } else if (fileExtension === "mp4" || fileExtension === "webm" || fileExtension === "ogg") {
+
+      if(photo.image == undefined){
         const photoVideo = document.createElement("video");
         photoVideo.setAttribute("class","box-img")
         photoContainer.appendChild(photoVideo);
@@ -108,7 +104,19 @@ async function displayPhotographerInfo() {
         photoVideoSource.src=`assets/photographers/${photo.video}`;
         photoVideoSource.type ="video/mp4";
         photoVideo.appendChild(photoVideoSource) 
+      
       }
+
+      if (photo.video == undefined){
+        const photoImage = document.createElement("img");
+        photoImage.setAttribute("class","box-img")
+        photoImage.src = `assets/photographers/${photo.image}`;
+        photoContainer.appendChild(photoImage);
+
+      }
+
+
+  
       const footerArticleInfo = document.createElement("div")
       footerArticleInfo.setAttribute("class","info-photo")
       photoContainer.appendChild(footerArticleInfo)

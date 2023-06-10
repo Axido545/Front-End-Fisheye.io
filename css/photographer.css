@@ -50,6 +50,19 @@
   color: black;
 }
 
+.button-submit {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: #901c1c;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .info-photograph {
   margin: auto;
   margin-left: 0;
@@ -307,4 +320,7 @@ form input {
   display: flex;
   justify-content: space-between;
   width: 220px;
+}
+.section-total-price .fa-heart {
+  color: black;
 }
