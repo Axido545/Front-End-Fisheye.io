@@ -96,21 +96,64 @@ form.first.addEventListener('change', function(){
     
 
 
+    
+function checkPrenom() {
+  if (form.first.value =="") {
+    validFirstMsg.innerHTML = "Veuillez entrer un prénom"
+    return false;
+  } else if (form.first.value.length < 2){
+    validFirstMsg.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
+    return false;
+  }else if (regexFirstLast.test(form.first.value)){
+    validFirstMsg.innerHTML = ""
+    return true;
+  }else {
+    validFirstMsg.innerHTML = "Veuillez entrer un prénom valide"
+    return false;
+  }
+}
+
+function checkNom() {
+  if (form.last.value == "") {
+    validLastMsg.innerHTML = "Veuillez entrer un nom"
+    return false;
+  } else if (form.last.value.length < 2){
+    validLastMsg.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom."
+    return false;
+  }else if (regexFirstLast.test(form.last.value)){
+    validLastMsg.innerHTML = ""
+    return true;
+  }else {
+    validLastMsg.innerHTML = "Veuillez entrer un nom valide"
+    return false;
+  }
+}
+
+function checkEmail() {
+  if(form.email == ""){
+    validEmailMsg.innerHTML = "Veuillez entrer un e-mail";
+    return false;
+  } else if (regexEmail.test(form.email.value)){
+    validEmailMsg.innerHTML = "";
+     return true;
+  }else {
+    validEmailMsg.innerHTML = "Veuillez entrer un e-mail valide";
+    return false;
+  }
+}
+
+
+
     document.addEventListener('DOMContentLoaded', function() {
 
         myForm.addEventListener('submit', function(event) {
           event.preventDefault();
           let isValid = false;
           if ( checkPrenom() 
-          && validbirthDate()
-          && validTournement()
-          && checklocation()
-          && checkConditions()
           && checkEmail()
           && checkNom()) {
             isValid = true;
-            modalbg.style.display = "none";
-            modal.style.display = 'block';
+            console.log("le message a été bien reçu")
           } else {
             // Afficher un message d'erreur si nécessaire
      

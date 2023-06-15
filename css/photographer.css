@@ -154,7 +154,8 @@ form div {
   margin-bottom: 26px;
 }
 
-form input {
+form input,
+textarea {
   width: 100%;
   height: 68px;
   border: none;
@@ -210,7 +211,7 @@ form input {
   align-items: center;
   height: 24px;
   color: #d3573c;
-}
+=}
 
 .like-photo {
   justify-content: flex-end;
@@ -246,9 +247,24 @@ form input {
   margin: 0 100px;
 }
 
-@media (max-width: 770px) {
+@media (max-width: 1024px) {
+  .photograph-header {
+    margin: auto;
+  }
+  .photo-gallery {
+ 
+    grid-template-columns: repeat(2, 2fr);
+  }
+}
+
+
+@media (max-width: 767px) {
   header {
     height: 0;
+  }
+
+  .box-img {
+    max-width: 100%;
   }
 
   .photograph-header {
@@ -263,6 +279,7 @@ form input {
   .contact_button:focus {
     align-self: center;
     margin: 30px;
+    position: relative;
   }
 
   .photographer-name {
@@ -277,12 +294,8 @@ form input {
 
   .info-photograph {
     margin: auto;
-    margin-left: 0;
-    -ms-flex-align: start;
-    justify-content: flex-start;
     order: 1;
     margin-top: 30px;
-    padding-left: 30px;
   }
 
   .picture-photograph {
