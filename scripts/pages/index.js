@@ -7,7 +7,6 @@ console.log(response)
         } else {
         }
         const data = await response.json();
-
         console.log(data)
         return { photographers: data };
     } catch (error) {
@@ -17,8 +16,7 @@ console.log(response)
 }
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
-
-    photographers.photographers.forEach((photographer) => {
+        photographers.photographers.forEach((photographer) => {
         const photographerModel = photographerFactory(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);

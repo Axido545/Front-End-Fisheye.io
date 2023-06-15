@@ -29,10 +29,8 @@ async function getPhotographerById(photographerId) {
 
 async function init() {
   const id = getPhotographerIdFromURL();
-  
   if (id) {
-    const { photographer } = await getPhotographerById(id);
-  
+    const { photographer } = await getPhotographerById(id);  
     if (photographer) {
       console.log(photographer);
       // Utilisez les données du photographe pour afficher les informations nécessaires
@@ -43,9 +41,7 @@ async function init() {
     console.error("Aucun identifiant de photographe spécifié dans l'URL.");
   }
 }
-
 init();
-
 async function getPhotographerPhotos(photographerId) {
   try {
     const response = await fetch('data/photographers.json');
@@ -61,8 +57,6 @@ async function getPhotographerPhotos(photographerId) {
   }
 }
 /////////////////////////////////////affichage des éléments header ///////////////////////////////////////
-
-
 //fonction  photographerFactory, paramètre data.
 async function displayPhotographerInfo() {
   const id = getPhotographerIdFromURL();
@@ -71,7 +65,6 @@ async function displayPhotographerInfo() {
   if (photographer) {
     const photographerInfoSection = document.querySelector(".photograph-header");
     const portrait = photographer.portrait;
-  
 
     // Partie info du photographe
     const sectionInfo = document.createElement("section");
@@ -119,7 +112,6 @@ async function displayPhotographerInfo() {
     selectFiltre.setAttribute("name","select-filter");
     filtrePhotos.appendChild(selectFiltre);
 
-
     const optionOne = document.createElement('option')
     optionOne.setAttribute("value","popular");
     optionOne.textContent = "Popularité";
@@ -134,24 +126,18 @@ async function displayPhotographerInfo() {
     optionTree.setAttribute("value","Titre");
     optionTree.textContent = "Titre";
     selectFiltre.appendChild(optionTree);
-
 optionOne.addEventListener("click",
 function(){
 //affiche photo par popularite
 });
-
 optionTwo.addEventListener("click",
 function(){
 //affiche photo par date
-
 });
 optionTree.addEventListener("click",
 function(){
 //affiche photo par titre
-
-
 });
-
   } else {
     console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
   }
