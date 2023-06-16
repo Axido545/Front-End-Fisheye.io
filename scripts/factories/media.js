@@ -87,6 +87,27 @@ async function displayPhotographerInfo() {
       photoContainer.setAttribute("class", "photo-container");
       photoGallery.appendChild(photoContainer);
 
+      const lightboxLink = document.createElement("a");
+      lightboxLink.setAttribute("class","link-lightbox")
+      lightboxLink.appendChild(photoContainer);
+      photoGallery.appendChild(lightboxLink)
+
+///////////////////////////LIGHTBOX/////////////////////////////////
+
+lightboxLink.addEventListener("click", function(){
+
+
+
+});
+
+
+const lightboxPage = document.createElement("section")
+lightboxPage
+
+
+
+
+
       if(photo.image == undefined){
         const photoVideo = document.createElement("video");
         photoVideo.setAttribute("class","box-img")
@@ -137,6 +158,8 @@ async function displayPhotographerInfo() {
 
       const likeValueSectionPrice = document.createElement("span");
       likeValueSectionPrice.setAttribute("class","like-value-section-price")
+      let totalLikes = 0;
+   
       likeSectionPrice.appendChild(likeValueSectionPrice)
 
       const iconLikesValue = document.createElement("i")
@@ -147,15 +170,29 @@ async function displayPhotographerInfo() {
       priceVue.textContent = photographer.price + "€ / jour";
       sectionTotalPrice.appendChild(priceVue)
 
-    let totalLikes = 0;
-    photographerPhotos.forEach(photo => {
-      totalLikes += photo.likes;
-    });
+    //mettre la boucle dans une fonction qu
+
+    function calculTotalLike (){
+      photographerPhotos.forEach(photo => {
+        totalLikes += photo.likes;
+
+        //
+
+      });
+
+
+    }
+
+
+    function updateTotalLikes() {
+      likeValueSectionPrice.textContent = totalLikes;
+     
+    }
 
 var heartIcons = document.querySelectorAll(".fa-heart");
 
 // Parcourir tous les cœurs
-heartIcons.forEach(function(iconLikes) {
+// heartIcons.forEach(function(iconLikes) {
   iconLikes.addEventListener("click", function() {
     if (!iconLikes.classList.contains("fa-solid")) {
       iconLikes.classList.remove("fa-regular");
@@ -171,14 +208,13 @@ heartIcons.forEach(function(iconLikes) {
     console.log(totalLikes);
     // Mettre à jour le texte affichant le nombre de likes pour la photo spécifique
     numberLikes.textContent = photo.likes;
+    likeValueSectionPrice.textContent = totalLikes;
     // Mettre à jour l'affichage du total des likes
     updateTotalLikes();
   });
 });
-function updateTotalLikes() {
-  likeValueSectionPrice.textContent = totalLikes;
-}
-        });
+
+        // });
 
       } else {
         console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);

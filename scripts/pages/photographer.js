@@ -56,6 +56,15 @@ async function getPhotographerPhotos(photographerId) {
     return [];
   }
 }
+//ajout du lien vers l'accueil
+const logo  = document.querySelector(".logo");
+const header = document.querySelector("header");
+const logoLink = document.createElement("a");
+logoLink.setAttribute("href", "index.html");
+logoLink.appendChild(logo)
+header.appendChild(logoLink);
+
+
 /////////////////////////////////////affichage des éléments header ///////////////////////////////////////
 //fonction  photographerFactory, paramètre data.
 async function displayPhotographerInfo() {
@@ -129,6 +138,7 @@ async function displayPhotographerInfo() {
 optionOne.addEventListener("click",
 function(){
 //affiche photo par popularite
+
 });
 optionTwo.addEventListener("click",
 function(){
