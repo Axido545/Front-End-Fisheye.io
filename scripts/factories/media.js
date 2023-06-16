@@ -71,12 +71,7 @@ async function displayPhotographerInfo() {
 
     const mainContent = document.getElementById("main");
 
-    const modalContactName = document.querySelector(".modal header h2");
-      modalContactName.innerHTML =`Contactez-moi<br>${photographer.name}`;
-      modalContactName.setAttribute("class","title-name-contact")
-
     // Galerie de photos
-  
     const photoGallery = document.createElement("section");
     photoGallery.setAttribute("class", "photo-gallery");
     mainContent.appendChild(photoGallery);
@@ -95,19 +90,9 @@ async function displayPhotographerInfo() {
 ///////////////////////////LIGHTBOX/////////////////////////////////
 
 lightboxLink.addEventListener("click", function(){
-
-
-
 });
-
-
 const lightboxPage = document.createElement("section")
 lightboxPage
-
-
-
-
-
       if(photo.image == undefined){
         const photoVideo = document.createElement("video");
         photoVideo.setAttribute("class","box-img")
@@ -126,7 +111,6 @@ lightboxPage
         photoContainer.appendChild(photoImage);
 
       }
-
       const footerArticleInfo = document.createElement("div")
       footerArticleInfo.setAttribute("class","info-photo")
       photoContainer.appendChild(footerArticleInfo)
@@ -175,22 +159,15 @@ lightboxPage
     function calculTotalLike (){
       photographerPhotos.forEach(photo => {
         totalLikes += photo.likes;
-
-        //
-
+        //on
       });
-
-
     }
-
-
     function updateTotalLikes() {
       likeValueSectionPrice.textContent = totalLikes;
      
     }
 
 var heartIcons = document.querySelectorAll(".fa-heart");
-
 // Parcourir tous les cœurs
 // heartIcons.forEach(function(iconLikes) {
   iconLikes.addEventListener("click", function() {
@@ -213,9 +190,7 @@ var heartIcons = document.querySelectorAll(".fa-heart");
     updateTotalLikes();
   });
 });
-
         // });
-
       } else {
         console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
       }
