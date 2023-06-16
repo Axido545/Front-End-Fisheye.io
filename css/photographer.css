@@ -61,7 +61,7 @@
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
-  margin-left : 35px;
+  margin-left: 35px;
 }
 
 .info-photograph {
@@ -117,8 +117,8 @@
   justify-content: space-between;
   margin: auto;
   width: 669px;
-  height:900px;
-  padding :10px
+  height: 900px;
+  padding: 10px;
 }
 
 .title-name-contact,
@@ -140,7 +140,7 @@
   font-weight: normal;
   text-align: left;
   margin-bottom: 10px;
-  padding-left : 35px;
+  padding-left: 35px;
 }
 
 form {
@@ -174,7 +174,7 @@ textarea {
 }
 
 textarea {
-  height :170px;
+  height: 170px;
 }
 
 .box-img {
@@ -225,7 +225,7 @@ textarea {
   align-items: center;
   height: 24px;
   color: #d3573c;
-=}
+}
 
 .like-photo {
   justify-content: flex-end;
@@ -266,11 +266,9 @@ textarea {
     margin: auto;
   }
   .photo-gallery {
- 
     grid-template-columns: repeat(2, 2fr);
   }
 }
-
 
 @media (max-width: 767px) {
   header {
