@@ -121,6 +121,13 @@
   padding: 10px;
 }
 
+#light-box-modal {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
 .title-name-contact,
 .formData {
   padding-left: 35px;

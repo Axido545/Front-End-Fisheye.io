@@ -32,7 +32,6 @@ async function init() {
   if (id) {
     const { photographer } = await getPhotographerById(id);  
     if (photographer) {
-      console.log(photographer.name);
       // Utilisez les données du photographe pour afficher les informations nécessaires
 const modalContactName = document.querySelector(".modal header h2");
 modalContactName.innerHTML =`Contactez-moi<br>${photographer.name}`;

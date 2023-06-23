@@ -60,6 +60,8 @@ async function getPhotographerPhotos(photographerId) {
     return [];
   }
 }
+let totalLikes = 0;
+
     //fonction  photographerFactory, paramètre data.
 async function displayPhotographerInfo() {
   const id = getPhotographerIdFromURL();
@@ -141,9 +143,7 @@ lightboxPage
       sectionTotalPrice.appendChild(likeSectionPrice)
 
       const likeValueSectionPrice = document.createElement("span");
-      likeValueSectionPrice.setAttribute("class","like-value-section-price")
-      let totalLikes = 0;
-   
+      likeValueSectionPrice.setAttribute("class","like-value-section-price")  
       likeSectionPrice.appendChild(likeValueSectionPrice)
 
       const iconLikesValue = document.createElement("i")
@@ -156,17 +156,15 @@ lightboxPage
 
     //mettre la boucle dans une fonction qu
 
-    function calculTotalLike (){
+    function calculTotalLike() {
       photographerPhotos.forEach(photo => {
         totalLikes += photo.likes;
-        //on
       });
     }
     function updateTotalLikes() {
       likeValueSectionPrice.textContent = totalLikes;
-     
     }
-
+    
 var heartIcons = document.querySelectorAll(".fa-heart");
 // Parcourir tous les cœurs
 // heartIcons.forEach(function(iconLikes) {
@@ -174,22 +172,28 @@ var heartIcons = document.querySelectorAll(".fa-heart");
     if (!iconLikes.classList.contains("fa-solid")) {
       iconLikes.classList.remove("fa-regular");
       iconLikes.classList.add("fa-solid");
-      photo.likes++; // Augmenter le nombre de likes dans l'objet photo
-      totalLikes++; // Augmenter le total des likes
+      photo.likes++;
+      totalLikes++;
     } else {
       iconLikes.classList.remove("fa-solid");
       iconLikes.classList.add("fa-regular");
-      photo.likes--; // Diminuer le nombre de likes dans l'objet photo
-      totalLikes--; // Diminuer le total des likes
+      photo.likes--;
+      totalLikes--;
     }
-    console.log(totalLikes);
-    // Mettre à jour le texte affichant le nombre de likes pour la photo spécifique
+    
     numberLikes.textContent = photo.likes;
     likeValueSectionPrice.textContent = totalLikes;
-    // Mettre à jour l'affichage du total des likes
-    updateTotalLikes();
+    console.log(totalLikes)
+
+
   });
+
+  calculTotalLike();
+  updateTotalLikes();
 });
+
+
+
         // });
       } else {
         console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
