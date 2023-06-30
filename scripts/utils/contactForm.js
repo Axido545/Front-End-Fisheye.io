@@ -46,15 +46,29 @@ modalContactName.setAttribute("class","title-name-contact")
 }
 init();
 
+const modal = document.getElementById("contact_modal");
 
 function displayModal() {
-    const modal = document.getElementById("contact_modal");
 	modal.style.display = "block";
 }
 function closeModal() {
-    const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 }
+
+const btnContact = document.querySelector(".contact_button")
+
+document.querySelector('img[src="assets/icons/close.svg"]').removeAttribute("onclick");
+document.querySelector('.contact_button').removeAttribute("onclick");
+
+const close = document.querySelector('img[src="assets/icons/close.svg"]');
+
+btnContact.addEventListener("click", function(){
+  displayModal()
+})
+
+close.addEventListener("click", function(){
+closeModal()
+})
 
 const formModal = document.querySelector("form");
 formModal.setAttribute("name","contact-photograph");
@@ -62,25 +76,31 @@ formModal.setAttribute("action","photographer.html");
 formModal.setAttribute("method","get");
 formModal.setAttribute("id","form-content");
 
-const divFirst = document.querySelector("form div");
-divFirst.setAttribute("class","formData formFirst")
+const divOld = document.querySelector("form div");
+divOld.remove()
+const btnSubmitOld = document.querySelector("form button");
+btnSubmitOld.remove()
 
-const labelFirst =  document.querySelector("form div label");
+const divFirst = document.createElement("div")
+divFirst.setAttribute("class","formData formLast")
+formModal.appendChild(divFirst)
+
+const labelFirst =  document.createElement("label");
 labelFirst.setAttribute("for","first");
+labelFirst.textContent = "Prénom";
+divFirst.appendChild(labelFirst)
 
-const inputFirst = document.querySelector(".formFirst input")
+const inputFirst = document.createElement("input");
 inputFirst.setAttribute("class","text-control")
 inputFirst.setAttribute("id","first")
 inputFirst.setAttribute("type","text")
 inputFirst.setAttribute("name","first")
+divFirst.appendChild(inputFirst)
 
 const validFirstBalise = document.createElement("span")
 validFirstBalise.setAttribute("class", "validator-first validator-custum");
 divFirst.appendChild(validFirstBalise)
 
-const btnSubmitOld = document.querySelector("form button");
-
-btnSubmitOld.remove()
 
 const divLast = document.createElement("div")
 divLast.setAttribute("class","formData formLast")
@@ -110,7 +130,6 @@ const labelEmail =  document.createElement("label");
 labelEmail.setAttribute("for","email");
 labelEmail.textContent = "E-mail";
 divEmail.appendChild(labelEmail)
-
 
 const inputEmail = document.createElement("input");
 inputEmail.setAttribute("class","text-control")
@@ -175,7 +194,6 @@ form.first.addEventListener('change', function(){
 
   form.message.addEventListener('change', function(){
     validMessage(this);
-
   });
 
   const validFirst = function (inputFirst){
@@ -232,8 +250,6 @@ const validMessage = function(inputMessage){
   }
   
 };
-
-
 
 function checkPrenom() {
   if (form.first.value =="") {
@@ -299,6 +315,7 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('Nom :' + form.last.value);
       console.log('Email :' + form.email.value);
       console.log('Message :' + form.message.value);
+      closeModal()
     } else {
       if (checkPrenom() == false) {
         validFirstMsg.innerHTML = "Veuillez entrer un prénom";

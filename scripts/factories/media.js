@@ -11,13 +11,11 @@ async function getPhotographerData() {
     return null;
   }
 }
-
 function getPhotographerIdFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get('id');
   return id ? parseInt(id) : null;
 }
-
 async function getPhotographerById(photographerId) {
   const data = await getPhotographerData();
   if (data) {
@@ -26,10 +24,8 @@ async function getPhotographerById(photographerId) {
   }
   return { photographer: null };
 }
-
 async function init() {
-  const id = getPhotographerIdFromURL();
-  
+  const id = getPhotographerIdFromURL(); 
   if (id) {
     const { photographer } = await getPhotographerById(id);
   
@@ -88,9 +84,7 @@ async function displayPhotographerInfo() {
       lightboxLink.setAttribute("class","link-lightbox")
       lightboxLink.appendChild(photoContainer);
       photoGallery.appendChild(lightboxLink)
-
 ///////////////////////////LIGHTBOX/////////////////////////////////
-
 lightboxLink.addEventListener("click", function(){
 });
 const lightboxPage = document.createElement("section")
@@ -103,15 +97,12 @@ lightboxPage
         photoVideoSource.src=`assets/photographers/${photo.video}`;
         photoVideoSource.type ="video/mp4";
         photoVideo.appendChild(photoVideoSource) 
-      
       }
-
       if (photo.video == undefined){
         const photoImage = document.createElement("img");
         photoImage.setAttribute("class","box-img")
         photoImage.src = `assets/photographers/${photo.image}`;
         photoContainer.appendChild(photoImage);
-
       }
       const footerArticleInfo = document.createElement("div")
       footerArticleInfo.setAttribute("class","info-photo")
@@ -155,46 +146,42 @@ lightboxPage
       sectionTotalPrice.appendChild(priceVue)
 
     //mettre la boucle dans une fonction qu
+// récuperer les photos du photographe
 
-    function calculTotalLike() {
-      photographerPhotos.forEach(photo => {
-        totalLikes += photo.likes;
-      });
-    }
-    function updateTotalLikes() {
-      likeValueSectionPrice.textContent = totalLikes;
-    }
-    
-var heartIcons = document.querySelectorAll(".fa-heart");
-// Parcourir tous les cœurs
-// heartIcons.forEach(function(iconLikes) {
+
+
+totalLikes += photo.likes;
+      
+
+
+function updateTotalLikes(){
+  likeValueSectionPrice.textContent = totalLikes;
+
+}
+
+      // likeValueSectionPrice.textContent = totalLikes;
   iconLikes.addEventListener("click", function() {
     if (!iconLikes.classList.contains("fa-solid")) {
       iconLikes.classList.remove("fa-regular");
       iconLikes.classList.add("fa-solid");
       photo.likes++;
       totalLikes++;
+
+  
     } else {
       iconLikes.classList.remove("fa-solid");
       iconLikes.classList.add("fa-regular");
       photo.likes--;
       totalLikes--;
+
     }
-    
-    numberLikes.textContent = photo.likes;
-    likeValueSectionPrice.textContent = totalLikes;
+     numberLikes.textContent = photo.likes;
+     updateTotalLikes()
     console.log(totalLikes)
-
-
   });
-
-  calculTotalLike();
-  updateTotalLikes();
-});
-
-
-
-        // });
+  
+ updateTotalLikes()
+});    
       } else {
         console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
       }
