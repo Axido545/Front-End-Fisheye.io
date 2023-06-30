@@ -138,7 +138,7 @@ lightboxPage
       likeSectionPrice.appendChild(likeValueSectionPrice)
 
       const iconLikesValue = document.createElement("i")
-      iconLikesValue.setAttribute("class","fa-solid fa-heart")
+      iconLikesValue.setAttribute("class","fa-solid fa-heart affichage-totallikes")
       likeSectionPrice.appendChild(iconLikesValue)
 
       const priceVue = document.createElement("span")
@@ -152,35 +152,64 @@ lightboxPage
 
 totalLikes += photo.likes;
       
+function updateTotalLikes() {
+  var likeValueElements = document.querySelectorAll(".fa-heart ");
+  likeValueElements.forEach(function(element) {
+    element.textContent = totalLikes;
 
-
-function updateTotalLikes(){
-  likeValueSectionPrice.textContent = totalLikes;
-
+  });
 }
 
-      // likeValueSectionPrice.textContent = totalLikes;
-  iconLikes.addEventListener("click", function() {
-    if (!iconLikes.classList.contains("fa-solid")) {
-      iconLikes.classList.remove("fa-regular");
-      iconLikes.classList.add("fa-solid");
-      photo.likes++;
-      totalLikes++;
+iconLikes.addEventListener("click", function() {
+  // var likeValueSectionPrice = this.parentNode.querySelector(".fa-heart .affichage-totallikes");
+
+  if (!iconLikes.classList.contains("fa-solid")) {
+    iconLikes.classList.remove("fa-regular");
+    iconLikes.classList.add("fa-solid");
+    photo.likes++;
+    totalLikes++;
+  } else {
+    iconLikes.classList.remove("fa-solid");
+    iconLikes.classList.add("fa-regular");
+    photo.likes--;
+    totalLikes--;
+  }
+
+  numberLikes.textContent = photo.likes;
+  updateTotalLikes();
+  console.log(totalLikes);
+});
+
+updateTotalLikes();
+
+
+// function updateTotalLikes(){
+//   likeValueSectionPrice.textContent = totalLikes;
+
+// }
+
+//       // likeValueSectionPrice.textContent = totalLikes;
+//   iconLikes.addEventListener("click", function() {
+//     if (!iconLikes.classList.contains("fa-solid")) {
+//       iconLikes.classList.remove("fa-regular");
+//       iconLikes.classList.add("fa-solid");
+//       photo.likes++;
+//       totalLikes++;
 
   
-    } else {
-      iconLikes.classList.remove("fa-solid");
-      iconLikes.classList.add("fa-regular");
-      photo.likes--;
-      totalLikes--;
+//     } else {
+//       iconLikes.classList.remove("fa-solid");
+//       iconLikes.classList.add("fa-regular");
+//       photo.likes--;
+//       totalLikes--;
 
-    }
-     numberLikes.textContent = photo.likes;
-     updateTotalLikes()
-    console.log(totalLikes)
-  });
+//     }
+//      numberLikes.textContent = photo.likes;
+//      updateTotalLikes()
+//     console.log(totalLikes)
+//   });
   
- updateTotalLikes()
+//  updateTotalLikes()
 });    
       } else {
         console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
