@@ -111,3 +111,9 @@ p {
 textarea {
   border-radius: 5px;
 }
+
+.bg-modal-lightbox {
+  width: 1000px;
+  height: 1000px;
+  background-color: white;
+}

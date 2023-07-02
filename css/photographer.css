@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.466);
+  background-color: rgba(40, 39, 39, 0.466);
 }
 
 .photograph-header {
@@ -209,7 +209,7 @@ textarea {
 .photo-container h3 {
   color: #d3573c;
   margin-left: 0;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: lighter;
 }
 
@@ -355,4 +355,18 @@ textarea {
 }
 .section-total-price .fa-heart {
   color: black;
+}
+
+.bg-modal-lightbox {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: white;
+}
+
+.img-big-format {
+  background-color: red;
 }

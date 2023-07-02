@@ -69,6 +69,74 @@ async function displayPhotographerInfo() {
 
     const mainContent = document.getElementById("main");
 
+
+    ////////////FILTRE
+
+         const filtrePhotos = document.createElement("section")
+        filtrePhotos.setAttribute("class","filtre");
+        mainContent.appendChild(filtrePhotos);
+    
+        const labelFiltre = document.createElement("section")
+        filtrePhotos.setAttribute("for","select-filter");
+        filtrePhotos.textContent ="Trier par";
+        filtrePhotos.appendChild(labelFiltre);
+    
+        const selectFiltre = document.createElement('select')
+        selectFiltre.setAttribute("id","select-filter");
+        selectFiltre.setAttribute("name","select-filter");
+        filtrePhotos.appendChild(selectFiltre);
+    
+    
+        const optionOne = document.createElement('option')
+        optionOne.setAttribute("value","popular");
+        optionOne.textContent = "Popularité";
+        selectFiltre.appendChild(optionOne);
+    
+        const optionTwo = document.createElement('option')
+        optionTwo.setAttribute("value","date");
+        optionTwo.textContent = "Date";
+        selectFiltre.appendChild(optionTwo);
+    
+        const optionTree = document.createElement('option')
+        optionTree.setAttribute("value","Titre");
+        optionTree.textContent = "Titre";
+        selectFiltre.appendChild(optionTree);
+
+
+    ///////////FILTRE
+
+    optionTwo.addEventListener("click", function(){
+      console.log("trie par date on recupere les élémént")
+
+    // Sélectionnez tous les éléments avec la classe "box-img"
+var mediaElements = document.querySelectorAll(".photo-container");
+
+// Convertissez les éléments en un tableau
+var mediaArray = Array.from(mediaElements);
+
+// Triez les éléments par date
+mediaArray.sort(function(a, b) {
+  var dateA = new Date(a.getAttribute("data-date"));
+  var dateB = new Date(b.getAttribute("data-date"));
+  return dateA - dateB;
+});
+// Réinsérez les éléments triés dans leur conteneur d'origine
+var mediaContainer = document.querySelector(".photo-gallery");
+mediaArray.forEach(function(media) {
+  mediaContainer.appendChild(media);
+});
+
+    })
+
+    const bgModalLightBox = document.createElement("section");
+    bgModalLightBox.setAttribute("class", "bg-modal-lightbox")
+    const bodyPage = document.querySelector("body");
+    bodyPage.appendChild(bgModalLightBox)
+
+    const imgBigFormat = document.createElement("img");
+    imgBigFormat.setAttribute("class","img-big-format");
+    bgModalLightBox.appendChild(imgBigFormat);
+
     // Galerie de photos
     const photoGallery = document.createElement("section");
     photoGallery.setAttribute("class", "photo-gallery");
@@ -82,27 +150,63 @@ async function displayPhotographerInfo() {
 
       const lightboxLink = document.createElement("a");
       lightboxLink.setAttribute("class","link-lightbox")
-      lightboxLink.appendChild(photoContainer);
-      photoGallery.appendChild(lightboxLink)
+      photoContainer.appendChild(lightboxLink)
+
+
+
+
+
 ///////////////////////////LIGHTBOX/////////////////////////////////
+
+
+
+
 lightboxLink.addEventListener("click", function(){
-});
+console.log("o")
+
+bgModalLightBox.style.display ="block";
+
+photographerPhotos.forEach((photo) => {
+}
+
+    )});
 const lightboxPage = document.createElement("section")
 lightboxPage
       if(photo.image == undefined){
         const photoVideo = document.createElement("video");
         photoVideo.setAttribute("class","box-img")
+
         photoContainer.appendChild(photoVideo);
         const photoVideoSource = document.createElement("source");
         photoVideoSource.src=`assets/photographers/${photo.video}`;
         photoVideoSource.type ="video/mp4";
+      
+        photoVideoSource.setAttribute("data-date",photo.date)
+        photoVideoSource.setAttribute("title",photo.title)
         photoVideo.appendChild(photoVideoSource) 
+
+        var mediaTab = document.querySelectorAll(".box-img");
+
+        mediaTab.forEach(function(photoVideoSource, index) {
+          // Ajouter un attribut tabindex à chaque élément
+          photoVideoSource.setAttribute("tabindex", index);
+        });
       }
       if (photo.video == undefined){
         const photoImage = document.createElement("img");
         photoImage.setAttribute("class","box-img")
+        photoImage.setAttribute("data-date",photo.date)
+        photoImage.setAttribute("title",photo.title)
         photoImage.src = `assets/photographers/${photo.image}`;
         photoContainer.appendChild(photoImage);
+
+        var mediaTab = document.querySelectorAll(".box-img");
+
+        mediaTab.forEach(function(photoImage, index) {
+          // Ajouter un attribut tabindex à chaque élément
+          photoImage.setAttribute("tabindex", index);
+        });
+
       }
       const footerArticleInfo = document.createElement("div")
       footerArticleInfo.setAttribute("class","info-photo")
@@ -116,13 +220,19 @@ lightboxPage
       const photoLikes = document.createElement("p");
       photoLikes.setAttribute("class","like-photo")
       footerArticleInfo.appendChild(photoLikes);
+      
+      const likeClick = document.createElement("span")
+      likeClick.setAttribute("class", "like-section-value-price hiddenspan")
+      photoLikes.appendChild(likeClick);
+
 
       const numberLikes = document.createElement("span");
+      numberLikes.setAttribute("class","number-likes")
       numberLikes.textContent = `${photo.likes}`;
       photoLikes.appendChild(numberLikes);
    
       const iconLikes = document.createElement("i")
-      iconLikes.setAttribute("class","fa-regular fa-heart")
+      iconLikes.setAttribute("class","fa-regular fa-heart heart-like")
       photoLikes.appendChild(iconLikes)
 
       const sectionTotalPrice = document.createElement("section");
@@ -145,24 +255,15 @@ lightboxPage
       priceVue.textContent = photographer.price + "€ / jour";
       sectionTotalPrice.appendChild(priceVue)
 
-    //mettre la boucle dans une fonction qu
-// récuperer les photos du photographe
-
-
-
 totalLikes += photo.likes;
-      
 function updateTotalLikes() {
-  var likeValueElements = document.querySelectorAll(".fa-heart ");
+  let likeValueElements = document.querySelectorAll(".like-value-section-price");
   likeValueElements.forEach(function(element) {
     element.textContent = totalLikes;
-
   });
-}
-
+ }
+  updateTotalLikes()
 iconLikes.addEventListener("click", function() {
-  // var likeValueSectionPrice = this.parentNode.querySelector(".fa-heart .affichage-totallikes");
-
   if (!iconLikes.classList.contains("fa-solid")) {
     iconLikes.classList.remove("fa-regular");
     iconLikes.classList.add("fa-solid");
@@ -174,42 +275,11 @@ iconLikes.addEventListener("click", function() {
     photo.likes--;
     totalLikes--;
   }
-
   numberLikes.textContent = photo.likes;
-  updateTotalLikes();
   console.log(totalLikes);
+  updateTotalLikes();
 });
-
 updateTotalLikes();
-
-
-// function updateTotalLikes(){
-//   likeValueSectionPrice.textContent = totalLikes;
-
-// }
-
-//       // likeValueSectionPrice.textContent = totalLikes;
-//   iconLikes.addEventListener("click", function() {
-//     if (!iconLikes.classList.contains("fa-solid")) {
-//       iconLikes.classList.remove("fa-regular");
-//       iconLikes.classList.add("fa-solid");
-//       photo.likes++;
-//       totalLikes++;
-
-  
-//     } else {
-//       iconLikes.classList.remove("fa-solid");
-//       iconLikes.classList.add("fa-regular");
-//       photo.likes--;
-//       totalLikes--;
-
-//     }
-//      numberLikes.textContent = photo.likes;
-//      updateTotalLikes()
-//     console.log(totalLikes)
-//   });
-  
-//  updateTotalLikes()
 });    
       } else {
         console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
