@@ -104,29 +104,100 @@ async function displayPhotographerInfo() {
 
 
     ///////////FILTRE
+    optionOne.addEventListener("click", function() {
+      console.log("tri par popularité on récupère les éléments");
+    
+      // Sélectionnez tous les éléments avec la classe "photo-container"
+      var mediaElements = document.querySelectorAll(".photo-container");
+    
+      // Convertissez les éléments en un tableau
+      var mediaArray = Array.from(mediaElements);
+    
+      // Triez les éléments par popularité (numberLikes)
+      mediaArray.sort(function(a, b) {
+        var likesA = parseInt(a.querySelector(".number-likes").textContent);
+        var likesB = parseInt(b.querySelector(".number-likes").textContent);
+        return likesB - likesA;
+      });
+    
+      // Réinsérez les éléments triés dans leur conteneur d'origine
+      var mediaContainer = document.querySelector(".photo-gallery");
+      mediaArray.forEach(function(media) {
+        mediaContainer.appendChild(media);
+      });
+    
+      // Forcez la mise à jour de l'affichage
+      setTimeout(function() {
+        window.dispatchEvent(new Event("resize"));
+      }, 0);
+    });
+ 
 
-    optionTwo.addEventListener("click", function(){
-      console.log("trie par date on recupere les élémént")
 
-    // Sélectionnez tous les éléments avec la classe "box-img"
-var mediaElements = document.querySelectorAll(".photo-container");
+    optionTwo.addEventListener("click", function() {
+      console.log("trie par date on récupère les éléments");
+    
+      // Sélectionnez tous les éléments avec la classe "box-img"
+      var mediaElements = document.querySelectorAll(".box-img");
+    
+      // Convertissez les éléments en un tableau
+      var mediaArray = Array.from(mediaElements);
+    
+      // Triez les éléments par date
+      mediaArray.sort(function(a, b) {
+        var dateA = new Date(a.getAttribute("data-date"));
+        var dateB = new Date(b.getAttribute("data-date"));
+        return dateA - dateB;
+      });
+    
+      // Réinsérez les éléments triés dans leur conteneur d'origine
+      var mediaContainer = document.querySelector(".photo-gallery");
+      mediaArray.forEach(function(media) {
+        mediaContainer.appendChild(media);
+      });
+    
+      // Forcez la mise à jour de l'affichage
+      setTimeout(function() {
+        window.dispatchEvent(new Event("resize"));
+      }, 0);
+    });
 
-// Convertissez les éléments en un tableau
-var mediaArray = Array.from(mediaElements);
 
-// Triez les éléments par date
-mediaArray.sort(function(a, b) {
-  var dateA = new Date(a.getAttribute("data-date"));
-  var dateB = new Date(b.getAttribute("data-date"));
-  return dateA - dateB;
-});
-// Réinsérez les éléments triés dans leur conteneur d'origine
-var mediaContainer = document.querySelector(".photo-gallery");
-mediaArray.forEach(function(media) {
-  mediaContainer.appendChild(media);
-});
+    
+    optionTree.addEventListener("click", function() {
+    console.log("tri par titre");
+    
+      // Sélectionnez tous les éléments avec la classe "photo-container"
+      var mediaElements = document.querySelectorAll(".photo-container");
+    
+      // Convertissez les éléments en un tableau
+      var mediaArray = Array.from(mediaElements);
+    
+      // Triez les éléments par titre
+      mediaArray.sort(function(a, b) {
+        var titleA = a.getAttribute("title");
+        var titleB = b.getAttribute("title");
+        if (titleA < titleB) {
+          return -1;
+        }
+        if (titleA > titleB) {
+          return 1;
+        }
+        return 0;
+      });
+    
+      // Réinsérez les éléments triés dans leur conteneur d'origine
+      var mediaContainer = document.querySelector(".photo-gallery");
+      mediaArray.forEach(function(media) {
+        mediaContainer.appendChild(media);
+      });
+    
+      // Forcez la mise à jour de l'affichage
+      setTimeout(function() {
+        window.dispatchEvent(new Event("resize"));
+      }, 0);
+    });
 
-    })
 
     const bgModalLightBox = document.createElement("section");
     bgModalLightBox.setAttribute("class", "bg-modal-lightbox")
