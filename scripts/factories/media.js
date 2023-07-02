@@ -97,10 +97,10 @@ async function displayPhotographerInfo() {
         optionTwo.textContent = "Date";
         selectFiltre.appendChild(optionTwo);
     
-        const optionTree = document.createElement('option')
-        optionTree.setAttribute("value","Titre");
-        optionTree.textContent = "Titre";
-        selectFiltre.appendChild(optionTree);
+        const optionThree = document.createElement('option')
+        optionThree.setAttribute("value","Titre");
+        optionThree.textContent = "Titre";
+        selectFiltre.appendChild(optionThree);
 
 
     ///////////FILTRE
@@ -133,27 +133,26 @@ async function displayPhotographerInfo() {
     });
  
 
-
     optionTwo.addEventListener("click", function() {
-      console.log("trie par date on récupère les éléments");
+      console.log("tri par date on récupère les éléments");
     
-      // Sélectionnez tous les éléments avec la classe "box-img"
-      var mediaElements = document.querySelectorAll(".box-img");
+      // Sélectionnez tous les éléments avec la classe "photo-container"
+      var mediaContainers = document.querySelectorAll(".photo-container");
     
       // Convertissez les éléments en un tableau
-      var mediaArray = Array.from(mediaElements);
+      var mediaArray = Array.from(mediaContainers);
     
       // Triez les éléments par date
       mediaArray.sort(function(a, b) {
-        var dateA = new Date(a.getAttribute("data-date"));
-        var dateB = new Date(b.getAttribute("data-date"));
+        var dateA = new Date(a.querySelector("img, video").getAttribute("data-date"));
+        var dateB = new Date(b.querySelector("img, video").getAttribute("data-date"));
         return dateA - dateB;
       });
     
       // Réinsérez les éléments triés dans leur conteneur d'origine
-      var mediaContainer = document.querySelector(".photo-gallery");
-      mediaArray.forEach(function(media) {
-        mediaContainer.appendChild(media);
+      var mediaGallery = document.querySelector(".photo-gallery");
+      mediaArray.forEach(function(mediaContainer) {
+        mediaGallery.appendChild(mediaContainer);
       });
     
       // Forcez la mise à jour de l'affichage
@@ -161,35 +160,51 @@ async function displayPhotographerInfo() {
         window.dispatchEvent(new Event("resize"));
       }, 0);
     });
-
-
     
-    optionTree.addEventListener("click", function() {
-    console.log("tri par titre");
+    
+    
+    
+    optionThree.addEventListener("click", function() {
+      console.log("Tri par titre : on récupère les éléments");
     
       // Sélectionnez tous les éléments avec la classe "photo-container"
-      var mediaElements = document.querySelectorAll(".photo-container");
+      var mediaContainers = document.querySelectorAll(".photo-container");
     
       // Convertissez les éléments en un tableau
-      var mediaArray = Array.from(mediaElements);
+      var mediaArray = Array.from(mediaContainers);
     
       // Triez les éléments par titre
       mediaArray.sort(function(a, b) {
-        var titleA = a.getAttribute("title");
-        var titleB = b.getAttribute("title");
-        if (titleA < titleB) {
-          return -1;
+        var titleA, titleB;
+        var imgElementA = a.querySelector("img");
+        var videoElementA = a.querySelector("video");
+        if (imgElementA) {
+          titleA = imgElementA.getAttribute("title");
+        } else if (videoElementA) {
+          var sourceElementA = videoElementA.querySelector("source");
+          if (sourceElementA) {
+            titleA = sourceElementA.getAttribute("title");
+          }
         }
-        if (titleA > titleB) {
-          return 1;
+    
+        var imgElementB = b.querySelector("img");
+        var videoElementB = b.querySelector("video");
+        if (imgElementB) {
+          titleB = imgElementB.getAttribute("title");
+        } else if (videoElementB) {
+          var sourceElementB = videoElementB.querySelector("source");
+          if (sourceElementB) {
+            titleB = sourceElementB.getAttribute("title");
+          }
         }
-        return 0;
+    
+        return titleA.localeCompare(titleB);
       });
     
       // Réinsérez les éléments triés dans leur conteneur d'origine
-      var mediaContainer = document.querySelector(".photo-gallery");
-      mediaArray.forEach(function(media) {
-        mediaContainer.appendChild(media);
+      var mediaGallery = document.querySelector(".photo-gallery");
+      mediaArray.forEach(function(mediaContainer) {
+        mediaGallery.appendChild(mediaContainer);
       });
     
       // Forcez la mise à jour de l'affichage
@@ -197,6 +212,7 @@ async function displayPhotographerInfo() {
         window.dispatchEvent(new Event("resize"));
       }, 0);
     });
+    
 
 
     const bgModalLightBox = document.createElement("section");
