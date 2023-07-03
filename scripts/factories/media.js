@@ -252,21 +252,37 @@ lightboxLink.addEventListener("click", function(){
 
   arrowRight.addEventListener("click", function() {
     // Obtenez l'index de la photo actuellement affichée
-    var currentPhotoIndex = photographerPhotos.indexOf(photo);
+    let currentPhotoIndex = photographerPhotos.indexOf(photo);
   
     // Calculez l'index de la photo suivante
-    var nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
+    let nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
   
     // Récupérez la prochaine photo et son titre
-    var nextPhoto = photographerPhotos[nextPhotoIndex];
-    var nextTitle = nextPhoto.title;
+    let nextPhoto = photographerPhotos[nextPhotoIndex];
   
     // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
     imgBigFormat.setAttribute("src", `assets/photographers/${nextPhoto.image}`);
-    titleLightbox.textContent = nextTitle;
   
     // Mettez à jour la variable "photo" avec la prochaine photo
     photo = nextPhoto;
+  });
+
+
+  arrowLeft.addEventListener("click", function() {
+    // Obtenez l'index de la photo actuellement affichée
+    let  currentPhotoIndex = photographerPhotos.indexOf(photo);
+  
+    // Calculez l'index de la photo suivante
+    let  previewPhotoIndex = (currentPhotoIndex - 1) % photographerPhotos.length;
+  
+    // Récupérez la prochaine photo et son titre
+    let previewPhoto = photographerPhotos[previewPhotoIndex];
+  
+    // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+    imgBigFormat.setAttribute("src", `assets/photographers/${previewPhoto.image}`);
+  
+    // Mettez à jour la variable "photo" avec la prochaine photo
+    photo = previewPhoto;
   });
 
 
