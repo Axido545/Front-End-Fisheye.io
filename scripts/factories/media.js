@@ -1,4 +1,3 @@
-import{ getPhotographers ,displayData} from "./pages/index.js";
 
 
 async function getPhotographerData() {
@@ -106,58 +105,59 @@ selectFiltre.appendChild(optionThree);
 
 
 ///////////FILTRE EVENT
+
 optionOne.addEventListener("click", function() {
- // Sélectionnez tous les éléments avec la classe "photo-container"
-let mediaElements = document.querySelectorAll(".photo-container");
-    
-// Convertissez les éléments en un tableau
-let mediaArray = Array.from(mediaElements);
-    
-// Triez les éléments par popularité (numberLikes)
-mediaArray.sort(function(a, b) {
-  let likesA = parseInt(a.querySelector(".number-likes").textContent);
-  let likesB = parseInt(b.querySelector(".number-likes").textContent);
-  return likesB - likesA;
-});
-    
-// Réinsérez les éléments triés dans leur conteneur d'origine
-let  mediaContainer = document.querySelector(".photo-gallery");
-mediaArray.forEach(function(media) {
-  mediaContainer.appendChild(media);
-});
-    
-// Forcez la mise à jour de l'affichage
-setTimeout(function() {
-  window.dispatchEvent(new Event("resize"));
-  }, 0);
-});
+  // Sélectionnez tous les éléments avec la classe "photo-container"
+ let mediaElements = document.querySelectorAll(".photo-container");
+     
+ // Convertissez les éléments en un tableau
+ let mediaArray = Array.from(mediaElements);
+     
+ // Triez les éléments par popularité (numberLikes)
+ mediaArray.sort(function(a, b) {
+   let likesA = parseInt(a.querySelector(".number-likes").textContent);
+   let likesB = parseInt(b.querySelector(".number-likes").textContent);
+   return likesB - likesA;
+ });
+ // Réinsérez les éléments triés dans leur conteneur d'origine
+ let  mediaContainer = document.querySelector(".photo-gallery");
+ mediaArray.forEach(function(media) {
+   mediaContainer.appendChild(media);
+ });
+     
+ // Forcez la mise à jour de l'affichage
+ setTimeout(function() {
+   window.dispatchEvent(new Event("resize"));
+   }, 0);
+ });
+
 
 optionTwo.addEventListener("click", function() {
     
-// Sélectionnez tous les éléments avec la classe "photo-container"
-let mediaContainers = document.querySelectorAll(".photo-container");
-    
-// Convertissez les éléments en un tableau
-let mediaArray = Array.from(mediaContainers);
-    
-// Triez les éléments par date
-mediaArray.sort(function(a, b) {
-  let dateA = new Date(a.querySelector("img, video").getAttribute("data-date"));
-  let dateB = new Date(b.querySelector("img, video").getAttribute("data-date"));
-  return dateA - dateB;
-});
-    
-// Réinsérez les éléments triés dans leur conteneur d'origine
-let mediaGallery = document.querySelector(".photo-gallery");
-mediaArray.forEach(function(mediaContainer) {
-    mediaGallery.appendChild(mediaContainer);
-});
-    
-// Forcez la mise à jour de l'affichage
-setTimeout(function() {
-   window.dispatchEvent(new Event("resize"));
-  }, 0);
-});
+  // Sélectionnez tous les éléments avec la classe "photo-container"
+  let mediaContainers = document.querySelectorAll(".photo-container");
+      
+  // Convertissez les éléments en un tableau
+  let mediaArray = Array.from(mediaContainers);
+      
+  // Triez les éléments par date
+  mediaArray.sort(function(a, b) {
+    let dateA = new Date(a.querySelector("img, video").getAttribute("data-date"));
+    let dateB = new Date(b.querySelector("img, video").getAttribute("data-date"));
+    return dateA - dateB;
+  });
+      
+  // Réinsérez les éléments triés dans leur conteneur d'origine
+  let mediaGallery = document.querySelector(".photo-gallery");
+  mediaArray.forEach(function(mediaContainer) {
+      mediaGallery.appendChild(mediaContainer);
+  });
+      
+  // Forcez la mise à jour de l'affichage
+  setTimeout(function() {
+     window.dispatchEvent(new Event("resize"));
+    }, 0);
+  });
     
 optionThree.addEventListener("click", function() {
     
@@ -178,7 +178,7 @@ mediaArray.sort(function(a, b) {
       var sourceElementA = videoElementA.querySelector("source");
      if (sourceElementA) {
       titleA = sourceElementA.getAttribute("title");
-      }
+    }
 }
     
 let imgElementB = b.querySelector("img");
@@ -206,36 +206,43 @@ setTimeout(function() {
   }, 0);
 });
     
-    const bgModalLightBox = document.createElement("section");
-    bgModalLightBox.setAttribute("class", "bg-modal-lightbox")
-    const bodyPage = document.querySelector("body");
-    bodyPage.appendChild(bgModalLightBox)
+const bgModalLightBox = document.createElement("section");
+bgModalLightBox.setAttribute("class", "bg-modal-lightbox")
+const bodyPage = document.querySelector("body");
+bodyPage.appendChild(bgModalLightBox)
 
-    const imgBigFormat = document.createElement("img");
-    imgBigFormat.setAttribute("class","img-big-format");
-    bgModalLightBox.appendChild(imgBigFormat);
+const imgBigFormat = document.createElement("img");
+imgBigFormat.setAttribute("class","img-big-format");
+bgModalLightBox.appendChild(imgBigFormat);
 
-    // Galerie de photos
-    const photoGallery = document.createElement("section");
-    photoGallery.setAttribute("class", "photo-gallery");
-    mainContent.appendChild(photoGallery);
+ // Galerie de photos
+const photoGallery = document.createElement("section");
+photoGallery.setAttribute("class", "photo-gallery");
+mainContent.appendChild(photoGallery);
 
-    const photographerPhotos = await getPhotographerPhotos(id);
-    photographerPhotos.forEach((photo) => {
-      const photoContainer = document.createElement("article");
-      photoContainer.setAttribute("class", "photo-container");
-      photoGallery.appendChild(photoContainer);
+const photographerPhotos = await getPhotographerPhotos(id);
+photographerPhotos.forEach((photo) => {
+const photoContainer = document.createElement("article");
+photoContainer.setAttribute("class", "photo-container");
+photoGallery.appendChild(photoContainer);
 
-      const lightboxLink = document.createElement("a");
-      lightboxLink.setAttribute("class","link-lightbox")
-      photoContainer.appendChild(lightboxLink)
+const lightboxLink = document.createElement("a");
+lightboxLink.setAttribute("class","link-lightbox")
+photoContainer.appendChild(lightboxLink)
 
-
-
+const sectionInnerLightBox = document.createElement("section");
+sectionInnerLightBox.style.backgroundColor = "red";
+sectionInnerLightBox.style.width = "1000px";
+sectionInnerLightBox.setAttribute("class", "section-inner-lightbox")
+bgModalLightBox.appendChild(sectionInnerLightBox)
 
 
 ///////////////////////////LIGHTBOX/////////////////////////////////
 
+lightboxLink.addEventListener("click", function(){
+bgModalLightBox.style.display ="block";
+
+});
 
 
 
@@ -254,8 +261,8 @@ setTimeout(function() {
       if(photo.image == undefined){
         const photoVideo = document.createElement("video");
         photoVideo.setAttribute("class","box-img")
+        lightboxLink.appendChild(photoVideo);
 
-        photoContainer.appendChild(photoVideo);
         const photoVideoSource = document.createElement("source");
         photoVideoSource.src=`assets/photographers/${photo.video}`;
         photoVideoSource.type ="video/mp4";
@@ -277,7 +284,7 @@ setTimeout(function() {
         photoImage.setAttribute("data-date",photo.date)
         photoImage.setAttribute("title",photo.title)
         photoImage.src = `assets/photographers/${photo.image}`;
-        photoContainer.appendChild(photoImage);
+        lightboxLink.appendChild(photoImage);
 
         var mediaTab = document.querySelectorAll(".box-img");
 
@@ -313,25 +320,25 @@ const iconLikes = document.createElement("i")
 iconLikes.setAttribute("class","fa-regular fa-heart heart-like")
 photoLikes.appendChild(iconLikes)
 
-      const sectionTotalPrice = document.createElement("section");
-      sectionTotalPrice.setAttribute("class","section-total-price")
-      mainContent.appendChild(sectionTotalPrice);
+const sectionTotalPrice = document.createElement("section");
+sectionTotalPrice.setAttribute("class","section-total-price")
+mainContent.appendChild(sectionTotalPrice);
 
-      const likeSectionPrice = document.createElement("span");
-      likeSectionPrice.setAttribute("class","like-section-price")
-      sectionTotalPrice.appendChild(likeSectionPrice)
+const likeSectionPrice = document.createElement("span");
+likeSectionPrice.setAttribute("class","like-section-price")
+sectionTotalPrice.appendChild(likeSectionPrice)
 
-      const likeValueSectionPrice = document.createElement("span");
-      likeValueSectionPrice.setAttribute("class","like-value-section-price")  
-      likeSectionPrice.appendChild(likeValueSectionPrice)
+const likeValueSectionPrice = document.createElement("span");
+likeValueSectionPrice.setAttribute("class","like-value-section-price")  
+likeSectionPrice.appendChild(likeValueSectionPrice)
 
-      const iconLikesValue = document.createElement("i")
-      iconLikesValue.setAttribute("class","fa-solid fa-heart affichage-totallikes")
-      likeSectionPrice.appendChild(iconLikesValue)
+const iconLikesValue = document.createElement("i")
+iconLikesValue.setAttribute("class","fa-solid fa-heart affichage-totallikes")
+likeSectionPrice.appendChild(iconLikesValue)
 
-      const priceVue = document.createElement("span")
-      priceVue.textContent = photographer.price + "€ / jour";
-      sectionTotalPrice.appendChild(priceVue)
+const priceVue = document.createElement("span")
+priceVue.textContent = photographer.price + "€ / jour";
+sectionTotalPrice.appendChild(priceVue)
 
 totalLikes += photo.likes;
 function updateTotalLikes() {
