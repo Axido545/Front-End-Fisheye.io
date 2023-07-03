@@ -369,5 +369,60 @@ textarea {
 }
 
 .img-big-format {
-  background-color: red;
+  /* background-color: red;
+  /* object-fit: cover; */
+  width: 80%;
+  height: auto;
+  position: absolute;
+  margin-left: 10%;
+  margin-right: 50%;
+  justify-content: center;
+  border-radius: 5%;
+  margin-bottom: 30%;
+}
+
+.section-inner-lightbox {
+  display: flex;
+  width: auto;
+  height: 100%;
+  position: relative;
+  margin-top: 2%;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 5%;
+}
+
+.arrow-left,
+.arrow-right {
+  color: #901c1c;
+  font-size: 48px;
+}
+.arrow-left {
+  left: 0;
+  top: 40%;
+  z-index: 10;
+  position: absolute;
+}
+
+.close-lightbox {
+  color: #901c1c;
+  font-size: 48px;
+  z-index: 1;
+  position: absolute;
+  right: 2%;
+}
+
+.arrow-right {
+  right: 2%;
+  top: 40%;
+  z-index: 10;
+  position: absolute;
+}
+
+.title-lightbox {
+  position: absolute;
+  bottom: 2%;
+  width: 80%;
+  height: auto;
+  position: absolute;
 }
