@@ -201,56 +201,55 @@ lightboxLink.setAttribute("class","link-lightbox")
 photoContainer.appendChild(lightboxLink)
 
 
+function closLightbox(){
+  bgModalLightBox.style.display ="none";
+
+}
+
+function openLightbox(){
+  bgModalLightBox.style.display ="block";
+
+}
+///////////////////////////LIGHTBOX event/////////////////////////////////
 
 
-///////////////////////////LIGHTBOX/////////////////////////////////
 
 lightboxLink.addEventListener("click", function(){
-bgModalLightBox.style.display ="block";
+  openLightbox();
 
+  const sectionInnerLightBox = document.createElement("section");
+  sectionInnerLightBox.setAttribute("class", "section-inner-lightbox");
+  bgModalLightBox.appendChild(sectionInnerLightBox);
 
-const sectionInnerLightBox = document.createElement("section");
-sectionInnerLightBox.setAttribute("class", "section-inner-lightbox")
-bgModalLightBox.appendChild(sectionInnerLightBox)
+  const arrowLeft = document.createElement("i");
+  arrowLeft.setAttribute("class", "fa-solid fa-chevron-left arrow-left");
+  sectionInnerLightBox.appendChild(arrowLeft);
 
-const arrowLeft = document.createElement("i")
-arrowLeft.setAttribute("class", "fa-solid fa-chevron-left arrow-left");
-sectionInnerLightBox.appendChild(arrowLeft)
+  const imgBigFormat = document.createElement("img");
+  imgBigFormat.setAttribute("class","img-big-format");
+  sectionInnerLightBox.appendChild(imgBigFormat);
+  imgBigFormat.setAttribute("src",`assets/photographers/${photo.image}`);
 
-const imgBigFormat = document.createElement("img");
-imgBigFormat.setAttribute("class","img-big-format");
-sectionInnerLightBox.appendChild(imgBigFormat);
-imgBigFormat.setAttribute("src",`assets/photographers/${photo.image}`);
+  const closeLightBox = document.createElement("i");
+  closeLightBox.setAttribute("class", "fa-solid fa-xmark close-lightbox");
+  sectionInnerLightBox.appendChild(closeLightBox);
 
+  const arrowRight = document.createElement("i");
+  arrowRight.setAttribute("class", "fa-solid fa-chevron-right arrow-right");
+  sectionInnerLightBox.appendChild(arrowRight);
 
+  const titleLightbox = document.createElement("span");
+  titleLightbox.setAttribute("class","title-lightbox");
+  titleLightbox.textContent = "blabla";
+  sectionInnerLightBox.appendChild(titleLightbox);
 
-const crossCloseLightBox = document.createElement("i");
-crossCloseLightBox.setAttribute("class", "fa-solid fa-xmark close-lightbox")
-sectionInnerLightBox.appendChild(crossCloseLightBox)
+  closeLightBox.addEventListener("click", function(){
 
-const arrowRight = document.createElement("i")
-arrowRight.setAttribute("class", "fa-solid fa-chevron-right arrow-right");
-sectionInnerLightBox.appendChild(arrowRight)
-
-const titleLightbox = document.createElement("span");
-titleLightbox.setAttribute("class","title-lightbox")
-titleLightbox.textContent = "blabla";
-sectionInnerLightBox.appendChild(titleLightbox)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    closLightbox();
+  });
 });
+
+
 
 if(photo.image == undefined){
         const photoVideo = document.createElement("video");
