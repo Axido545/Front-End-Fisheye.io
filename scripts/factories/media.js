@@ -252,13 +252,13 @@ lightboxLink.addEventListener("click", function(){
 
   arrowRight.addEventListener("click", function() {
     // Obtenez l'index de la photo actuellement affichée
-    var currentPhotoIndex = photos.indexOf(photo);
+    var currentPhotoIndex = photographerPhotos.indexOf(photo);
   
     // Calculez l'index de la photo suivante
-    var nextPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+    var nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
   
     // Récupérez la prochaine photo et son titre
-    var nextPhoto = photos[nextPhotoIndex];
+    var nextPhoto = photographerPhotos[nextPhotoIndex];
     var nextTitle = nextPhoto.title;
   
     // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
