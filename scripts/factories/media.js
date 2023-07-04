@@ -1,5 +1,3 @@
-
-
 async function getPhotographerData() {
   try {
     const response = await fetch('data/photographers.json');
@@ -41,7 +39,6 @@ async function init() {
     console.error("Aucun identifiant de photographe spécifié dans l'URL.");
   }
 }
-
 init();
 
 async function getPhotographerPhotos(photographerId) {
@@ -59,8 +56,7 @@ async function getPhotographerPhotos(photographerId) {
   }
 }
 let totalLikes = 0;
-
-    //fonction  photographerFactory, paramètre data.
+//fonction  photographerFactory, paramètre data.
 async function displayPhotographerInfo() {
   const id = getPhotographerIdFromURL();
   const { photographer } = await getPhotographerById(id);
@@ -68,11 +64,9 @@ async function displayPhotographerInfo() {
   if (photographer) {
     const photographerInfoSection = document.querySelector(".photograph-header");
     const portrait = photographer.portrait;
+     const mainContent = document.getElementById("main");
 
-    const mainContent = document.getElementById("main");
-
-
-    ////////////FILTRE dans le DOM
+////////////FILTRE affichage HTML
 
 const filtrePhotos = document.createElement("section")
 filtrePhotos.setAttribute("class","filtre");
@@ -104,19 +98,18 @@ optionThree.textContent = "Titre";
 selectFiltre.appendChild(optionThree);
 
 ///////////FILTRE EVENT
-
 optionOne.addEventListener("click", function() {
-  // Sélectionnez tous les éléments avec la classe "photo-container"
- let mediaElements = document.querySelectorAll(".photo-container");
- // Convertissez les éléments en un tableau
- let mediaArray = Array.from(mediaElements);
- // Triez les éléments par popularité (numberLikes)
+  // Sélection tous les éléments avec la classe "photo-container"
+  let mediaElements = document.querySelectorAll(".photo-container");
+  // Convertion les éléments en un tableau
+  let mediaArray = Array.from(mediaElements);
+ // Trie les éléments par popularité (avec la classe "number-likes")
  mediaArray.sort(function(a, b) {
    let likesA = parseInt(a.querySelector(".number-likes").textContent);
    let likesB = parseInt(b.querySelector(".number-likes").textContent);
    return likesB - likesA;
  });
- // Réinsérez les éléments triés dans leur conteneur d'origine
+ // Réinsértion les éléments triés dans leur conteneur d'origine
  let  mediaContainer = document.querySelector(".photo-gallery");
  mediaArray.forEach(function(media) {
    mediaContainer.appendChild(media);
@@ -135,17 +128,17 @@ optionTwo.addEventListener("click", function() {
     return dateA - dateB;
   });
   // Réinsérez les éléments triés dans leur conteneur d'origine
-  let mediaGallery = document.querySelector(".photo-gallery");
-  mediaArray.forEach(function(mediaContainer) {
-      mediaGallery.appendChild(mediaContainer);
+  let mediaContainer = document.querySelector(".photo-gallery");
+  mediaArray.forEach(function(media) {
+    mediaContainer.appendChild(media);
   });
   });
     
 optionThree.addEventListener("click", function() {
 // Sélectionnez tous les éléments avec la classe "photo-container"
-let mediaContainers = document.querySelectorAll(".photo-container");
+let mediaElements = document.querySelectorAll(".photo-container");
 // Convertissez les éléments en un tableau
-let mediaArray = Array.from(mediaContainers);
+let mediaArray = Array.from(mediaElements);
 // Triez les éléments par titre
 mediaArray.sort(function(a, b) {
   let titleA, titleB;
@@ -172,9 +165,9 @@ let videoElementB = b.querySelector("video");
   return titleA.localeCompare(titleB);
       });
 // Réinsérez les éléments triés dans leur conteneur d'origine
-let  mediaGallery = document.querySelector(".photo-gallery");
-mediaArray.forEach(function(mediaContainer) {
-  mediaGallery.appendChild(mediaContainer);
+let  mediaContainer = document.querySelector(".photo-gallery");
+mediaArray.forEach(function(media) {
+  mediaContainer.appendChild(media);
   });
 });
     
@@ -211,10 +204,8 @@ function openLightbox(){
 
 }
 ///////////////////////////LIGHTBOX event/////////////////////////////////
-
-
-
 lightboxLink.addEventListener("click", function(){
+  
   openLightbox();
 
   const sectionInnerLightBox = document.createElement("section");
@@ -225,10 +216,52 @@ lightboxLink.addEventListener("click", function(){
   arrowLeft.setAttribute("class", "fa-solid fa-chevron-left arrow-left");
   sectionInnerLightBox.appendChild(arrowLeft);
 
-  const imgBigFormat = document.createElement("img");
-  imgBigFormat.setAttribute("class","img-big-format");
-  sectionInnerLightBox.appendChild(imgBigFormat);
-  imgBigFormat.setAttribute("src",`assets/photographers/${photo.image}`);
+  // const imgBigFormat = document.createElement("img");
+  // imgBigFormat.setAttribute("class","img-big-format");
+  // sectionInnerLightBox.appendChild(imgBigFormat);
+  // imgBigFormat.setAttribute("src",`assets/photographers/${photo.image}`);
+
+
+
+  if(photo.image == undefined){
+    const photoVideoBF = document.createElement("video");
+    photoVideoBF.setAttribute("class","img-big-format")
+    sectionInnerLightBox.appendChild(photoVideoBF);
+  
+    const photoVideoSourceBF = document.createElement("source");
+    photoVideoSourceBF.src=`assets/photographers/${photo.video}`;
+    photoVideoSourceBF.type ="video/mp4";
+  
+    photoVideoSourceBF.setAttribute("data-date",photo.date);
+    photoVideoSourceBF.setAttribute("title",photo.title);
+    photoVideoSourceBF.setAttribute("controls","");
+    photoVideoBF.appendChild(photoVideoSourceBF);
+    photoVideoBF.play();
+    var mediaTab = document.querySelectorAll(".img-big-format");
+  
+    mediaTab.forEach(function(photoVideoSourceBF, index) {
+      // Ajouter un attribut tabindex à chaque élément
+      photoVideoSourceBF.setAttribute("tabindex", index);
+    });
+  }
+  
+  if (photo.video == undefined){
+    const photoImageBF = document.createElement("img");
+    photoImageBF.setAttribute("class","img-big-format")
+    photoImageBF.setAttribute("data-date",photo.date)
+    photoImageBF.setAttribute("title",photo.title)
+    photoImageBF.src = `assets/photographers/${photo.image}`;
+    sectionInnerLightBox.appendChild(photoImageBF);
+  
+    var mediaTab = document.querySelectorAll(".img-big-format");
+  
+    mediaTab.forEach(function(photoImageBF, index) {
+      // Ajouter un attribut tabindex à chaque élément
+      photoImageBF.setAttribute("tabindex", index);
+    });
+  
+  }
+
 
   const closeLightBox = document.createElement("i");
   closeLightBox.setAttribute("class", "fa-solid fa-xmark close-lightbox");
@@ -244,52 +277,54 @@ lightboxLink.addEventListener("click", function(){
   sectionInnerLightBox.appendChild(titleLightbox);
 
   closeLightBox.addEventListener("click", function(){
-
     closLightbox();
   });
 
+//   arrowRight.addEventListener("click", function() {
+//     // Obtenez l'index de la photo actuellement affichée
+//     let currentPhotoIndex = photographerPhotos.indexOf(photo);  
+//     // Calculez l'index de la photo suivante
+//     let nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
+//     // Récupérez la prochaine photo et son titre
+//     let nextPhoto = photographerPhotos[nextPhotoIndex];
+//     // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+//  if(nextPhoto.image){
+
+//   photoImageBF.src = `assets/photographers/${nextPhoto.image}`;
+
+//  }
+
+//  if(nextPhoto.video){
+//   photoVideoSourceBF.src=`assets/photographers/${nextPhoto.video}`;
+
+//  }
 
 
-  arrowRight.addEventListener("click", function() {
-    // Obtenez l'index de la photo actuellement affichée
-    let currentPhotoIndex = photographerPhotos.indexOf(photo);
-  
-    // Calculez l'index de la photo suivante
-    let nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
-  
-    // Récupérez la prochaine photo et son titre
-    let nextPhoto = photographerPhotos[nextPhotoIndex];
-  
-    // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
-    imgBigFormat.setAttribute("src", `assets/photographers/${nextPhoto.image}`);
-  
-    // Mettez à jour la variable "photo" avec la prochaine photo
-    photo = nextPhoto;
-  });
+//     // Mettez à jour la variable "photo" avec la prochaine photo
+//     photo = nextPhoto;
+//     if (nextPhoto == undefined){
+//       arrowRight.style.display = "none";
+//     }
+//   });
 
-
-  arrowLeft.addEventListener("click", function() {
-    // Obtenez l'index de la photo actuellement affichée
-    let  currentPhotoIndex = photographerPhotos.indexOf(photo);
-  
-    // Calculez l'index de la photo suivante
-    let  previewPhotoIndex = (currentPhotoIndex - 1) % photographerPhotos.length;
-  
-    // Récupérez la prochaine photo et son titre
-    let previewPhoto = photographerPhotos[previewPhotoIndex];
-  
-    // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
-    imgBigFormat.setAttribute("src", `assets/photographers/${previewPhoto.image}`);
-  
-    // Mettez à jour la variable "photo" avec la prochaine photo
-    photo = previewPhoto;
-  });
-
-
-
+//   arrowLeft.addEventListener("click", function() {
+//     // Obtenez l'index de la photo actuellement affichée
+//     let currentPhotoIndex = photographerPhotos.indexOf(photo);    
+//     // Calculez l'index de la photo précédente
+//     let previewPhotoIndex = (currentPhotoIndex - 1 + photographerPhotos.length) % photographerPhotos.length;
+//     // Récupérez la photo précédente et son titre
+//     let previewPhoto = photographerPhotos[previewPhotoIndex];
+//     // Mettez à jour la source de l'image et le titre de la lightbox avec la photo précédente
+//     imgBigFormat.setAttribute("src", `assets/photographers/${previewPhoto.image}`);
+//     // Mettez à jour la variable "photo" avec la photo précédente
+//     photo = previewPhoto;
+//     if (previewPhoto == undefined){
+//       arrowLeft.style.display = "none";
+//     } else {
+//       arrowRight.style.display = "block"; // Assurez-vous que la flèche droite est affichée si nécessaire
+//     }
+//   });
 });
-
-
 
 if(photo.image == undefined){
         const photoVideo = document.createElement("video");
@@ -326,7 +361,6 @@ if (photo.video == undefined){
           // Ajouter un attribut tabindex à chaque élément
           photoImage.setAttribute("tabindex", index);
         });
-
 }
 
 const footerArticleInfo = document.createElement("div")
@@ -341,10 +375,6 @@ footerArticleInfo.appendChild(photoTitle);
 const photoLikes = document.createElement("p");
  photoLikes.setAttribute("class","like-photo")
 footerArticleInfo.appendChild(photoLikes);
-      
-const likeClick = document.createElement("span")
-likeClick.setAttribute("class", "like-section-value-price hiddenspan")
-photoLikes.appendChild(likeClick);
 
 const numberLikes = document.createElement("span");
 numberLikes.setAttribute("class","number-likes")
