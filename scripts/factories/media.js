@@ -195,6 +195,7 @@ photoGallery.appendChild(photoContainer);
 
 const lightboxLink = document.createElement("a");
 lightboxLink.setAttribute("class","link-lightbox")
+lightboxLink.setAttribute("aria-label","afficher le grand format")
 photoContainer.appendChild(lightboxLink)
 
 
@@ -240,6 +241,7 @@ lightboxLink.addEventListener("click", function(){
   
     photoVideoSourceBF.setAttribute("data-date",photo.date);
     photoVideoSourceBF.setAttribute("title",photo.title);
+    photoVideoSourceBF.setAttribute("alt",photo.title);
     photoVideoSourceBF.setAttribute("controls","");
     photoVideoBF.appendChild(photoVideoSourceBF);
     photoVideoBF.play();
@@ -256,6 +258,7 @@ lightboxLink.addEventListener("click", function(){
     photoImageBF.setAttribute("class","img-big-format")
     photoImageBF.setAttribute("data-date",photo.date)
     photoImageBF.setAttribute("title",photo.title)
+    photoImageBF.setAttribute("alt",photo.title)
     photoImageBF.src = `assets/photographers/${photo.image}`;
     photoContainerLightbox.appendChild(photoImageBF);
   
@@ -303,6 +306,7 @@ lightboxLink.addEventListener("click", function(){
   photoImageBF.setAttribute("class","img-big-format")
   photoImageBF.setAttribute("data-date",photo.date)
   photoImageBF.setAttribute("title",nextPhoto.title)
+  photoImageBF.setAttribute("alt",nextPhoto.title)
   photoImageBF.src = `assets/photographers/${nextPhoto.image}`;
   sectionInnerLightBox.appendChild(photoImageBF);
 
@@ -319,6 +323,7 @@ lightboxLink.addEventListener("click", function(){
   photoImageBF.setAttribute("class","img-big-format")
   photoImageBF.setAttribute("data-date",photo.date)
   photoImageBF.setAttribute("title",photo.title)
+  photoImageBF.setAttribute("alt",nextPhoto.title)
   photoImageBF.src = `assets/photographers/${photo.image}`;
   sectionInnerLightBox.appendChild(photoImageBF);
 
@@ -369,6 +374,8 @@ if(photo.image == undefined){
       
         photoVideoSource.setAttribute("data-date",photo.date)
         photoVideoSource.setAttribute("title",photo.title)
+        photoVideoSource.setAttribute("alt",photo.title)
+
         photoVideo.appendChild(photoVideoSource) 
 
         var mediaTab = document.querySelectorAll(".box-img");
@@ -384,6 +391,7 @@ if (photo.video == undefined){
         photoImage.setAttribute("class","box-img")
         photoImage.setAttribute("data-date",photo.date)
         photoImage.setAttribute("title",photo.title)
+        photoImage.setAttribute("alt",photo.title)
         photoImage.src = `assets/photographers/${photo.image}`;
         lightboxLink.appendChild(photoImage);
 
@@ -415,6 +423,7 @@ photoLikes.appendChild(numberLikes);
    
 const iconLikes = document.createElement("i")
 iconLikes.setAttribute("class","fa-regular fa-heart heart-like")
+iconLikes.setAttribute("aria-label","En cliquand une fois cela ajoute un like, recliquant une fois cele annule le like")
 photoLikes.appendChild(iconLikes)
 
 const sectionTotalPrice = document.createElement("section");
