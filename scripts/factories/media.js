@@ -342,23 +342,23 @@ lightboxLink.addEventListener("click", function(){
 //     }
 //   });
 
-  arrowLeft.addEventListener("click", function() {
-    // Obtenez l'index de la photo actuellement affichée
-    let currentPhotoIndex = photographerPhotos.indexOf(photo);    
-    // Calculez l'index de la photo précédente
-    let previewPhotoIndex = (currentPhotoIndex - 1 + photographerPhotos.length) % photographerPhotos.length;
-    // Récupérez la photo précédente et son titre
-    let previewPhoto = photographerPhotos[previewPhotoIndex];
-    // Mettez à jour la source de l'image et le titre de la lightbox avec la photo précédente
-    imgBigFormat.setAttribute("src", `assets/photographers/${previewPhoto.image}`);
-    // Mettez à jour la variable "photo" avec la photo précédente
-    photo = previewPhoto;
-    if (previewPhoto == undefined){
-      arrowLeft.style.display = "none";
-    } else {
-      arrowRight.style.display = "block"; // Assurez-vous que la flèche droite est affichée si nécessaire
-    }
-  });
+  // arrowLeft.addEventListener("click", function() {
+  //   // Obtenez l'index de la photo actuellement affichée
+  //   let currentPhotoIndex = photographerPhotos.indexOf(photo);    
+  //   // Calculez l'index de la photo précédente
+  //   let previewPhotoIndex = (currentPhotoIndex - 1 + photographerPhotos.length) % photographerPhotos.length;
+  //   // Récupérez la photo précédente et son titre
+  //   let previewPhoto = photographerPhotos[previewPhotoIndex];
+  //   // Mettez à jour la source de l'image et le titre de la lightbox avec la photo précédente
+  //   imgBigFormat.setAttribute("src", `assets/photographers/${previewPhoto.image}`);
+  //   // Mettez à jour la variable "photo" avec la photo précédente
+  //   photo = previewPhoto;
+  //   if (previewPhoto == undefined){
+  //     arrowLeft.style.display = "none";
+  //   } else {
+  //     arrowRight.style.display = "block"; // Assurez-vous que la flèche droite est affichée si nécessaire
+  //   }
+  // });
 });
 
 
