@@ -16,6 +16,8 @@ function photographerFactory(data) {
         const pPrice = document.createElement('p');
 // l'attribut source de l'image reprend le chemin plus haut
         img.setAttribute("src", picture)
+        img.setAttribute("alt", "La photo du photographe")
+        img.setAttribute("aria-label", "cliquez pour voir tous les photos du photographe")
         divImg.setAttribute("class",contanerImg)
         pLocation.setAttribute("class","location")
         pTagline.setAttribute("class","tagline")

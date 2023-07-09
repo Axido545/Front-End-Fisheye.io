@@ -87,6 +87,7 @@ async function displayPhotographerInfo() {
     const img = document.createElement("img");
     const picture = `assets/photographers/${portrait}`;
     img.setAttribute("src", picture);
+    img.setAttribute("alt", "La photo du photographe");
     sectionPicture.appendChild(img);
 
     const photographerName = document.createElement("h2");
@@ -103,6 +104,17 @@ async function displayPhotographerInfo() {
     photographerTagline.setAttribute("class", "tagline");
     photographerTagline.textContent = `${photographer.tagline}`;
     sectionInfo.appendChild(photographerTagline);
+
+
+    const contactBTN = document.querySelector(".contact_button")
+    contactBTN.setAttribute("aria-label", "contactez le photographe")
+
+
+    
+
+    const logo = document.querySelector(".logo");
+    logo.setAttribute("alt", "Fisheye Logo")
+    logo.setAttribute("aria-label", "Retour à la page d'accueil")
 
     
   } else {

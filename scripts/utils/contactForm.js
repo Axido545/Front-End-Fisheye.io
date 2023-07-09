@@ -46,14 +46,24 @@ modalContactName.setAttribute("class","title-name-contact")
 }
 init();
 
+
 const modal = document.getElementById("contact_modal");
 
 function displayModal() {
 	modal.style.display = "block";
 }
 function closeModal() {
+
+
     modal.style.display = "none";
 }
+
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    modal.style.display = "none";
+  }
+});
+
 
 const btnContact = document.querySelector(".contact_button")
 
@@ -168,6 +178,7 @@ divMessage.appendChild(validMessageBalise)
 const btnSubmit = document.createElement("button")
 btnSubmit.classList.add('button-submit');
 btnSubmit.setAttribute("id","submit")
+btnSubmit.setAttribute("aria-label","Envoyer mes information")
 btnSubmit.textContent ="Evoyer";
 formModal.appendChild(btnSubmit)
 

@@ -29,3 +29,6 @@ async function displayData(photographers) {
                 };
             //affichage photograph des que script executé
                 init();
+
+                const logo = document.querySelector(".logo");
+                logo.setAttribute("alt", "Fisheye Logo")

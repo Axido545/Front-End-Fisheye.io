@@ -368,23 +368,24 @@ textarea {
   background-color: white;
 }
 
-.img-big-format {
-  /* background-color: red;
-  /* object-fit: cover; */
-  width: 80%;
-  height: auto;
-  position: absolute;
-  margin-left: 10%;
-  margin-right: 50%;
-  justify-content: center;
+.photo-container-lightbox {
+  width: 1050px;
+  height: 900px;
   border-radius: 5px;
   margin-bottom: 30%;
+}
+
+.img-big-format {
+  object-fit: cover;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .section-inner-lightbox {
   display: flex;
   width: auto;
-  height: 100%;
+  width: 1242px;
+  height: 900px;
   position: relative;
   margin-top: 2%;
   margin-left: 20%;
