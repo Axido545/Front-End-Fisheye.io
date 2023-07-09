@@ -293,54 +293,54 @@ lightboxLink.addEventListener("click", function(){
     }
   });
 
-  arrowRight.addEventListener("click", function() {
-    // Obtenez l'index de la photo actuellement affichée
-    let currentPhotoIndex = photographerPhotos.indexOf(photo);  
-    // Calculez l'index de la photo suivante
-    let nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
-    // Récupérez la prochaine photo et son titre
-    let nextPhoto = photographerPhotos[nextPhotoIndex];
-    // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
- if(nextPhoto.image){
-  const photoImageBF = document.createElement("img");
-  photoImageBF.setAttribute("class","img-big-format")
-  photoImageBF.setAttribute("data-date",photo.date)
-  photoImageBF.setAttribute("title",nextPhoto.title)
-  photoImageBF.setAttribute("alt",nextPhoto.title)
-  photoImageBF.src = `assets/photographers/${nextPhoto.image}`;
-  sectionInnerLightBox.appendChild(photoImageBF);
+//   arrowRight.addEventListener("click", function() {
+//     // Obtenez l'index de la photo actuellement affichée
+//     let currentPhotoIndex = photographerPhotos.indexOf(photo);  
+//     // Calculez l'index de la photo suivante
+//     let nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
+//     // Récupérez la prochaine photo et son titre
+//     let nextPhoto = photographerPhotos[nextPhotoIndex];
+//     // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+//  if(nextPhoto.image){
+//   const photoImageBF = document.createElement("img");
+//   photoImageBF.setAttribute("class","img-big-format")
+//   photoImageBF.setAttribute("data-date",photo.date)
+//   photoImageBF.setAttribute("title",nextPhoto.title)
+//   photoImageBF.setAttribute("alt",nextPhoto.title)
+//   photoImageBF.src = `assets/photographers/${nextPhoto.image}`;
+//   sectionInnerLightBox.appendChild(photoImageBF);
 
-  var mediaTab = document.querySelectorAll(".img-big-format");
+//   var mediaTab = document.querySelectorAll(".img-big-format");
 
-  mediaTab.forEach(function(photoImageBF, index) {
-    // Ajouter un attribut tabindex à chaque élément
-    photoImageBF.setAttribute("tabindex", index);
-  });
+//   mediaTab.forEach(function(photoImageBF, index) {
+//     // Ajouter un attribut tabindex à chaque élément
+//     photoImageBF.setAttribute("tabindex", index);
+//   });
 
- }
- if(nextPhoto.video){
-  const photoImageBF = document.createElement("img");
-  photoImageBF.setAttribute("class","img-big-format")
-  photoImageBF.setAttribute("data-date",photo.date)
-  photoImageBF.setAttribute("title",photo.title)
-  photoImageBF.setAttribute("alt",nextPhoto.title)
-  photoImageBF.src = `assets/photographers/${photo.image}`;
-  sectionInnerLightBox.appendChild(photoImageBF);
+//  }
+//  if(nextPhoto.video){
+//   const photoImageBF = document.createElement("img");
+//   photoImageBF.setAttribute("class","img-big-format")
+//   photoImageBF.setAttribute("data-date",photo.date)
+//   photoImageBF.setAttribute("title",photo.title)
+//   photoImageBF.setAttribute("alt",nextPhoto.title)
+//   photoImageBF.src = `assets/photographers/${photo.image}`;
+//   sectionInnerLightBox.appendChild(photoImageBF);
 
-  var mediaTab = document.querySelectorAll(".img-big-format");
+//   var mediaTab = document.querySelectorAll(".img-big-format");
 
-  mediaTab.forEach(function(photoImageBF, index) {
-    // Ajouter un attribut tabindex à chaque élément
-    photoImageBF.setAttribute("tabindex", index);
-  });
+//   mediaTab.forEach(function(photoImageBF, index) {
+//     // Ajouter un attribut tabindex à chaque élément
+//     photoImageBF.setAttribute("tabindex", index);
+//   });
 
- }
-    // Mettez à jour la variable "photo" avec la prochaine photo
-    photo = nextPhoto;
-    if (nextPhoto == undefined){
-      arrowRight.style.display = "none";
-    }
-  });
+//  }
+//     // Mettez à jour la variable "photo" avec la prochaine photo
+//     photo = nextPhoto;
+//     if (nextPhoto == undefined){
+//       arrowRight.style.display = "none";
+//     }
+//   });
 
   arrowLeft.addEventListener("click", function() {
     // Obtenez l'index de la photo actuellement affichée
