@@ -363,6 +363,36 @@ lightboxLink.addEventListener("click", function(){
 
 
 
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+      let currentPhotoIndex = photographerPhotos.indexOf(photo);
+      let nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
+      let nextPhoto = photographerPhotos[nextPhotoIndex];
+    
+      // Mettez à jour la lightbox avec la prochaine photo
+      if (nextPhoto) {
+        imgBigFormat.src = `assets/photographers/${nextPhoto.image}`;
+        titleLightbox.textContent = nextPhoto.title;
+        photo = nextPhoto;
+      }
+    } else if (event.key === 'ArrowLeft') {
+
+      let currentPhotoIndex = photographerPhotos.indexOf(photo);
+      let previewPhotoIndex = (currentPhotoIndex - 1) % photographerPhotos.length;
+      let previewPhoto = photographerPhotos[previewPhotoIndex];
+    
+      // Mettez à jour la lightbox avec la prochaine photo
+      if (previewPhoto) {
+        imgBigFormat.src = `assets/photographers/${previewPhoto.image}`;
+        titleLightbox.textContent = previewPhoto.title;
+        photo = previewPhoto;
+      }
+
+      
+    }
+  });
+
   
 });
 
