@@ -241,7 +241,7 @@ lightboxLink.addEventListener("click", function(){
 
   const arrowRight = document.createElement("i");
   arrowRight.setAttribute("class", "fa-solid fa-chevron-right arrow-right");
-  arrowRight.setAttribute("aria-label", "media suivant");g
+  arrowRight.setAttribute("aria-label", "media suivant");
   commandesLightbox.appendChild(arrowRight);
 
   const closeLightBox = document.createElement("i");
