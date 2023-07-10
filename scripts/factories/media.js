@@ -210,14 +210,11 @@ function openLightbox(){
 }
 ///////////////////////////LIGHTBOX event/////////////////////////////////
 lightboxLink.addEventListener("click", function(){
-  
   openLightbox();
 
   const sectionInnerLightBox = document.createElement("section");
   sectionInnerLightBox.setAttribute("class", "section-inner-lightbox");
   bgModalLightBox.appendChild(sectionInnerLightBox);
-
-  
 
   const photoContainerLightbox = document.createElement("div")
   photoContainerLightbox.setAttribute("class","photo-container-lightbox")
@@ -278,7 +275,7 @@ lightboxLink.addEventListener("click", function(){
   titleLightbox.textContent = nextPhoto.title;
 
   var mediaTab = document.querySelectorAll(".img-big-format");
-  mediaTab.forEach(function(photoImageBF, index) {
+  mediaTab.forEach(function(imgBigFormat, index) {
     // Ajouter un attribut tabindex à chaque élément
     imgBigFormat.setAttribute("tabindex", index);
   });
@@ -294,9 +291,9 @@ lightboxLink.addEventListener("click", function(){
 
   var mediaTab = document.querySelectorAll(".img-big-format");
 
-  mediaTab.forEach(function(photoImageBF, index) {
+  mediaTab.forEach(function(imgBigFormat, index) {
     // Ajouter un attribut tabindex à chaque élément
-    photoImageBF.setAttribute("tabindex", index);
+    imgBigFormat.setAttribute("tabindex", index);
   });
 
  }
@@ -328,7 +325,7 @@ lightboxLink.addEventListener("click", function(){
   titleLightbox.textContent = previewPhoto.title;
 
   var mediaTab = document.querySelectorAll(".img-big-format");
-  mediaTab.forEach(function(photoImageBF, index) {
+  mediaTab.forEach(function(imgBigFormat, index) {
     // Ajouter un attribut tabindex à chaque élément
     imgBigFormat.setAttribute("tabindex", index);
   });
@@ -344,9 +341,9 @@ lightboxLink.addEventListener("click", function(){
 
   var mediaTab = document.querySelectorAll(".img-big-format");
 
-  mediaTab.forEach(function(photoImageBF, index) {
+  mediaTab.forEach(function(imgBigFormat, index) {
     // Ajouter un attribut tabindex à chaque élément
-    photoImageBF.setAttribute("tabindex", index);
+    imgBigFormat.setAttribute("tabindex", index);
   });
 
  }
