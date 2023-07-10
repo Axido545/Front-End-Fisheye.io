@@ -101,6 +101,9 @@ optionThree.setAttribute("value","Titre");
 optionThree.textContent = "Titre";
 selectFiltre.appendChild(optionThree);
 
+
+
+
 ///////////FILTRE EVENT
 optionOne.addEventListener("click", function() {
   // Sélection tous les éléments avec la classe "photo-container"
@@ -122,9 +125,9 @@ optionOne.addEventListener("click", function() {
 
 optionTwo.addEventListener("click", function() {
   // Sélectionnez tous les éléments avec la classe "photo-container"
-  let mediaContainers = document.querySelectorAll(".photo-container");
+  let mediaElements = document.querySelectorAll(".photo-container");
   // Convertissez les éléments en un tableau
-  let mediaArray = Array.from(mediaContainers);
+  let mediaArray = Array.from(mediaElements);
   // Triez les éléments par date
   mediaArray.sort(function(a, b) {
     let dateA = new Date(a.querySelector("img, video").getAttribute("data-date"));
@@ -198,15 +201,12 @@ lightboxLink.setAttribute("class","link-lightbox")
 lightboxLink.setAttribute("aria-label","afficher le grand format")
 photoContainer.appendChild(lightboxLink)
 
-
 function closLightbox(){
   bgModalLightBox.style.display ="none";
-
 }
 
 function openLightbox(){
   bgModalLightBox.style.display ="flex";
-
 }
 ///////////////////////////LIGHTBOX event/////////////////////////////////
 lightboxLink.addEventListener("click", function(){
@@ -241,7 +241,7 @@ lightboxLink.addEventListener("click", function(){
 
   const arrowRight = document.createElement("i");
   arrowRight.setAttribute("class", "fa-solid fa-chevron-right arrow-right");
-  arrowRight.setAttribute("aria-label", "media suivant");
+  arrowRight.setAttribute("aria-label", "media suivant");g
   commandesLightbox.appendChild(arrowRight);
 
   const closeLightBox = document.createElement("i");
