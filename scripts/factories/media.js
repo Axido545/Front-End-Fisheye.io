@@ -240,7 +240,6 @@ lightboxLink.addEventListener("click", function(){
   arrowRight.setAttribute("class", "fa-solid fa-chevron-right arrow-right");
   commandesLightbox.appendChild(arrowRight);
 
-
   const closeLightBox = document.createElement("i");
   closeLightBox.setAttribute("class", "fa-solid fa-xmark close-lightbox");
   commandesLightbox.appendChild(closeLightBox);
@@ -249,52 +248,6 @@ lightboxLink.addEventListener("click", function(){
   titleLightbox.setAttribute("class","title-lightbox");
   titleLightbox.textContent = photo.title;
   commandesLightbox.appendChild(titleLightbox);
-
-
-  // if(photo.image == undefined){
-  //   const photoVideoBF = document.createElement("video");
-  //   photoVideoBF.setAttribute("class","img-big-format")
-  //   photoContainerLightbox.appendChild(photoVideoBF);
-  
-  //   const photoVideoSourceBF = document.createElement("source");
-  //   photoVideoSourceBF.src=`assets/photographers/${photo.video}`;
-  //   photoVideoSourceBF.type ="video/mp4";
-  
-  //   photoVideoSourceBF.setAttribute("data-date",photo.date);
-  //   photoVideoSourceBF.setAttribute("title",photo.title);
-  //   photoVideoSourceBF.setAttribute("alt",photo.title);
-  //   photoVideoSourceBF.setAttribute("controls","");
-  //   photoVideoBF.appendChild(photoVideoSourceBF);
-  //   photoVideoBF.play();
-  //   var mediaTab = document.querySelectorAll(".img-big-format");
-  
-  //   mediaTab.forEach(function(photoVideoSourceBF, index) {
-  //     // Ajouter un attribut tabindex à chaque élément
-  //     photoVideoSourceBF.setAttribute("tabindex", index);
-  //   });
-  // }
-  
-  // if (photo.video == undefined){
-  //   const photoImageBF = document.createElement("img");
-  //   photoImageBF.setAttribute("class","img-big-format")
-  //   photoImageBF.setAttribute("data-date",photo.date)
-  //   photoImageBF.setAttribute("title",photo.title)
-  //   photoImageBF.setAttribute("alt",photo.title)
-  //   photoImageBF.src = `assets/photographers/${photo.image}`;
-  //   photoContainerLightbox.appendChild(photoImageBF);
-  
-  //   var mediaTab = document.querySelectorAll(".img-big-format");
-  
-  //   mediaTab.forEach(function(photoImageBF, index) {
-  //     // Ajouter un attribut tabindex à chaque élément
-  //     photoImageBF.setAttribute("tabindex", index);
-  //   });
-  
-  // }
-
-
-
-
 
   closeLightBox.addEventListener("click", function(){
     closLightbox();
@@ -306,75 +259,108 @@ lightboxLink.addEventListener("click", function(){
     }
   });
 
-//   arrowRight.addEventListener("click", function() {
-//     // Obtenez l'index de la photo actuellement affichée
-//     let currentPhotoIndex = photographerPhotos.indexOf(photo);  
-//     // Calculez l'index de la photo suivante
-//     let nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
-//     // Récupérez la prochaine photo et son titre
-//     let nextPhoto = photographerPhotos[nextPhotoIndex];
-//     // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
-//  if(nextPhoto.image){
-//   const photoImageBF = document.createElement("img");
-//   photoImageBF.setAttribute("class","img-big-format")
-//   photoImageBF.setAttribute("data-date",photo.date)
-//   photoImageBF.setAttribute("title",nextPhoto.title)
-//   photoImageBF.setAttribute("alt",nextPhoto.title)
-//   photoImageBF.src = `assets/photographers/${nextPhoto.image}`;
-//   sectionInnerLightBox.appendChild(photoImageBF);
+  arrowRight.addEventListener("click", function() {
+    // Obtenez l'index de la photo actuellement affichée
+    let currentPhotoIndex = photographerPhotos.indexOf(photo);  
+    // Calculez l'index de la photo suivante
+    let nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
+    // Récupérez la prochaine photo et son titre
+    let nextPhoto = photographerPhotos[nextPhotoIndex];
+    // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+ if(nextPhoto.image){
+  imgBigFormat.setAttribute("class","img-big-format")
+  imgBigFormat.setAttribute("data-date",photo.date)
+  imgBigFormat.setAttribute("title",nextPhoto.title)
+  imgBigFormat.setAttribute("alt",nextPhoto.title)
+  imgBigFormat.src = `assets/photographers/${nextPhoto.image}`;
+  photoContainerLightbox.appendChild(imgBigFormat);
 
-//   var mediaTab = document.querySelectorAll(".img-big-format");
+  titleLightbox.textContent = nextPhoto.title;
 
-//   mediaTab.forEach(function(photoImageBF, index) {
-//     // Ajouter un attribut tabindex à chaque élément
-//     photoImageBF.setAttribute("tabindex", index);
-//   });
+  var mediaTab = document.querySelectorAll(".img-big-format");
+  mediaTab.forEach(function(photoImageBF, index) {
+    // Ajouter un attribut tabindex à chaque élément
+    imgBigFormat.setAttribute("tabindex", index);
+  });
 
-//  }
-//  if(nextPhoto.video){
-//   const photoImageBF = document.createElement("img");
-//   photoImageBF.setAttribute("class","img-big-format")
-//   photoImageBF.setAttribute("data-date",photo.date)
-//   photoImageBF.setAttribute("title",photo.title)
-//   photoImageBF.setAttribute("alt",nextPhoto.title)
-//   photoImageBF.src = `assets/photographers/${photo.image}`;
-//   sectionInnerLightBox.appendChild(photoImageBF);
+ }
+ if(nextPhoto.video){
+  imgBigFormat.setAttribute("class","img-big-format")
+  imgBigFormat.setAttribute("data-date",photo.date)
+  imgBigFormat.setAttribute("title",photo.title)
+  imgBigFormat.setAttribute("alt",nextPhoto.title)
+  imgBigFormat.src = `assets/photographers/${photo.image}`;
+  photoContainerLightbox.appendChild(imgBigFormat);
 
-//   var mediaTab = document.querySelectorAll(".img-big-format");
+  var mediaTab = document.querySelectorAll(".img-big-format");
 
-//   mediaTab.forEach(function(photoImageBF, index) {
-//     // Ajouter un attribut tabindex à chaque élément
-//     photoImageBF.setAttribute("tabindex", index);
-//   });
+  mediaTab.forEach(function(photoImageBF, index) {
+    // Ajouter un attribut tabindex à chaque élément
+    photoImageBF.setAttribute("tabindex", index);
+  });
 
-//  }
-//     // Mettez à jour la variable "photo" avec la prochaine photo
-//     photo = nextPhoto;
-//     if (nextPhoto == undefined){
-//       arrowRight.style.display = "none";
-//     }
-//   });
+ }
+    // Mettez à jour la variable "photo" avec la prochaine photo
+    photo = nextPhoto;
+    if (nextPhoto == undefined){
+      arrowRight.style.display = "none";
+    }
+  });
 
-  // arrowLeft.addEventListener("click", function() {
-  //   // Obtenez l'index de la photo actuellement affichée
-  //   let currentPhotoIndex = photographerPhotos.indexOf(photo);    
-  //   // Calculez l'index de la photo précédente
-  //   let previewPhotoIndex = (currentPhotoIndex - 1 + photographerPhotos.length) % photographerPhotos.length;
-  //   // Récupérez la photo précédente et son titre
-  //   let previewPhoto = photographerPhotos[previewPhotoIndex];
-  //   // Mettez à jour la source de l'image et le titre de la lightbox avec la photo précédente
-  //   imgBigFormat.setAttribute("src", `assets/photographers/${previewPhoto.image}`);
-  //   // Mettez à jour la variable "photo" avec la photo précédente
-  //   photo = previewPhoto;
-  //   if (previewPhoto == undefined){
-  //     arrowLeft.style.display = "none";
-  //   } else {
-  //     arrowRight.style.display = "block"; // Assurez-vous que la flèche droite est affichée si nécessaire
-  //   }
-  // });
+
+
+  arrowLeft.addEventListener("click", function() {
+    // Obtenez l'index de la photo actuellement affichée
+    let currentPhotoIndex = photographerPhotos.indexOf(photo);  
+    // Calculez l'index de la photo suivante
+    let previewPhotoIndex = (currentPhotoIndex - 1) % photographerPhotos.length;
+    // Récupérez la prochaine photo et son titre
+    let previewPhoto = photographerPhotos[previewPhotoIndex];
+    // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+ if(previewPhoto.image){
+  imgBigFormat.setAttribute("class","img-big-format")
+  imgBigFormat.setAttribute("data-date",previewPhoto.date)
+  imgBigFormat.setAttribute("title",previewPhoto.title)
+  imgBigFormat.setAttribute("alt",previewPhoto.title)
+  imgBigFormat.src = `assets/photographers/${previewPhoto.image}`;
+  photoContainerLightbox.appendChild(imgBigFormat);
+
+  titleLightbox.textContent = previewPhoto.title;
+
+  var mediaTab = document.querySelectorAll(".img-big-format");
+  mediaTab.forEach(function(photoImageBF, index) {
+    // Ajouter un attribut tabindex à chaque élément
+    imgBigFormat.setAttribute("tabindex", index);
+  });
+
+ }
+ if(previewPhoto.video){
+  imgBigFormat.setAttribute("class","img-big-format")
+  imgBigFormat.setAttribute("data-date",previewPhoto.date)
+  imgBigFormat.setAttribute("title",previewPhoto.title)
+  imgBigFormat.setAttribute("alt",previewPhoto.title)
+  imgBigFormat.src = `assets/photographers/${previewPhoto.image}`;
+  photoContainerLightbox.appendChild(imgBigFormat);
+
+  var mediaTab = document.querySelectorAll(".img-big-format");
+
+  mediaTab.forEach(function(photoImageBF, index) {
+    // Ajouter un attribut tabindex à chaque élément
+    photoImageBF.setAttribute("tabindex", index);
+  });
+
+ }
+    // Mettez à jour la variable "photo" avec la prochaine photo
+    photo = previewPhoto;
+    if (previewPhoto == undefined){
+      arrowLeft.style.display = "none";
+    }
+  });
+
+
+
+  
 });
-
-
 
 if(photo.image == undefined){
         const photoVideo = document.createElement("video");
