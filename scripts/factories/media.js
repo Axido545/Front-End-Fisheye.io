@@ -212,6 +212,11 @@ function openLightbox(){
 lightboxLink.addEventListener("click", function(){
   openLightbox();
 
+  let oldSectionInnerLightBox = document.querySelector(".section-inner-lightbox");
+  if (oldSectionInnerLightBox) {
+    bgModalLightBox.removeChild(oldSectionInnerLightBox);
+  }
+
   const sectionInnerLightBox = document.createElement("section");
   sectionInnerLightBox.setAttribute("class", "section-inner-lightbox");
   bgModalLightBox.appendChild(sectionInnerLightBox);
