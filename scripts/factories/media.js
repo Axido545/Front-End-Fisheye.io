@@ -90,13 +90,13 @@ optionOne.textContent = "Popularité";
 selectFiltre.appendChild(optionOne);
     
 const optionTwo = document.createElement('option')
-optionOne.setAttribute("aria-label","Date");
+optionTwo.setAttribute("aria-label","Date");
 optionTwo.setAttribute("value","date");
 optionTwo.textContent = "Date";
 selectFiltre.appendChild(optionTwo);
     
 const optionThree = document.createElement('option')
-optionOne.setAttribute("aria-label","Titre");
+optionThree.setAttribute("aria-label","Titre");
 optionThree.setAttribute("value","Titre");
 optionThree.textContent = "Titre";
 selectFiltre.appendChild(optionThree);
