@@ -241,6 +241,11 @@ lightboxLink.addEventListener("click", function(){
   commandesLightbox.appendChild(arrowRight);
 
 
+  const closeLightBox = document.createElement("i");
+  closeLightBox.setAttribute("class", "fa-solid fa-xmark close-lightbox");
+  commandesLightbox.appendChild(closeLightBox);
+
+
   // if(photo.image == undefined){
   //   const photoVideoBF = document.createElement("video");
   //   photoVideoBF.setAttribute("class","img-big-format")
@@ -281,9 +286,7 @@ lightboxLink.addEventListener("click", function(){
   //   });
   
   // }
-  const closeLightBox = document.createElement("i");
-  closeLightBox.setAttribute("class", "fa-solid fa-xmark close-lightbox");
-  sectionInnerLightBox.appendChild(closeLightBox);
+
 
 
   const titleLightbox = document.createElement("span");
