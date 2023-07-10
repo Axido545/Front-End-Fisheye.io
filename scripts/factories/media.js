@@ -245,6 +245,11 @@ lightboxLink.addEventListener("click", function(){
   closeLightBox.setAttribute("class", "fa-solid fa-xmark close-lightbox");
   commandesLightbox.appendChild(closeLightBox);
 
+  const titleLightbox = document.createElement("span");
+  titleLightbox.setAttribute("class","title-lightbox");
+  titleLightbox.textContent = photo.title;
+  commandesLightbox.appendChild(titleLightbox);
+
 
   // if(photo.image == undefined){
   //   const photoVideoBF = document.createElement("video");
@@ -289,10 +294,7 @@ lightboxLink.addEventListener("click", function(){
 
 
 
-  const titleLightbox = document.createElement("span");
-  titleLightbox.setAttribute("class","title-lightbox");
-  titleLightbox.textContent = "blabla";
-  sectionInnerLightBox.appendChild(titleLightbox);
+
 
   closeLightBox.addEventListener("click", function(){
     closLightbox();

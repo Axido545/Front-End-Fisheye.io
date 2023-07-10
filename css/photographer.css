@@ -451,9 +451,17 @@ textarea {
 }
 
 .title-lightbox {
-  position: absolute;
+  /* position: absolute;
   bottom: 2%;
   width: 80%;
   height: auto;
+  position: absolute; */
+
   position: absolute;
+  margin-right: 10%;
+  bottom: 2%;
+  left: 15%;
+  margin: auto;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
