@@ -49,6 +49,10 @@ init();
 
 const modal = document.getElementById("contact_modal");
 
+
+
+
+
 function displayModal() {
 	modal.style.display = "block";
 }
@@ -59,10 +63,21 @@ function closeModal() {
 }
 
 document.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter' ) {
+    displayModal()  }
+});
+
+
+
+
+document.addEventListener('keydown', function(event) {
   if (event.key === 'Escape') {
     modal.style.display = "none";
   }
 });
+
+
+
 
 
 const btnContact = document.querySelector(".contact_button")

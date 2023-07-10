@@ -58,12 +58,18 @@ async function getPhotographerPhotos(photographerId) {
 }
 //ajout du lien vers l'accueil
 const logo  = document.querySelector(".logo");
+logo.setAttribute("alt","Logo Fisheye")
 const header = document.querySelector("header");
 const logoLink = document.createElement("a");
 logoLink.setAttribute("href", "index.html");
+logoLink.setAttribute("aria-label", "retour à la page d'accueil");
+
 logoLink.appendChild(logo)
 header.appendChild(logoLink);
 
+
+const lang = document.querySelector("html")
+lang.setAttribute("lang","fr")
 
 /////////////////////////////////////affichage des éléments header ///////////////////////////////////////
 //fonction  photographerFactory, paramètre data.
@@ -90,12 +96,12 @@ async function displayPhotographerInfo() {
     img.setAttribute("alt", "La photo du photographe");
     sectionPicture.appendChild(img);
 
-    const photographerName = document.createElement("h2");
+    const photographerName = document.createElement("h1");
     photographerName.setAttribute("class", "photographer-name");
     photographerName.textContent = photographer.name;
     sectionInfo.appendChild(photographerName);
 
-    const photographerLocation = document.createElement("p");
+    const photographerLocation = document.createElement("h2");
     photographerLocation.setAttribute("class", "location");
     photographerLocation.textContent = ` ${photographer.city}, ${photographer.country}`;
     sectionInfo.appendChild(photographerLocation);

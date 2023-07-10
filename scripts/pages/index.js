@@ -32,3 +32,6 @@ async function displayData(photographers) {
 
                 const logo = document.querySelector(".logo");
                 logo.setAttribute("alt", "Fisheye Logo")
+
+                const lang = document.querySelector("html")
+                lang.setAttribute("lang","fr")
