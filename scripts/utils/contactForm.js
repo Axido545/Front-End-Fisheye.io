@@ -48,6 +48,10 @@ init();
 
 
 const modal = document.getElementById("contact_modal");
+modal.setAttribute("aria-hidden", "false");
+modal.setAttribute("role", "dialog")
+modal.setAttribute("aria-describedby", "Formulaire contact")
+
 
 
 
@@ -55,11 +59,13 @@ const modal = document.getElementById("contact_modal");
 
 function displayModal() {
 	modal.style.display = "block";
+  modal.attr('aria-hidden', 'true')
 }
 function closeModal() {
 
 
     modal.style.display = "none";
+    modal.attr('aria-hidden', 'false')
 }
 
 document.addEventListener('keydown', function(event) {

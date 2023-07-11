@@ -184,6 +184,20 @@ textarea {
   height: 170px;
 }
 
+.select-filter,
+.popular-filter,
+.date-filter,
+.title-filte,
+.heart-like {
+  cursor: pointer;
+}
+
+.link-lightbox {
+  cursor: pointer;
+  height: 300px;
+  width: 400px;
+}
+
 .box-img {
   object-fit: cover;
   height: 300px;
@@ -256,6 +270,7 @@ textarea {
   border-radius: 5px;
   font-size: 0.9em;
   padding: 10px 20px;
+  cursor: pointer;
 }
 
 .filtre {

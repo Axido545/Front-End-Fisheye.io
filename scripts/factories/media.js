@@ -80,11 +80,13 @@ filtrePhotos.appendChild(labelFiltre);
 const selectFiltre = document.createElement('select')
 selectFiltre.setAttribute("aria-label","Filtres");
 selectFiltre.setAttribute("id","select-filter");
+selectFiltre.setAttribute("class","select-filter");
 selectFiltre.setAttribute("name","select-filter");
 filtrePhotos.appendChild(selectFiltre);
     
 const optionOne = document.createElement('option')
 optionOne.setAttribute("aria-label","Popularité");
+optionOne.setAttribute("class","popular-filter");
 optionOne.setAttribute("value","popular");
 optionOne.textContent = "Popularité";
 selectFiltre.appendChild(optionOne);
@@ -92,12 +94,15 @@ selectFiltre.appendChild(optionOne);
 const optionTwo = document.createElement('option')
 optionTwo.setAttribute("aria-label","Date");
 optionTwo.setAttribute("value","date");
+optionTwo.setAttribute("class","date-filter");
 optionTwo.textContent = "Date";
 selectFiltre.appendChild(optionTwo);
     
 const optionThree = document.createElement('option')
 optionThree.setAttribute("aria-label","Titre");
 optionThree.setAttribute("value","Titre");
+optionThree.setAttribute("class","title-filter");
+optionTwo.textContent = "Date";
 optionThree.textContent = "Titre";
 selectFiltre.appendChild(optionThree);
 
@@ -182,6 +187,9 @@ const bgModalLightBox = document.createElement("section");
 bgModalLightBox.setAttribute("class", "bg-modal-lightbox")
 const bodyPage = document.querySelector("body");
 bodyPage.appendChild(bgModalLightBox)
+bgModalLightBox.setAttribute("aria-hidden", "false");
+bgModalLightBox.setAttribute("role", "dialog")
+bgModalLightBox.setAttribute("aria-describedby", "Lightbox")
 
 
 
@@ -203,10 +211,12 @@ photoContainer.appendChild(lightboxLink)
 
 function closLightbox(){
   bgModalLightBox.style.display ="none";
+  bgModalLightBox.setAttribute("aria-hidden", "false");
 }
 
 function openLightbox(){
   bgModalLightBox.style.display ="flex";
+  bgModalLightBox.setAttribute("aria-hidden", "true");
 }
 ///////////////////////////LIGHTBOX event/////////////////////////////////
 lightboxLink.addEventListener("click", function(){
@@ -274,7 +284,7 @@ if (photo.video == undefined){
   // photoContainerLightbox.appendChild(imgBigFormat);
 
 
-  imgBigFormat.setAttribute("src",`assets/photographers/${photo.image}`);
+  // imgBigFormat.setAttribute("src",`assets/photographers/${photo.image}`);
 
   const commandesLightbox = document.createElement("div")
   commandesLightbox.setAttribute("class","commandes-lightbox")
@@ -318,72 +328,81 @@ if (photo.video == undefined){
     let nextPhoto = photographerPhotos[nextPhotoIndex];
     // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
  if(nextPhoto.image){
-  imgBigFormat.setAttribute("class","img-big-format")
-  imgBigFormat.setAttribute("data-date",photo.date)
-  imgBigFormat.setAttribute("title",nextPhoto.title)
-  imgBigFormat.setAttribute("alt",nextPhoto.title)
-  imgBigFormat.src = `assets/photographers/${nextPhoto.image}`;
-  photoContainerLightbox.appendChild(imgBigFormat);
+  nextImgBigFormat = document.createElement(img)
+  nextImgBigFormat.setAttribute("class","img-big-format")
+  nextImgBigFormat.setAttribute("data-date",photo.date)
+  nextImgBigFormat.setAttribute("title",nextPhoto.title)
+  nextImgBigFormat.setAttribute("alt",nextPhoto.title)
+  nextImgBigFormat.src = `assets/photographers/${nextPhoto.image}`;
+  photoContainerLightbox.appendChild(nextImgBigFormat);
 
   titleLightbox.textContent = nextPhoto.title;
 
   var mediaTab = document.querySelectorAll(".img-big-format");
-  mediaTab.forEach(function(imgBigFormat, index) {
+  mediaTab.forEach(function(nextImgBigFormat, index) {
     // Ajouter un attribut tabindex à chaque élément
-    imgBigFormat.setAttribute("tabindex", index);
+    nextImgBigFormat.setAttribute("tabindex", index);
   });
 
  }
  if(nextPhoto.video){
-  imgBigFormat.setAttribute("class","img-big-format")
-  imgBigFormat.setAttribute("data-date",photo.date)
-  imgBigFormat.setAttribute("title",photo.title)
-  imgBigFormat.setAttribute("alt",nextPhoto.title)
-  imgBigFormat.src = `assets/photographers/${photo.image}`;
-  photoContainerLightbox.appendChild(imgBigFormat);
+  const nextVideoBigFormat = document.createElement("video");
+  nextVideoBigFormat.setAttribute("class","img-big-format")
+  lightboxLink.appendChild(nextVideoBigFormat);
 
-  var mediaTab = document.querySelectorAll(".img-big-format");
+  const nextVideoBigFormaSource = document.createElement("source");
+  nextVideoBigFormaSource.src=`assets/photographers/${photo.video}`;
+  nextVideoBigFormaSource.type ="video/mp4";
 
-  mediaTab.forEach(function(imgBigFormat, index) {
+  nextVideoBigFormaSource.setAttribute("data-date",photo.date)
+  nextVideoBigFormaSource.setAttribute("title",photo.title)
+  nextVideoBigFormaSource.setAttribute("alt",photo.title)
+
+  nextVideoBigFormat.appendChild(nextVideoBigFormaSource) 
+
+  var mediaTab = document.querySelectorAll(".box-img");
+
+  mediaTab.forEach(function(nextVideoBigFormaSource, index) {
     // Ajouter un attribut tabindex à chaque élément
-    imgBigFormat.setAttribute("tabindex", index);
+    nextVideoBigFormaSource.setAttribute("tabindex", index);
   });
 
  }
     // Mettez à jour la variable "photo" avec la prochaine photo
     photo = nextPhoto;
-    if (nextPhoto == undefined){
+    if (nextPhoto == undefined || nextVideo == undefined ){
       arrowRight.style.display = "none";
     }
   });
 
 
 
-  arrowLeft.addEventListener("click", function() {
-    // Obtenez l'index de la photo actuellement affichée
-    let currentPhotoIndex = photographerPhotos.indexOf(photo);  
-    // Calculez l'index de la photo suivante
-    let previewPhotoIndex = (currentPhotoIndex - 1) % photographerPhotos.length;
-    // Récupérez la prochaine photo et son titre
-    let previewPhoto = photographerPhotos[previewPhotoIndex];
-    // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
- if(previewPhoto.image){
-  imgBigFormat.setAttribute("class","img-big-format")
-  imgBigFormat.setAttribute("data-date",previewPhoto.date)
-  imgBigFormat.setAttribute("title",previewPhoto.title)
-  imgBigFormat.setAttribute("alt",previewPhoto.title)
-  imgBigFormat.src = `assets/photographers/${previewPhoto.image}`;
-  photoContainerLightbox.appendChild(imgBigFormat);
+//   arrowLeft.addEventListener("click", function() {
+//     // Obtenez l'index de la photo actuellement affichée
+//     let currentPhotoIndex = photographerPhotos.indexOf(photo);  
+//     // Calculez l'index de la photo suivante
+//     let previewPhotoIndex = (currentPhotoIndex - 1) % photographerPhotos.length;
+//     // Récupérez la prochaine photo et son titre
+//     let previewPhoto = photographerPhotos[previewPhotoIndex];
+//     // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+//  if(previewPhoto.image){
+//   previewimgBigFormat = document.createElement
+//   imgBigFormat.setAttribute("class","img-big-format")
+//   imgBigFormat.setAttribute("data-date",previewPhoto.date)
+//   imgBigFormat.setAttribute("title",previewPhoto.title)
+//   imgBigFormat.setAttribute("alt",previewPhoto.title)
+//   imgBigFormat.src = `assets/photographers/${previewPhoto.image}`;
+//   photoContainerLightbox.appendChild(imgBigFormat);
 
-  titleLightbox.textContent = previewPhoto.title;
+//   titleLightbox.textContent = previewPhoto.title;
 
-  var mediaTab = document.querySelectorAll(".img-big-format");
-  mediaTab.forEach(function(imgBigFormat, index) {
-    // Ajouter un attribut tabindex à chaque élément
-    imgBigFormat.setAttribute("tabindex", index);
-  });
+//   var mediaTab = document.querySelectorAll(".img-big-format");
+//   mediaTab.forEach(function(imgBigFormat, index) {
+//     // Ajouter un attribut tabindex à chaque élément
+//     imgBigFormat.setAttribute("tabindex", index);
+//   });
 
- }
+//  }
  if(previewPhoto.video){
   imgBigFormat.setAttribute("class","img-big-format")
   imgBigFormat.setAttribute("data-date",previewPhoto.date)
