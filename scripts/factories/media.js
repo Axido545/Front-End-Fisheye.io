@@ -225,9 +225,55 @@ lightboxLink.addEventListener("click", function(){
   photoContainerLightbox.setAttribute("class","photo-container-lightbox")
   sectionInnerLightBox.appendChild(photoContainerLightbox);
 
-  const imgBigFormat = document.createElement("img");
-  imgBigFormat.setAttribute("class","img-big-format");
-  photoContainerLightbox.appendChild(imgBigFormat);
+
+  if(photo.image == undefined){
+    const photoBigFormatVideo = document.createElement("video");
+    photoBigFormatVideo.setAttribute("class","img-big-format")
+    photoBigFormatVideo.setAttribute("controls","")
+
+    photoContainerLightbox.appendChild(photoBigFormatVideo);
+
+    const photoBigFormatVideoSource = document.createElement("source");
+    photoBigFormatVideoSource.src=`assets/photographers/${photo.video}`;
+    photoBigFormatVideoSource.type ="video/mp4";
+  
+    photoBigFormatVideoSource.setAttribute("data-date",photo.date)
+    photoBigFormatVideoSource.setAttribute("title",photo.title)
+    photoBigFormatVideoSource.setAttribute("alt",photo.title)
+
+    photoBigFormatVideo.appendChild(photoBigFormatVideoSource) 
+
+    var mediaTab = document.querySelectorAll(".box-img");
+
+    mediaTab.forEach(function(photoVideoSource, index) {
+      // Ajouter un attribut tabindex à chaque élément
+      photoBigFormatVideoSource.setAttribute("tabindex", index);
+    });
+}
+
+if (photo.video == undefined){
+    const imgBigFormat = document.createElement("img");
+    imgBigFormat.setAttribute("class","img-big-format")
+    imgBigFormat.setAttribute("data-date",photo.date)
+    imgBigFormat.setAttribute("title",photo.title)
+    imgBigFormat.setAttribute("alt",photo.title)
+    imgBigFormat.src = `assets/photographers/${photo.image}`;
+    photoContainerLightbox.appendChild(imgBigFormat);
+
+    var mediaTab = document.querySelectorAll(".img-big-format");
+
+    mediaTab.forEach(function(photoImage, index) {
+      // Ajouter un attribut tabindex à chaque élément
+      photoImage.setAttribute("tabindex", index);
+    });
+}
+
+
+  // const imgBigFormat = document.createElement("img");
+  // imgBigFormat.setAttribute("class","img-big-format");
+  // photoContainerLightbox.appendChild(imgBigFormat);
+
+
   imgBigFormat.setAttribute("src",`assets/photographers/${photo.image}`);
 
   const commandesLightbox = document.createElement("div")
