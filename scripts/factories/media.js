@@ -524,14 +524,14 @@ photoLikes.appendChild(numberLikes);
    
 const iconLikes = document.createElement("i")
 iconLikes.setAttribute("class","fa-regular fa-heart heart-like")
-iconLikes.setAttribute("aria-label","En cliquand une fois cela ajoute un like, recliquant une fois cele annule le like")
+iconLikes.setAttribute("aria-label","En cliquand une fois cela ajoute un like à l' image " + photo.title +" , recliquant une fois cele annule le like")
 photoLikes.appendChild(iconLikes)
 
 const sectionTotalPrice = document.createElement("section");
 sectionTotalPrice.setAttribute("class","section-total-price")
 mainContent.appendChild(sectionTotalPrice);
 
-const likeSectionPrice = document.createElement("span");
+const likeSectionPrice = document.createElement("span");  
 likeSectionPrice.setAttribute("class","like-section-price")
 sectionTotalPrice.appendChild(likeSectionPrice)
 
