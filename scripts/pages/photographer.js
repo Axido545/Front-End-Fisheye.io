@@ -122,6 +122,10 @@ async function displayPhotographerInfo() {
     logo.setAttribute("alt", "Fisheye Logo")
     logo.setAttribute("aria-label", "Retour à la page d'accueil")
 
+
+    
+
+
     
   } else {
     console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);

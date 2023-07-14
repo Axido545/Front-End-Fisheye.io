@@ -35,3 +35,13 @@ async function displayData(photographers) {
 
                 const lang = document.querySelector("html")
                 lang.setAttribute("lang","fr")
+
+                // Sélectionner tous les éléments HTML de la page
+
+
+
+
+
+
+
+

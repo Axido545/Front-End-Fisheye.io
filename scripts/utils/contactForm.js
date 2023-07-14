@@ -370,3 +370,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// Sélectionner tous les éléments HTML de la page
+let elements = document.querySelectorAll("*");
+
+// Parcourir chaque élément et ajouter l'attribut "tabindex"
+for (var i = 0; i < elements.length; i++) {
+  elements[i].setAttribute("tabindex", "0");
+}

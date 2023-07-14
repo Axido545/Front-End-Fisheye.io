@@ -1,3 +1,6 @@
+
+
+
 //fonction  photographerFactory, paramètre data.
 function photographerFactory(data) {
 // l'intérieur de la fonction, l'objet data est destructuré pour extraire les propriétés name et portrait.
@@ -38,7 +41,16 @@ function photographerFactory(data) {
         const link = document.createElement('a');
           link.setAttribute('href', `photographer.html?id=${id}`); // ajout de l'id
          link.appendChild(article);
+
+         let elements = document.querySelectorAll("*");
+
+         // Parcourir chaque élément et ajouter l'attribut "tabindex"
+         for (var i = 0; i < elements.length; i++) {
+           elements[i].setAttribute("tabindex", "0");
+         }
+        
         return link;
+
     }
     return { name, picture, getUserCardDOM }
 }

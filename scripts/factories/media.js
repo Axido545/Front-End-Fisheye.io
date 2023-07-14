@@ -370,7 +370,7 @@ if (photo.video == undefined){
  }
     // Mettez à jour la variable "photo" avec la prochaine photo
     photo = nextPhoto;
-    if (nextPhoto == undefined || nextVideo == undefined ){
+    if (nextPhoto == undefined){
       arrowRight.style.display = "none";
     }
   });
@@ -573,8 +573,21 @@ iconLikes.addEventListener("click", function() {
 });
 updateTotalLikes();
 });    
+
+
+
+
+// Sélectionner tous les éléments HTML de la page
+let elements = document.querySelectorAll("*");
+
+// Parcourir chaque élément et ajouter l'attribut "tabindex"
+for (var i = 0; i < elements.length; i++) {
+  elements[i].setAttribute("tabindex", "0");
+}
+
       } else {
         console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
       }
     }
     displayPhotographerInfo();
+
