@@ -194,9 +194,13 @@ bgModalLightBox.setAttribute("aria-describedby", "Lightbox")
 
 
  // Galerie de photos
+const containerPhotoGallery = document.createElement("div")
+containerPhotoGallery.setAttribute("class", "container-gallery")
+mainContent.appendChild(containerPhotoGallery);
+
 const photoGallery = document.createElement("section");
 photoGallery.setAttribute("class", "photo-gallery");
-mainContent.appendChild(photoGallery);
+containerPhotoGallery.appendChild(photoGallery);
 
 const photographerPhotos = await getPhotographerPhotos(id);
 photographerPhotos.forEach((photo) => {
@@ -374,8 +378,6 @@ if (photo.video == undefined){
       arrowRight.style.display = "none";
     }
   });
-
-
 
   arrowLeft.addEventListener("click", function() {
     // Obtenez l'index de la photo actuellement affichée

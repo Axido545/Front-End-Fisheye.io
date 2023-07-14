@@ -123,8 +123,9 @@ async function displayPhotographerInfo() {
     logo.setAttribute("aria-label", "Retour à la page d'accueil")
 
 
-    
+    const headerPhotograph = document.querySelector("header");
 
+    headerPhotograph.style.width = "1240px";
 
     
   } else {
