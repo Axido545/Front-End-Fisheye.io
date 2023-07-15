@@ -48,7 +48,18 @@ function photographerFactory(data) {
          for (var i = 0; i < elements.length; i++) {
            elements[i].setAttribute("tabindex", "0");
          }
-        
+
+
+const body = document.querySelector("body");
+const headerTop = document.querySelector("header");
+const main = document.querySelector("main");
+
+const wrap = document.createElement("div");
+wrap.appendChild(headerTop);
+wrap.appendChild(main);
+body.appendChild(wrap);
+wrap.setAttribute("class","wrap")
+wrap.style.width = "1240 px";    
         return link;
 
     }
