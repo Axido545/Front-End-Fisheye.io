@@ -250,7 +250,7 @@ lightboxLink.addEventListener("click", function(){
   sectionInnerLightBox.appendChild(photoContainerLightbox);
 
 
-  if(photo.image == undefined){
+  if(photo.video){
     const photoBigFormatVideo = document.createElement("video");
     photoBigFormatVideo.setAttribute("class","img-big-format")
     photoBigFormatVideo.setAttribute("controls","")
@@ -275,7 +275,8 @@ lightboxLink.addEventListener("click", function(){
     });
 }
 
-if (photo.video == undefined){
+if (photo.image ){
+
     const imgBigFormat = document.createElement("img");
     imgBigFormat.setAttribute("class","img-big-format")
     imgBigFormat.setAttribute("data-date",photo.date)
@@ -291,15 +292,6 @@ if (photo.video == undefined){
       photoImage.setAttribute("tabindex", index);
     });
 }
-
-
-  // const imgBigFormat = document.createElement("img");
-  // imgBigFormat.setAttribute("class","img-big-format");
-  // photoContainerLightbox.appendChild(imgBigFormat);
-
-
-  // imgBigFormat.setAttribute("src",`assets/photographers/${photo.image}`);
-
   const commandesLightbox = document.createElement("div")
   commandesLightbox.setAttribute("class","commandes-lightbox")
   sectionInnerLightBox.appendChild(commandesLightbox);
@@ -362,7 +354,7 @@ if (photo.video == undefined){
  if(nextPhoto.video){
   const nextVideoBigFormat = document.createElement("video");
   nextVideoBigFormat.setAttribute("class","img-big-format")
-  lightboxLink.appendChild(nextVideoBigFormat);
+  photoContainerLightbox.appendChild(nextVideoBigFormat);
 
   const nextVideoBigFormaSource = document.createElement("source");
   nextVideoBigFormaSource.src=`assets/photographers/${photo.video}`;
