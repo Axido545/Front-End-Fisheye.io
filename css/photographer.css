@@ -342,7 +342,6 @@ textarea {
   .contact_button:focus {
     align-self: center;
     margin: 30px;
-    position: relative;
   }
 
   .photographer-name {
