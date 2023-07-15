@@ -468,7 +468,7 @@ if (photo.image ){
   
 });
 
-if(photo.image == undefined){
+if(photo.video){
         const photoVideo = document.createElement("video");
         photoVideo.setAttribute("class","box-img")
         lightboxLink.appendChild(photoVideo);
@@ -491,7 +491,7 @@ if(photo.image == undefined){
         });
 }
 
-if (photo.video == undefined){
+if (photo.image){
         const photoImage = document.createElement("img");
         photoImage.setAttribute("class","box-img")
         photoImage.setAttribute("data-date",photo.date)
