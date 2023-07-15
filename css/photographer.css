@@ -8,7 +8,7 @@
   background-color: rgba(40, 39, 39, 0.466);
 }
 
-header {
+.wrap {
   width: 1240px;
   margin: 0 auto;
 }
@@ -25,7 +25,6 @@ a {
 .photograph-header {
   background-color: #fafafa;
   height: 313px;
-  width: 1240px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -33,7 +32,6 @@ a {
   flex-direction: row;
   padding: 15px;
   grid-template-columns: 1fr 1fr 1fr;
-  position: relative;
 }
 
 .contact_button {
@@ -51,7 +49,6 @@ a {
   margin: auto;
   justify-content: center;
   order: 2;
-  position: absolute;
   margin: auto;
   left: 0;
   right: 0;
@@ -305,6 +302,9 @@ textarea {
 }
 
 @media (max-width: 1024px) {
+  .wrap {
+    width: 100%;
+  }
   .photograph-header {
     margin: auto;
   }
@@ -314,10 +314,16 @@ textarea {
 }
 
 @media (max-width: 767px) {
-  header {
-    height: 0;
+  .wrap {
+    width: 100%;
   }
-
+  .container-gallery {
+    width: 95%;
+  }
+  header {
+    justify-content: flex-start;
+    flex-direction: initial;
+  }
   .box-img {
     max-width: 100%;
   }
@@ -326,7 +332,9 @@ textarea {
     flex-direction: column;
     margin: 0;
     padding-top: 40px;
-    padding-bottom: 80px;
+    padding-bottom: 100px;
+    width: 100%;
+    padding-left: 0;
   }
 
   .contact_button,
@@ -367,6 +375,7 @@ textarea {
 
   .filtre {
     margin: 0 auto;
+    margin-bottom: 10px;
   }
 
   .photo-gallery {
@@ -486,12 +495,6 @@ textarea {
 }
 
 .title-lightbox {
-  /* position: absolute;
-  bottom: 2%;
-  width: 80%;
-  height: auto;
-  position: absolute; */
-
   position: absolute;
   margin-right: 10%;
   bottom: 2%;

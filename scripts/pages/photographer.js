@@ -125,7 +125,7 @@ async function displayPhotographerInfo() {
 
     const headerPhotograph = document.querySelector("header");
 
-    headerPhotograph.style.width = "1240px";
+    // headerPhotograph.style.width = "1240px";
 
     
   } else {

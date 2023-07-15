@@ -55,6 +55,16 @@ async function getPhotographerPhotos(photographerId) {
     return [];
   }
 }
+const body = document.querySelector("body");
+const headerTop = document.querySelector("header");
+const main = document.querySelector("main");
+
+const wrap = document.createElement("div");
+wrap.appendChild(headerTop);
+wrap.appendChild(main);
+body.appendChild(wrap);
+wrap.setAttribute("class","wrap")
+
 let totalLikes = 0;
 //fonction  photographerFactory, paramètre data.
 async function displayPhotographerInfo() {
@@ -577,13 +587,11 @@ updateTotalLikes();
 });    
 
 
-
-
-// Sélectionner tous les éléments HTML de la page
+// Sélectionne tous les éléments HTML de la page
 let elements = document.querySelectorAll("*");
 
-// Parcourir chaque élément et ajouter l'attribut "tabindex"
-for (var i = 0; i < elements.length; i++) {
+// Parcour chaque élément et ajouter l'attribut "tabindex"
+for (let i = 0; i < elements.length; i++) {
   elements[i].setAttribute("tabindex", "0");
 }
 

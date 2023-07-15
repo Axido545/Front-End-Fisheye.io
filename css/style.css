@@ -95,7 +95,8 @@ p {
   header {
     justify-content: center;
     flex-direction: column;
-    margin-top: 50px;
+    margin: 0 auto;
+    margin-top: 27px;
   }
 
   h1 {
