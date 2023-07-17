@@ -120,6 +120,8 @@ selectFiltre.appendChild(optionThree);
 
 
 ///////////FILTRE EVENT
+
+// au clic
 optionOne.addEventListener("click", function() {
   // Sélection tous les éléments avec la classe "photo-container"
   let mediaElements = document.querySelectorAll(".photo-container");
@@ -138,6 +140,30 @@ optionOne.addEventListener("click", function() {
  });
  });
 
+// avec la tocuhe entrée
+ optionOne.addEventListener("keydown", function(event) {
+  // Vérifier si la touche enfoncée est "Entrée" (keyCode 13)
+  if (event.key === "Enter") {
+    // Exécuter le même code que le gestionnaire "click"
+    // Sélection tous les éléments avec la classe "photo-container"
+    let mediaElements = document.querySelectorAll(".photo-container");
+    // Convertion les éléments en un tableau
+    let mediaArray = Array.from(mediaElements);
+    // Trie les éléments par popularité (avec la classe "number-likes")
+    mediaArray.sort(function(a, b) {
+      let likesA = parseInt(a.querySelector(".number-likes").textContent);
+      let likesB = parseInt(b.querySelector(".number-likes").textContent);
+      return likesB - likesA;
+    });
+    // Réinsértion les éléments triés dans leur conteneur d'origine
+    let mediaContainer = document.querySelector(".photo-gallery");
+    mediaArray.forEach(function(media) {
+      mediaContainer.appendChild(media);
+    });
+  }
+});
+
+//quand on clic
 optionTwo.addEventListener("click", function() {
   // Sélectionnez tous les éléments avec la classe "photo-container"
   let mediaElements = document.querySelectorAll(".photo-container");
@@ -155,43 +181,125 @@ optionTwo.addEventListener("click", function() {
     mediaContainer.appendChild(media);
   });
   });
-    
-optionThree.addEventListener("click", function() {
-// Sélectionnez tous les éléments avec la classe "photo-container"
-let mediaElements = document.querySelectorAll(".photo-container");
-// Convertissez les éléments en un tableau
-let mediaArray = Array.from(mediaElements);
-// Triez les éléments par titre
-mediaArray.sort(function(a, b) {
-  let titleA, titleB;
-  let imgElementA = a.querySelector("img");
-  let videoElementA = a.querySelector("video");
-    if (imgElementA) {
-      titleA = imgElementA.getAttribute("title");
-    } else if (videoElementA) {
-      var sourceElementA = videoElementA.querySelector("source");
-     if (sourceElementA) {
-      titleA = sourceElementA.getAttribute("title");
-    }
-}
-let imgElementB = b.querySelector("img");
-let videoElementB = b.querySelector("video");
-  if (imgElementB) {
-    titleB = imgElementB.getAttribute("title");
-  } else if (videoElementB) {
-    let sourceElementB = videoElementB.querySelector("source");
-  if (sourceElementB) {
-    titleB = sourceElementB.getAttribute("title");
-    }
-  }
-  return titleA.localeCompare(titleB);
+ 
+//avec la touche entrée
+  optionTwo.addEventListener("keydown", function(event) {
+    // Vérifier si la touche enfoncée est "Entrée" (keyCode 13)
+    if (event.key === "Enter") {
+      // Exécuter le même code que le gestionnaire "click"
+      // Sélectionnez tous les éléments avec la classe "photo-container"
+      let mediaElements = document.querySelectorAll(".photo-container");
+      // Convertissez les éléments en un tableau
+      let mediaArray = Array.from(mediaElements);
+      // Triez les éléments par date
+      mediaArray.sort(function(a, b) {
+        let dateA = new Date(a.querySelector("img, video").getAttribute("data-date"));
+        let dateB = new Date(b.querySelector("img, video").getAttribute("data-date"));
+        return dateA - dateB;
       });
-// Réinsérez les éléments triés dans leur conteneur d'origine
-let  mediaContainer = document.querySelector(".photo-gallery");
-mediaArray.forEach(function(media) {
-  mediaContainer.appendChild(media);
+      // Réinsérez les éléments triés dans leur conteneur d'origine
+      let mediaContainer = document.querySelector(".photo-gallery");
+      mediaArray.forEach(function(media) {
+        mediaContainer.appendChild(media);
+      });
+    }
   });
-});
+
+
+  
+// option 3 au clic
+
+optionThree.addEventListener("click", function() {
+  // Sélectionnez tous les éléments avec la classe "photo-container"
+  let mediaElements = document.querySelectorAll(".photo-container");
+  // Convertissez les éléments en un tableau
+  let mediaArray = Array.from(mediaElements);
+  // Triez les éléments par titre
+  mediaArray.sort(function(a, b) {
+    let titleA, titleB;
+    let imgElementA = a.querySelector("img");
+    let videoElementA = a.querySelector("video");
+      if (imgElementA) {
+        titleA = imgElementA.getAttribute("title");
+      } else if (videoElementA) {
+        var sourceElementA = videoElementA.querySelector("source");
+       if (sourceElementA) {
+        titleA = sourceElementA.getAttribute("title");
+      }
+  }
+  let imgElementB = b.querySelector("img");
+  let videoElementB = b.querySelector("video");
+    if (imgElementB) {
+      titleB = imgElementB.getAttribute("title");
+    } else if (videoElementB) {
+      let sourceElementB = videoElementB.querySelector("source");
+    if (sourceElementB) {
+      titleB = sourceElementB.getAttribute("title");
+      }
+    }
+    return titleA.localeCompare(titleB);
+        });
+  // Réinsérez les éléments triés dans leur conteneur d'origine
+  let  mediaContainer = document.querySelector(".photo-gallery");
+  mediaArray.forEach(function(media) {
+    mediaContainer.appendChild(media);
+    });
+  });
+
+
+//option 3 avec la touche entrée 
+  // Ajouter un gestionnaire d'événement pour la touche "keydown" sur le select
+  optionThree.addEventListener("keydown", function(event) {
+    // Vérifier si la touche enfoncée est "Entrée" (keyCode 13)
+    if (event.key === "Enter") {
+      // Exécuter le même code que le gestionnaire "click"
+      // Sélectionnez tous les éléments avec la classe "photo-container"
+      let mediaElements = document.querySelectorAll(".photo-container");
+      // Convertissez les éléments en un tableau
+      let mediaArray = Array.from(mediaElements);
+      // Triez les éléments par titre
+      mediaArray.sort(function(a, b) {
+        let titleA, titleB;
+        let imgElementA = a.querySelector("img");
+        let videoElementA = a.querySelector("video");
+        if (imgElementA) {
+          titleA = imgElementA.getAttribute("title");
+        } else if (videoElementA) {
+          var sourceElementA = videoElementA.querySelector("source");
+          if (sourceElementA) {
+            titleA = sourceElementA.getAttribute("title");
+          }
+        }
+        let imgElementB = b.querySelector("img");
+        let videoElementB = b.querySelector("video");
+        if (imgElementB) {
+          titleB = imgElementB.getAttribute("title");
+        } else if (videoElementB) {
+          let sourceElementB = videoElementB.querySelector("source");
+          if (sourceElementB) {
+            titleB = sourceElementB.getAttribute("title");
+          }
+        }
+        return titleA.localeCompare(titleB);
+      });
+      // Réinsérez les éléments triés dans leur conteneur d'origine
+      let mediaContainer = document.querySelector(".photo-gallery");
+      mediaArray.forEach(function(media) {
+        mediaContainer.appendChild(media);
+      });
+    }
+  });
+  
+  
+  
+
+  
+
+
+  
+
+
+
     
 const bgModalLightBox = document.createElement("section");
 bgModalLightBox.setAttribute("class", "bg-modal-lightbox")
@@ -438,28 +546,126 @@ if (photo.image ){
 //quand on utilise la touche flèche 
   document.addEventListener('keydown', function(event) {
     if (event.key === 'ArrowRight') {
-      let currentPhotoIndex = photographerPhotos.indexOf(photo);
-      let nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
-      let nextPhoto = photographerPhotos[nextPhotoIndex];
-    
-      // Mettez à jour la lightbox avec la prochaine photo
-      if (nextPhoto) {
-        imgBigFormat.src = `assets/photographers/${nextPhoto.image}`;
-        titleLightbox.textContent = nextPhoto.title;
-        photo = nextPhoto;
-      }
-    } else if (event.key === 'ArrowLeft') {
+  
+    // Obtenez l'index de la photo actuellement affichée
+     let currentPhotoIndex = photographerPhotos.indexOf(photo);  
+    // Calculez l'index de la photo suivante
+    let nextPhotoIndex = (currentPhotoIndex + 1) % photographerPhotos.length;
+    // Récupérez la prochaine photo et son titre
+    let nextPhoto = photographerPhotos[nextPhotoIndex];
+    // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+ if(nextPhoto.image){
+  nextImgBigFormat = document.createElement("img")
+  nextImgBigFormat.setAttribute("class","img-big-format")
+  nextImgBigFormat.setAttribute("data-date",photo.date)
+  nextImgBigFormat.setAttribute("title",nextPhoto.title)
+  nextImgBigFormat.setAttribute("alt",nextPhoto.title)
+  nextImgBigFormat.src = `assets/photographers/${nextPhoto.image}`;
+  photoContainerLightbox.appendChild(nextImgBigFormat);
 
-      let currentPhotoIndex = photographerPhotos.indexOf(photo);
-      let previewPhotoIndex = (currentPhotoIndex - 1) % photographerPhotos.length;
-      let previewPhoto = photographerPhotos[previewPhotoIndex];
-    
-      // Mettez à jour la lightbox avec la prochaine photo
-      if (previewPhoto) {
-        imgBigFormat.src = `assets/photographers/${previewPhoto.image}`;
-        titleLightbox.textContent = previewPhoto.title;
-        photo = previewPhoto;
-      }
+  titleLightbox.textContent = nextPhoto.title;
+
+  var mediaTab = document.querySelectorAll(".img-big-format");
+  mediaTab.forEach(function(nextImgBigFormat, index) {
+    // Ajouter un attribut tabindex à chaque élément
+    nextImgBigFormat.setAttribute("tabindex", index);
+  });
+
+ }
+ if(nextPhoto.video){
+  const nextVideoBigFormat = document.createElement("video");
+  nextVideoBigFormat.setAttribute("class","img-big-format")
+  photoContainerLightbox.appendChild(nextVideoBigFormat);
+
+  const nextVideoBigFormaSource = document.createElement("source");
+  nextVideoBigFormaSource.src=`assets/photographers/${photo.video}`;
+  nextVideoBigFormaSource.type ="video/mp4";
+
+  nextVideoBigFormaSource.setAttribute("data-date",photo.date)
+  nextVideoBigFormaSource.setAttribute("title",photo.title)
+  nextVideoBigFormaSource.setAttribute("alt",photo.title)
+
+  nextVideoBigFormat.appendChild(nextVideoBigFormaSource) 
+
+  var mediaTab = document.querySelectorAll(".box-img");
+
+  mediaTab.forEach(function(nextVideoBigFormaSource, index) {
+    // Ajouter un attribut tabindex à chaque élément
+    nextVideoBigFormaSource.setAttribute("tabindex", index);
+  });
+
+ }
+    // Mettez à jour la variable "photo" avec la prochaine photo
+    photo = nextPhoto;
+    if (nextPhoto == undefined){
+      arrowRight.style.display = "none";
+    }
+      
+
+
+
+
+
+    }
+  
+  
+  if (event.key === 'ArrowLeft') {
+
+
+// Obtenez l'index de la photo actuellement affichée
+let currentPhotoIndex = photographerPhotos.indexOf(photo);  
+// Calculez l'index de la photo suivante
+let previewPhotoIndex = (currentPhotoIndex - 1) % photographerPhotos.length;
+// Récupérez la prochaine photo et son titre
+let previewPhoto = photographerPhotos[previewPhotoIndex];
+// Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+if(previewPhoto.image){
+previewImgBigFormat = document.createElement("img")
+previewImgBigFormat.setAttribute("class","img-big-format")
+previewImgBigFormat.setAttribute("data-date",previewPhoto.date)
+previewImgBigFormat.setAttribute("title",previewPhoto.title)
+previewImgBigFormat.setAttribute("alt",previewPhoto.title)
+previewImgBigFormat.src = `assets/photographers/${previewPhoto.image}`;
+photoContainerLightbox.appendChild(previewImgBigFormat);
+
+titleLightbox.textContent = previewPhoto.title;
+
+var mediaTab = document.querySelectorAll(".img-big-format");
+mediaTab.forEach(function(previewImgBigFormat, index) {
+// Ajouter un attribut tabindex à chaque élément
+previewImgBigFormat.setAttribute("tabindex", index);
+});
+
+}
+if(previewPhoto.video){
+previewVideoBigFormat = document.createElement("video")
+previewVideoBigFormat.setAttribute("class","img-big-format")
+photoContainerLightbox.appendChild(previewVideoBigFormat);
+
+previewVideoSourceBigFormat = document.createElement("source")
+previewVideoSourceBigFormat.src = `assets/photographers/${previewPhoto.image}`; 
+previewVideoSourceBigFormat.type ="video/mp4";
+previewVideoSourceBigFormat.setAttribute("data-date",previewPhoto.date)
+previewVideoSourceBigFormat.setAttribute("title",previewPhoto.title)
+previewVideoBigFormat.appendChild(previewVideoSourceBigFormat);
+
+var mediaTab = document.querySelectorAll(".img-big-format");
+
+mediaTab.forEach(function(previewVideoBigFormat, index) {
+// Ajouter un attribut tabindex à chaque élément
+previewVideoBigFormat.setAttribute("tabindex", index);
+});
+
+}
+// Mettez à jour la variable "photo" avec la prochaine photo
+photo = previewPhoto;
+if (previewPhoto == undefined){
+  arrowLeft.style.display = "none";
+}
+
+
+
+
 
       
     }

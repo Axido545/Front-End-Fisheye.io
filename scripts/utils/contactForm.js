@@ -68,22 +68,18 @@ function closeModal() {
     modal.attr('aria-hidden', 'false')
 }
 
-document.addEventListener('keydown', function(event) {
+const btnContactOne = document.querySelector(".contact_button");
+
+btnContactOne.addEventListener('keydown', function(event) {
   if (event.key === 'Enter' ) {
     displayModal()  }
 });
 
-
-
-
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') {
-    modal.style.display = "none";
-  }
-});
-
-
-
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      modal.style.display = "none";
+    }
+  });
 
 
 const btnContact = document.querySelector(".contact_button")
