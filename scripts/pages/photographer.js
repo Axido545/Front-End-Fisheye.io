@@ -1,8 +1,10 @@
 async function getPhotographerData() {
   try {
-    const response = await fetch('data/photographers.json');
+    const response = await fetch("data/photographers.json");
     if (!response.ok) {
-      throw new Error("Une erreur s'est produite lors de la récupération des données des photographes.");
+      throw new Error(
+        "Une erreur s'est produite lors de la récupération des données des photographes.",
+      );
     }
     const data = await response.json();
     return data;
@@ -14,14 +16,16 @@ async function getPhotographerData() {
 
 function getPhotographerIdFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get('id');
+  const id = urlParams.get("id");
   return id ? parseInt(id) : null;
 }
 
 async function getPhotographerById(photographerId) {
   const data = await getPhotographerData();
   if (data) {
-    const photographer = data.photographers.find(photographer => photographer.id === photographerId);
+    const photographer = data.photographers.find(
+      (photographer) => photographer.id === photographerId,
+    );
     return photographer ? { photographer } : { photographer: null };
   }
   return { photographer: null };
@@ -30,12 +34,14 @@ async function getPhotographerById(photographerId) {
 async function init() {
   const id = getPhotographerIdFromURL();
   if (id) {
-    const { photographer } = await getPhotographerById(id);  
+    const { photographer } = await getPhotographerById(id);
     if (photographer) {
       console.log(photographer);
       // Utilisez les données du photographe pour afficher les informations nécessaires
     } else {
-      console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
+      console.error(
+        `Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`,
+      );
     }
   } else {
     console.error("Aucun identifiant de photographe spécifié dans l'URL.");
@@ -44,42 +50,46 @@ async function init() {
 init();
 async function getPhotographerPhotos(photographerId) {
   try {
-    const response = await fetch('data/photographers.json');
+    const response = await fetch("data/photographers.json");
     if (!response.ok) {
-      throw new Error("Une erreur s'est produite lors de la récupération des données des photographes.");
+      throw new Error(
+        "Une erreur s'est produite lors de la récupération des données des photographes.",
+      );
     }
     const data = await response.json();
-    const photographerPhotos = data.media.filter(photo => photo.photographerId === photographerId);
+    const photographerPhotos = data.media.filter(
+      (photo) => photo.photographerId === photographerId,
+    );
     return photographerPhotos;
   } catch (error) {
     console.error(error);
     return [];
   }
 }
-//ajout du lien vers l'accueil
-const logo  = document.querySelector(".logo");
-logo.setAttribute("alt","Logo Fisheye")
+// ajout du lien vers l'accueil
+const logo = document.querySelector(".logo");
+logo.setAttribute("alt", "Logo Fisheye");
 const header = document.querySelector("header");
 const logoLink = document.createElement("a");
 logoLink.setAttribute("href", "index.html");
 logoLink.setAttribute("aria-label", "retour à la page d'accueil");
 
-logoLink.appendChild(logo)
+logoLink.appendChild(logo);
 header.appendChild(logoLink);
 
+const lang = document.querySelector("html");
+lang.setAttribute("lang", "fr");
 
-const lang = document.querySelector("html")
-lang.setAttribute("lang","fr")
-
-/////////////////////////////////////affichage des éléments header ///////////////////////////////////////
-//fonction  photographerFactory, paramètre data.
+/// //////////////////////////////////affichage des éléments header ///////////////////////////////////////
+// fonction  photographerFactory, paramètre data.
 async function displayPhotographerInfo() {
   const id = getPhotographerIdFromURL();
   const { photographer } = await getPhotographerById(id);
 
   if (photographer) {
-    const photographerInfoSection = document.querySelector(".photograph-header");
-    const portrait = photographer.portrait;
+    const photographerInfoSection =
+      document.querySelector(".photograph-header");
+    const { portrait } = photographer;
 
     // Partie info du photographe
     const sectionInfo = document.createElement("section");
@@ -87,7 +97,10 @@ async function displayPhotographerInfo() {
     photographerInfoSection.appendChild(sectionInfo);
 
     const sectionPicture = document.createElement("section");
-    sectionPicture.setAttribute("class", "picture-photograph container-img img");
+    sectionPicture.setAttribute(
+      "class",
+      "picture-photograph container-img img",
+    );
     photographerInfoSection.appendChild(sectionPicture);
 
     const img = document.createElement("img");
@@ -111,25 +124,20 @@ async function displayPhotographerInfo() {
     photographerTagline.textContent = `${photographer.tagline}`;
     sectionInfo.appendChild(photographerTagline);
 
-
-    const contactBTN = document.querySelector(".contact_button")
-    contactBTN.setAttribute("aria-label", "contactez le photographe")
-
-
-    
+    const contactBTN = document.querySelector(".contact_button");
+    contactBTN.setAttribute("aria-label", "contactez le photographe");
 
     const logo = document.querySelector(".logo");
-    logo.setAttribute("alt", "Fisheye Logo")
-    logo.setAttribute("aria-label", "Retour à la page d'accueil")
-
+    logo.setAttribute("alt", "Fisheye Logo");
+    logo.setAttribute("aria-label", "Retour à la page d'accueil");
 
     const headerPhotograph = document.querySelector("header");
 
     // headerPhotograph.style.width = "1240px";
-
-    
   } else {
-    console.error(`Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`);
+    console.error(
+      `Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`,
+    );
   }
 }
 displayPhotographerInfo();
