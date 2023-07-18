@@ -62,7 +62,7 @@ function displayModal() {
 }
 function closeModal() {
   modal.style.display = "none";
-  modal.attr("aria-hidden", "false");
+  modal.setAttribute("aria-hidden", "false");
 }
 
 const btnContactOne = document.querySelector(".contact_button");
@@ -223,7 +223,7 @@ form.message.addEventListener("change", function () {
 });
 
 const validFirst = function (inputFirst) {
-  if (inputFirst.value == "") {
+  if (inputFirst.value === "") {
     validFirstMsg.innerHTML = "Veuillez entrer un prénom";
     form.first.style.borderColor = "red";
   } else if (inputFirst.value.length < 2) {
@@ -270,14 +270,14 @@ const validEmail = function (inputEmail) {
 };
 
 const validMessage = function (inputMessage) {
-  if (inputMessage == "") {
+  if (inputMessage === "") {
     validMessageMsg.innerHTML = "Veuillez écrire un message";
     form.message.style.borderColor = "red";
   }
 };
 
 function checkPrenom() {
-  if (form.first.value == "") {
+  if (form.first.value === "") {
     validFirstMsg.innerHTML = "Veuillez entrer un prénom";
     return false;
   }
@@ -324,7 +324,7 @@ function checkEmail() {
 }
 
 function checkMessage() {
-  if (form.message == "") {
+  if (form.message === "") {
     validMessageMsg.innerHTML = "Veuillez écrire un message";
     return false;
   }
