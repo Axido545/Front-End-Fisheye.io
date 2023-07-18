@@ -340,12 +340,333 @@ async function displayPhotographerInfo() {
       lightboxLink.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
         openLightbox();
+        openLightbox();
 
-      }
+        const oldSectionInnerLightBox = document.querySelector(
+          ".section-inner-lightbox",
+        );
+        if (oldSectionInnerLightBox) {
+          bgModalLightBox.removeChild(oldSectionInnerLightBox);
+        }
 
+        const sectionInnerLightBox = document.createElement("section");
+        sectionInnerLightBox.setAttribute("class", "section-inner-lightbox");
+        bgModalLightBox.appendChild(sectionInnerLightBox);
 
-      
-      });
+        const photoContainerLightbox = document.createElement("div");
+        photoContainerLightbox.setAttribute(
+          "class",
+          "photo-container-lightbox",
+        );
+        sectionInnerLightBox.appendChild(photoContainerLightbox);
+
+        if (photo.video) {
+          const photoBigFormatVideo = document.createElement("video");
+          photoBigFormatVideo.setAttribute("class", "img-big-format");
+          photoBigFormatVideo.setAttribute("controls", "");
+
+          photoContainerLightbox.appendChild(photoBigFormatVideo);
+
+          const photoBigFormatVideoSource = document.createElement("source");
+          photoBigFormatVideoSource.src = `assets/photographers/${photo.video}`;
+          photoBigFormatVideoSource.type = "video/mp4";
+
+          photoBigFormatVideoSource.setAttribute("data-date", photo.date);
+          photoBigFormatVideoSource.setAttribute("title", photo.title);
+          photoBigFormatVideoSource.setAttribute("alt", photo.title);
+
+          photoBigFormatVideo.appendChild(photoBigFormatVideoSource);
+
+          var mediaTab = document.querySelectorAll(".box-img");
+
+          mediaTab.forEach((photoVideoSource, index) => {
+            // Ajouter un attribut tabindex à chaque élément
+            photoBigFormatVideoSource.setAttribute("tabindex", index);
+          });
+        }
+
+        if (photo.image) {
+          const imgBigFormat = document.createElement("img");
+          imgBigFormat.setAttribute("class", "img-big-format");
+          imgBigFormat.setAttribute("data-date", photo.date);
+          imgBigFormat.setAttribute("title", photo.title);
+          imgBigFormat.setAttribute("alt", photo.title);
+          imgBigFormat.src = `assets/photographers/${photo.image}`;
+          photoContainerLightbox.appendChild(imgBigFormat);
+
+          var mediaTab = document.querySelectorAll(".img-big-format");
+
+          mediaTab.forEach((photoImage, index) => {
+            // Ajouter un attribut tabindex à chaque élément
+            photoImage.setAttribute("tabindex", index);
+          });
+        }
+        const commandesLightbox = document.createElement("div");
+        commandesLightbox.setAttribute("class", "commandes-lightbox");
+        sectionInnerLightBox.appendChild(commandesLightbox);
+
+        const arrowLeft = document.createElement("i");
+        arrowLeft.setAttribute("class", "fa-solid fa-chevron-left arrow-left");
+        arrowLeft.setAttribute("aria-label", "media précédent");
+        commandesLightbox.appendChild(arrowLeft);
+
+        const arrowRight = document.createElement("i");
+        arrowRight.setAttribute(
+          "class",
+          "fa-solid fa-chevron-right arrow-right",
+        );
+        arrowRight.setAttribute("aria-label", "media suivant");
+        commandesLightbox.appendChild(arrowRight);
+
+        const closeLightBox = document.createElement("i");
+        closeLightBox.setAttribute("class", "fa-solid fa-xmark close-lightbox");
+        commandesLightbox.appendChild(closeLightBox);
+
+        const titleLightbox = document.createElement("span");
+        titleLightbox.setAttribute("class", "title-lightbox");
+        titleLightbox.textContent = photo.title;
+        commandesLightbox.appendChild(titleLightbox);
+
+        closeLightBox.addEventListener("click", () => {
+          closLightbox();
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            closLightbox();
+          }
+        });
+
+        arrowRight.addEventListener("click", () => {
+          // Obtenez l'index de la photo actuellement affichée
+          const currentPhotoIndex = photographerPhotos.indexOf(photo);
+          // Calculez l'index de la photo suivante
+          const nextPhotoIndex =
+            (currentPhotoIndex + 1) % photographerPhotos.length;
+          // Récupérez la prochaine photo et son titre
+          const nextPhoto = photographerPhotos[nextPhotoIndex];
+          // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+          if (nextPhoto.image) {
+            nextImgBigFormat = document.createElement("img");
+            nextImgBigFormat.setAttribute("class", "img-big-format");
+            nextImgBigFormat.setAttribute("data-date", photo.date);
+            nextImgBigFormat.setAttribute("title", nextPhoto.title);
+            nextImgBigFormat.setAttribute("alt", nextPhoto.title);
+            nextImgBigFormat.src = `assets/photographers/${nextPhoto.image}`;
+            photoContainerLightbox.appendChild(nextImgBigFormat);
+
+            titleLightbox.textContent = nextPhoto.title;
+
+            const mediaTab = document.querySelectorAll(".img-big-format");
+            mediaTab.forEach((nextImgBigFormat, index) => {
+              // Ajouter un attribut tabindex à chaque élément
+              nextImgBigFormat.setAttribute("tabindex", index);
+            });
+          }
+          if (nextPhoto.video) {
+            const nextVideoBigFormat = document.createElement("video");
+            nextVideoBigFormat.setAttribute("class", "img-big-format");
+            photoContainerLightbox.appendChild(nextVideoBigFormat);
+
+            const nextVideoBigFormaSource = document.createElement("source");
+            nextVideoBigFormaSource.src = `assets/photographers/${nextPhoto.video}`;
+            nextVideoBigFormaSource.type = "video/mp4";
+
+            nextVideoBigFormaSource.setAttribute("data-date", nextPhoto.date);
+            nextVideoBigFormaSource.setAttribute("title", nextPhoto.title);
+            nextVideoBigFormaSource.setAttribute("alt", nextPhoto.title);
+
+            nextVideoBigFormat.appendChild(nextVideoBigFormaSource);
+
+            const mediaTab = document.querySelectorAll(".img-big-format");
+
+            mediaTab.forEach((nextVideoBigFormaSource, index) => {
+              // Ajouter un attribut tabindex à chaque élément
+              nextVideoBigFormaSource.setAttribute("tabindex", index);
+            });
+          }
+          // Mettez à jour la variable "photo" avec la prochaine photo
+          photo = nextPhoto;
+          if (nextPhoto == undefined) {
+            arrowRight.style.display = "none";
+          }
+        });
+
+        arrowLeft.addEventListener("click", () => {
+          // Obtenez l'index de la photo actuellement affichée
+          const currentPhotoIndex = photographerPhotos.indexOf(photo);
+          // Calculez l'index de la photo suivante
+          const previewPhotoIndex =
+            (currentPhotoIndex - 1) % photographerPhotos.length;
+          // Récupérez la prochaine photo et son titre
+          const previewPhoto = photographerPhotos[previewPhotoIndex];
+          // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+          if (previewPhoto.image) {
+            previewImgBigFormat = document.createElement("img");
+            previewImgBigFormat.setAttribute("class", "img-big-format");
+            previewImgBigFormat.setAttribute("data-date", previewPhoto.date);
+            previewImgBigFormat.setAttribute("title", previewPhoto.title);
+            previewImgBigFormat.setAttribute("alt", previewPhoto.title);
+            previewImgBigFormat.src = `assets/photographers/${previewPhoto.image}`;
+            photoContainerLightbox.appendChild(previewImgBigFormat);
+
+            titleLightbox.textContent = previewPhoto.title;
+
+            var mediaTab = document.querySelectorAll(".img-big-format");
+            mediaTab.forEach((previewImgBigFormat, index) => {
+              // Ajouter un attribut tabindex à chaque élément
+              previewImgBigFormat.setAttribute("tabindex", index);
+            });
+          }
+          if (previewPhoto.video) {
+            previewVideoBigFormat = document.createElement("video");
+            previewVideoBigFormat.setAttribute("class", "img-big-format");
+            photoContainerLightbox.appendChild(previewVideoBigFormat);
+
+            previewVideoSourceBigFormat = document.createElement("source");
+            previewVideoSourceBigFormat.src = `assets/photographers/${previewPhoto.image}`;
+            previewVideoSourceBigFormat.type = "video/mp4";
+            previewVideoSourceBigFormat.setAttribute(
+              "data-date",
+              previewPhoto.date,
+            );
+            previewVideoSourceBigFormat.setAttribute(
+              "title",
+              previewPhoto.title,
+            );
+            previewVideoBigFormat.appendChild(previewVideoSourceBigFormat);
+
+            var mediaTab = document.querySelectorAll(".img-big-format");
+
+            mediaTab.forEach((previewVideoBigFormat, index) => {
+              // Ajouter un attribut tabindex à chaque élément
+              previewVideoBigFormat.setAttribute("tabindex", index);
+            });
+          }
+          // Mettez à jour la variable "photo" avec la prochaine photo
+          photo = previewPhoto;
+          if (previewPhoto == undefined) {
+            arrowLeft.style.display = "none";
+          }
+        });
+
+        // quand on utilise la touche flèche
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowRight") {
+            // Obtenez l'index de la photo actuellement affichée
+            const currentPhotoIndex = photographerPhotos.indexOf(photo);
+            // Calculez l'index de la photo suivante
+            const nextPhotoIndex =
+              (currentPhotoIndex + 1) % photographerPhotos.length;
+            // Récupérez la prochaine photo et son titre
+            const nextPhoto = photographerPhotos[nextPhotoIndex];
+            // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+            if (nextPhoto.image) {
+              nextImgBigFormat = document.createElement("img");
+              nextImgBigFormat.setAttribute("class", "img-big-format");
+              nextImgBigFormat.setAttribute("data-date", photo.date);
+              nextImgBigFormat.setAttribute("title", nextPhoto.title);
+              nextImgBigFormat.setAttribute("alt", nextPhoto.title);
+              nextImgBigFormat.src = `assets/photographers/${nextPhoto.image}`;
+              photoContainerLightbox.appendChild(nextImgBigFormat);
+
+              titleLightbox.textContent = nextPhoto.title;
+
+              const mediaTab = document.querySelectorAll(".img-big-format");
+              mediaTab.forEach((nextImgBigFormat, index) => {
+                // Ajouter un attribut tabindex à chaque élément
+                nextImgBigFormat.setAttribute("tabindex", index);
+              });
+            }
+            if (nextPhoto.video) {
+              const nextVideoBigFormat = document.createElement("video");
+              nextVideoBigFormat.setAttribute("class", "img-big-format");
+              photoContainerLightbox.appendChild(nextVideoBigFormat);
+
+              const nextVideoBigFormaSource = document.createElement("source");
+              nextVideoBigFormaSource.src = `assets/photographers/${nextPhoto.video}`;
+              nextVideoBigFormaSource.type = "video/mp4";
+
+              nextVideoBigFormaSource.setAttribute("data-date", nextPhoto.date);
+              nextVideoBigFormaSource.setAttribute("title", nextPhoto.title);
+              nextVideoBigFormaSource.setAttribute("alt", nextPhoto.title);
+
+              nextVideoBigFormat.appendChild(nextVideoBigFormaSource);
+
+              var mediaTab = document.querySelectorAll(".box-img");
+
+              mediaTab.forEach((nextVideoBigFormaSource, index) => {
+                // Ajouter un attribut tabindex à chaque élément
+                nextVideoBigFormaSource.setAttribute("tabindex", index);
+              });
+            }
+            // Mettez à jour la variable "photo" avec la prochaine photo
+            photo = nextPhoto;
+            if (nextPhoto == undefined) {
+              arrowRight.style.display = "none";
+            }
+          }
+
+          if (event.key === "ArrowLeft") {
+            // Obtenez l'index de la photo actuellement affichée
+            const currentPhotoIndex = photographerPhotos.indexOf(photo);
+            // Calculez l'index de la photo suivante
+            const previewPhotoIndex =
+              (currentPhotoIndex - 1) % photographerPhotos.length;
+            // Récupérez la prochaine photo et son titre
+            const previewPhoto = photographerPhotos[previewPhotoIndex];
+            // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
+            if (previewPhoto.image) {
+              previewImgBigFormat = document.createElement("img");
+              previewImgBigFormat.setAttribute("class", "img-big-format");
+              previewImgBigFormat.setAttribute("data-date", previewPhoto.date);
+              previewImgBigFormat.setAttribute("title", previewPhoto.title);
+              previewImgBigFormat.setAttribute("alt", previewPhoto.title);
+              previewImgBigFormat.src = `assets/photographers/${previewPhoto.image}`;
+              photoContainerLightbox.appendChild(previewImgBigFormat);
+
+              titleLightbox.textContent = previewPhoto.title;
+
+              var mediaTab = document.querySelectorAll(".img-big-format");
+              mediaTab.forEach((previewImgBigFormat, index) => {
+                // Ajouter un attribut tabindex à chaque élément
+                previewImgBigFormat.setAttribute("tabindex", index);
+              });
+            }
+            if (previewPhoto.video) {
+              previewVideoBigFormat = document.createElement("video");
+              previewVideoBigFormat.setAttribute("class", "img-big-format");
+              photoContainerLightbox.appendChild(previewVideoBigFormat);
+
+              previewVideoSourceBigFormat = document.createElement("source");
+              previewVideoSourceBigFormat.src = `assets/photographers/${previewPhoto.image}`;
+              previewVideoSourceBigFormat.type = "video/mp4";
+              previewVideoSourceBigFormat.setAttribute(
+                "data-date",
+                previewPhoto.date,
+              );
+              previewVideoSourceBigFormat.setAttribute(
+                "title",
+                previewPhoto.title,
+              );
+              previewVideoBigFormat.appendChild(previewVideoSourceBigFormat);
+
+              var mediaTab = document.querySelectorAll(".img-big-format");
+
+              mediaTab.forEach((previewVideoBigFormat, index) => {
+                // Ajouter un attribut tabindex à chaque élément
+                previewVideoBigFormat.setAttribute("tabindex", index);
+              });
+            }
+            // Mettez à jour la variable "photo" avec la prochaine photo
+            photo = previewPhoto;
+            if (previewPhoto == undefined) {
+              arrowLeft.style.display = "none";
+            }
+          }
+        });
+
+      }});
       /// ////////////////////////LIGHTBOX event/////////////////////////////////
 
 
@@ -482,16 +803,16 @@ async function displayPhotographerInfo() {
             photoContainerLightbox.appendChild(nextVideoBigFormat);
 
             const nextVideoBigFormaSource = document.createElement("source");
-            nextVideoBigFormaSource.src = `assets/photographers/${photo.video}`;
+            nextVideoBigFormaSource.src = `assets/photographers/${nextPhoto.video}`;
             nextVideoBigFormaSource.type = "video/mp4";
 
-            nextVideoBigFormaSource.setAttribute("data-date", photo.date);
-            nextVideoBigFormaSource.setAttribute("title", photo.title);
-            nextVideoBigFormaSource.setAttribute("alt", photo.title);
+            nextVideoBigFormaSource.setAttribute("data-date", nextPhoto.date);
+            nextVideoBigFormaSource.setAttribute("title", nextPhoto.title);
+            nextVideoBigFormaSource.setAttribute("alt", nextPhoto.title);
 
             nextVideoBigFormat.appendChild(nextVideoBigFormaSource);
 
-            const mediaTab = document.querySelectorAll(".box-img");
+            const mediaTab = document.querySelectorAll(".img-big-format");
 
             mediaTab.forEach((nextVideoBigFormaSource, index) => {
               // Ajouter un attribut tabindex à chaque élément
@@ -597,12 +918,12 @@ async function displayPhotographerInfo() {
               photoContainerLightbox.appendChild(nextVideoBigFormat);
 
               const nextVideoBigFormaSource = document.createElement("source");
-              nextVideoBigFormaSource.src = `assets/photographers/${photo.video}`;
+              nextVideoBigFormaSource.src = `assets/photographers/${nextPhoto.video}`;
               nextVideoBigFormaSource.type = "video/mp4";
 
-              nextVideoBigFormaSource.setAttribute("data-date", photo.date);
-              nextVideoBigFormaSource.setAttribute("title", photo.title);
-              nextVideoBigFormaSource.setAttribute("alt", photo.title);
+              nextVideoBigFormaSource.setAttribute("data-date", nextPhoto.date);
+              nextVideoBigFormaSource.setAttribute("title", nextPhoto.title);
+              nextVideoBigFormaSource.setAttribute("alt", nextPhoto.title);
 
               nextVideoBigFormat.appendChild(nextVideoBigFormaSource);
 
@@ -794,6 +1115,31 @@ async function displayPhotographerInfo() {
         numberLikes.textContent = photo.likes;
         updateTotalLikes();
       });
+
+      iconLikes.addEventListener("keydown", () => {
+if(event.key === "Enter") {
+  if (!iconLikes.classList.contains("fa-solid")) {
+    iconLikes.classList.remove("fa-regular");
+    iconLikes.classList.add("fa-solid");
+    photo.likes++;
+    totalLikes++;
+  } else {
+    iconLikes.classList.remove("fa-solid");
+    iconLikes.classList.add("fa-regular");
+    photo.likes--;
+    totalLikes--;
+  }
+  numberLikes.textContent = photo.likes;
+  updateTotalLikes();
+
+
+
+}
+
+     
+      });
+
+
       updateTotalLikes();
     });
 
