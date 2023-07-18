@@ -126,51 +126,31 @@ async function displayPhotographerInfo() {
     selectFiltre.appendChild(optionThree);
 
     /// ////////FILTRE EVENT
-
+function displayByPopularity(){
+// Sélection tous les éléments avec la classe "photo-container"
+const mediaElements = document.querySelectorAll(".photo-container");
+// Convertion les éléments en un tableau
+const mediaArray = Array.from(mediaElements);
+// Trie les éléments par popularité (avec la classe "number-likes")
+mediaArray.sort((a, b) => {
+  const likesA = parseInt(a.querySelector(".number-likes").textContent);
+  const likesB = parseInt(b.querySelector(".number-likes").textContent);
+  return likesB - likesA;
+});
+// Réinsértion les éléments triés dans leur conteneur d'origine
+const mediaContainer = document.querySelector(".photo-gallery");
+mediaArray.forEach((media) => {
+  mediaContainer.appendChild(media);
+});
+}
     // au clic
     optionOne.addEventListener("click", () => {
-      // Sélection tous les éléments avec la classe "photo-container"
-      const mediaElements = document.querySelectorAll(".photo-container");
-      // Convertion les éléments en un tableau
-      const mediaArray = Array.from(mediaElements);
-      // Trie les éléments par popularité (avec la classe "number-likes")
-      mediaArray.sort((a, b) => {
-        const likesA = parseInt(a.querySelector(".number-likes").textContent);
-        const likesB = parseInt(b.querySelector(".number-likes").textContent);
-        return likesB - likesA;
-      });
-      // Réinsértion les éléments triés dans leur conteneur d'origine
-      const mediaContainer = document.querySelector(".photo-gallery");
-      mediaArray.forEach((media) => {
-        mediaContainer.appendChild(media);
-      });
+      displayByPopularity
+      
     });
 
-    // avec la tocuhe entrée
-    optionOne.addEventListener("keydown", (event) => {
-      // Vérifier si la touche enfoncée est "Entrée" (keyCode 13)
-      if (event.key === "Enter") {
-        // Exécuter le même code que le gestionnaire "click"
-        // Sélection tous les éléments avec la classe "photo-container"
-        const mediaElements = document.querySelectorAll(".photo-container");
-        // Convertion les éléments en un tableau
-        const mediaArray = Array.from(mediaElements);
-        // Trie les éléments par popularité (avec la classe "number-likes")
-        mediaArray.sort((a, b) => {
-          const likesA = parseInt(a.querySelector(".number-likes").textContent);
-          const likesB = parseInt(b.querySelector(".number-likes").textContent);
-          return likesB - likesA;
-        });
-        // Réinsértion les éléments triés dans leur conteneur d'origine
-        const mediaContainer = document.querySelector(".photo-gallery");
-        mediaArray.forEach((media) => {
-          mediaContainer.appendChild(media);
-        });
-      }
-    });
-
-    // quand on clic
-    optionTwo.addEventListener("click", () => {
+  
+    function displayByDate(){
       // Sélectionnez tous les éléments avec la classe "photo-container"
       const mediaElements = document.querySelectorAll(".photo-container");
       // Convertissez les éléments en un tableau
@@ -178,10 +158,10 @@ async function displayPhotographerInfo() {
       // Triez les éléments par date
       mediaArray.sort((a, b) => {
         const dateA = new Date(
-          a.querySelector("img, video").getAttribute("data-date"),
+          a.querySelector("img, source").getAttribute("data-date"),
         );
         const dateB = new Date(
-          b.querySelector("img, video").getAttribute("data-date"),
+          b.querySelector("img, source").getAttribute("data-date"),
         );
         return dateA - dateB;
       });
@@ -190,112 +170,118 @@ async function displayPhotographerInfo() {
       mediaArray.forEach((media) => {
         mediaContainer.appendChild(media);
       });
+
+
+    }
+
+
+    // quand on clic
+    optionTwo.addEventListener("click", () => {
+displayByDate()
     });
 
-    // avec la touche entrée
-    optionTwo.addEventListener("keydown", (event) => {
-      // Vérifier si la touche enfoncée est "Entrée" (keyCode 13)
-      if (event.key === "Enter") {
-        // Exécuter le même code que le gestionnaire "click"
-        // Sélectionnez tous les éléments avec la classe "photo-container"
-        const mediaElements = document.querySelectorAll(".photo-container");
-        // Convertissez les éléments en un tableau
-        const mediaArray = Array.from(mediaElements);
-        // Triez les éléments par date
-        mediaArray.sort((a, b) => {
-          const dateA = new Date(
-            a.querySelector("img, video").getAttribute("data-date"),
-          );
-          const dateB = new Date(
-            b.querySelector("img, video").getAttribute("data-date"),
-          );
-          return dateA - dateB;
-        });
-        // Réinsérez les éléments triés dans leur conteneur d'origine
-        const mediaContainer = document.querySelector(".photo-gallery");
-        mediaArray.forEach((media) => {
-          mediaContainer.appendChild(media);
-        });
-      }
-    });
-
+    
     // option 3 au clic
 
+    function displayByTitle(){
+   // Sélectionnez tous les éléments avec la classe "photo-container"
+   const mediaElements = document.querySelectorAll(".photo-container");
+   // Convertissez les éléments en un tableau
+   const mediaArray = Array.from(mediaElements);
+   // Triez les éléments par titre
+   mediaArray.sort((a, b) => {
+     let titleA;
+     let titleB;
+     const imgElementA = a.querySelector("img");
+     const videoElementA = a.querySelector("video");
+     if (imgElementA) {
+       titleA = imgElementA.getAttribute("title");
+     } else if (videoElementA) {
+       const sourceElementA = videoElementA.querySelector("source");
+       if (sourceElementA) {
+         titleA = sourceElementA.getAttribute("title");
+       }
+     }
+     const imgElementB = b.querySelector("img");
+     const videoElementB = b.querySelector("video");
+     if (imgElementB) {
+       titleB = imgElementB.getAttribute("title");
+     } else if (videoElementB) {
+       const sourceElementB = videoElementB.querySelector("source");
+       if (sourceElementB) {
+         titleB = sourceElementB.getAttribute("title");
+       }
+     }
+     return titleA.localeCompare(titleB);
+   });
+   // Réinsérez les éléments triés dans leur conteneur d'origine
+   const mediaContainer = document.querySelector(".photo-gallery");
+   mediaArray.forEach((media) => {
+     mediaContainer.appendChild(media);
+   });
+    }
     optionThree.addEventListener("click", () => {
-      // Sélectionnez tous les éléments avec la classe "photo-container"
-      const mediaElements = document.querySelectorAll(".photo-container");
-      // Convertissez les éléments en un tableau
-      const mediaArray = Array.from(mediaElements);
-      // Triez les éléments par titre
-      mediaArray.sort((a, b) => {
-        let titleA;
-        let titleB;
-        const imgElementA = a.querySelector("img");
-        const videoElementA = a.querySelector("video");
-        if (imgElementA) {
-          titleA = imgElementA.getAttribute("title");
-        } else if (videoElementA) {
-          const sourceElementA = videoElementA.querySelector("source");
-          if (sourceElementA) {
-            titleA = sourceElementA.getAttribute("title");
-          }
-        }
-        const imgElementB = b.querySelector("img");
-        const videoElementB = b.querySelector("video");
-        if (imgElementB) {
-          titleB = imgElementB.getAttribute("title");
-        } else if (videoElementB) {
-          const sourceElementB = videoElementB.querySelector("source");
-          if (sourceElementB) {
-            titleB = sourceElementB.getAttribute("title");
-          }
-        }
-        return titleA.localeCompare(titleB);
-      });
-      // Réinsérez les éléments triés dans leur conteneur d'origine
-      const mediaContainer = document.querySelector(".photo-gallery");
-      mediaArray.forEach((media) => {
-        mediaContainer.appendChild(media);
-      });
+      displayByTitle()
     });
+const selectFilter = document.getElementById("select-filter");
 
-    // // Fonction pour trier les éléments par titre
-    // function sortElementsByTitle() {
-    //   // Sélectionnez tous les éléments avec la classe "photo-container"
-    //   const mediaElements = document.querySelectorAll(".photo-container");
-    //   // Convertissez les éléments en un tableau
-    //   const mediaArray = Array.from(mediaElements);
-    //   // Triez les éléments par titre
-    //   mediaArray.sort((a, b) => {
-    //     // ...
-    //   });
-    //   // Réinsérez les éléments triés dans leur conteneur d'origine
-    //   const mediaContainer = document.querySelector(".photo-gallery");
-    //   mediaArray.forEach((media) => {
-    //     mediaContainer.appendChild(media);
-    //   });
-    // }
+// Gestionnaire d'événements pour déclencher le tri lorsque l'option sélectionnée change
+selectFilter.addEventListener("change", () => {
+  if (selectFilter.value === "Titre") {
+    // Tri par titre
 
-    // // Gestionnaire d'événement pour la touche "Entrée" sur le select "optionThree"
-    // function handleEnterKey(event) {
-    //   // Vérifier si la touche enfoncée est "Entrée" (keyCode 13) ou "Enter" (nouvelle approche avec "key")
+document.addEventListener("keydown",(event)=>{
+if(event.key === "Enter"){
+  displayByTitle()
+  }
+})
+}
+else if (selectFilter.value === "date"){
+document.addEventListener("keydown",(event)=> {
+if(event.key === "Enter"){
+displayByDate()
+}
+})
+    // Votre code de tri par date ici ...
+  } else if (selectFilter.value === "popular") {
+    // Tri par popularité
+    document.addEventListener("keydown", (event)=>{
+
+      if(event.key === "Enter") {
+       displayByPopularity()
+
+
+      }
+    });
+  
+
+
+    // Votre code de tri par popularité ici ...
+  }
+});
+
+
+document.addEventListener("keydown", (event)=>{
+      if (event.key === "Enter") {
+displayByPopularity()
+
+  }
+    });
+    // document.addEventListener("keydown", (event) => {
     //   if (event.key === "Enter") {
-    //     // Exécuter le même code que le gestionnaire "click"
-    //     sortElementsByTitle();
+    //     // Vérifier si l'élément actuellement en focus a la classe ".title-filter"
+    //     const focusedElement = document.activeElement;
+    //     if (focusedElement.classList.contains("title-filter")) {
+    //       // Votre code de tri ici ...
+    // console.log("baaam")
+    //       alert("ouiiiiii");
+    
+ 
+    //     }
     //   }
-    // }
-
-    // // Ajouter un gestionnaire d'événement pour le focus sur le select
-    // optionThree.addEventListener("focus", () => {
-    //   // Ajouter le gestionnaire d'événement keydown lorsqu'il obtient le focus
-    //   optionThree.addEventListener("keydown", handleEnterKey);
     // });
 
-    // // Supprimer le gestionnaire d'événement keydown lorsque l'option perd le focus
-    // optionThree.addEventListener("blur", () => {
-    //   // Supprimer le gestionnaire d'événement keydown lorsqu'il perd le focus
-    //   optionThree.removeEventListener("keydown", handleEnterKey);
-    // });
+
 
     const bgModalLightBox = document.createElement("section");
     bgModalLightBox.setAttribute("class", "bg-modal-lightbox");
@@ -1116,8 +1102,9 @@ async function displayPhotographerInfo() {
         updateTotalLikes();
       });
 
-      iconLikes.addEventListener("keydown", () => {
+      iconLikes.addEventListener("keydown", (event) => {
 if(event.key === "Enter") {
+
   if (!iconLikes.classList.contains("fa-solid")) {
     iconLikes.classList.remove("fa-regular");
     iconLikes.classList.add("fa-solid");
