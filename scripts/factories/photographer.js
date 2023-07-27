@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-plusplus */
 // fonction  photographerFactory, paramètre data.
 function photographerFactory(data) {
   // l'intérieur de la fonction, l'objet data est destructuré pour extraire les propriétés name et portrait.

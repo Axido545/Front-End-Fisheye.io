@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-console */
 async function getPhotographers() {
   try {
     const response = await fetch("data/photographers.json");
@@ -6,7 +8,6 @@ async function getPhotographers() {
       throw new Error(
         "Une erreur s'est produite lors de la récupération des données des photographes.",
       );
-    } else {
     }
     const data = await response.json();
     console.log(data);

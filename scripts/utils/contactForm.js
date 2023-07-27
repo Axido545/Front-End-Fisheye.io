@@ -1,3 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable func-names */
+/* eslint-disable no-shadow */
+/* eslint-disable no-console */
 async function getPhotographerData() {
   try {
     const response = await fetch("data/photographers.json");
@@ -17,7 +21,7 @@ async function getPhotographerData() {
 function getPhotographerIdFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
   const id = urlParams.get("id");
-  return id ? parseInt(id) : null;
+  return id ? parseInt(id, 10) : null;
 }
 
 async function getPhotographerById(photographerId) {
@@ -200,27 +204,10 @@ const validLastMsg = document.querySelector(".validator-last");
 const validEmailMsg = document.querySelector(".validator-email");
 const validMessageMsg = document.querySelector(".validator-message");
 const form = document.querySelector("#form-content");
-const regexFirstLast = new RegExp("^[\\p{L} -]{2,}$", "iu");
-const regexEmail = new RegExp(
-  "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$",
-);
+// c'est normal parsque eslin ne reconnait pas les anti slash
+const regexFirstLast = /^[\p{L} -]{2,}$/iu;
+const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
 const myForm = document.forms.namedItem("contact-photograph");
-
-form.first.addEventListener("change", function () {
-  validFirst(this);
-});
-
-form.last.addEventListener("change", function () {
-  validLast(this);
-});
-
-form.email.addEventListener("change", function () {
-  validEmail(this);
-});
-
-form.message.addEventListener("change", function () {
-  validMessage(this);
-});
 
 const validFirst = function (inputFirst) {
   if (inputFirst.value === "") {
@@ -257,7 +244,7 @@ const validLast = function (inputLast) {
 };
 
 const validEmail = function (inputEmail) {
-  if (inputEmail == "") {
+  if (inputEmail === "") {
     validEmailMsg.innerHTML = "Veuillez entrer un e-mail";
     form.email.style.borderColor = "red";
   } else if (regexEmail.test(inputEmail.value)) {
@@ -294,7 +281,7 @@ function checkPrenom() {
   return false;
 }
 function checkNom() {
-  if (form.last.value == "") {
+  if (form.last.value === "") {
     validLastMsg.innerHTML = "Veuillez entrer un nom";
     return false;
   }
@@ -311,7 +298,7 @@ function checkNom() {
   return false;
 }
 function checkEmail() {
-  if (form.email == "") {
+  if (form.email === "") {
     validEmailMsg.innerHTML = "Veuillez entrer un e-mail";
     return false;
   }
@@ -331,6 +318,22 @@ function checkMessage() {
   return true;
 }
 
+form.first.addEventListener("change", function () {
+  validFirst(this);
+});
+
+form.last.addEventListener("change", function () {
+  validLast(this);
+});
+
+form.email.addEventListener("change", function () {
+  validEmail(this);
+});
+
+form.message.addEventListener("change", function () {
+  validMessage(this);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   myForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -343,19 +346,19 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log(`Message :${form.message.value}`);
       closeModal();
     } else {
-      if (checkPrenom() == false) {
+      if (checkPrenom() === false) {
         validFirstMsg.innerHTML = "Veuillez entrer un prénom";
         form.first.style.borderColor = "red";
       }
-      if (checkNom() == false) {
+      if (checkNom() === false) {
         validLastMsg.innerHTML = "Veuillez entrer un nom";
         form.last.style.borderColor = "red";
       }
-      if (checkEmail() == false) {
+      if (checkEmail() === false) {
         validEmailMsg.innerHTML = "Veuillez entrer un e-mail";
         form.email.style.borderColor = "red";
       }
-      if (checkMessage() == false) {
+      if (checkMessage() === false) {
         validMessageMsg.innerHTML = "Veuillez entrer un message";
         form.message.style.borderColor = "red";
       }
@@ -367,6 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const elements = document.querySelectorAll("*");
 
 // Parcourir chaque élément et ajouter l'attribut "tabindex"
+// eslint-disable-next-line no-plusplus
 for (let i = 0; i < elements.length; i++) {
-  elements[i].setAttribute("tabindex", "0");
+  elements[i].setAttribute("tabindex", "3 ");
 }
