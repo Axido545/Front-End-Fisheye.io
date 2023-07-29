@@ -300,7 +300,6 @@ async function displayPhotographerInfo() {
       lightboxLink.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
           openLightbox();
-          openLightbox();
 
           const oldSectionInnerLightBox = document.querySelector(
             ".section-inner-lightbox",
