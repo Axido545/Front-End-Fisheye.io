@@ -18,11 +18,7 @@ function photographerFactory(data) {
     const pPrice = document.createElement("p");
     // l'attribut source de l'image reprend le chemin plus haut
     img.setAttribute("src", picture);
-    img.setAttribute("alt", "La photo du photographe");
-    img.setAttribute(
-      "aria-label",
-      "cliquez pour voir tous les photos du photographe",
-    );
+    img.setAttribute("alt", `La photo du photographe${name}`);
     divImg.setAttribute("class", contanerImg);
     pLocation.setAttribute("class", "location");
     pTagline.setAttribute("class", "tagline");
@@ -42,6 +38,10 @@ function photographerFactory(data) {
     article.appendChild(pPrice);
     const link = document.createElement("a");
     link.setAttribute("href", `photographer.html?id=${id}`); // ajout de l'id
+    link.setAttribute(
+      "aria-label",
+      `Cliquez pour voir tous les photos du photographe ${name}`,
+    );
     link.appendChild(article);
 
     const elements = document.querySelectorAll("*");
