@@ -431,7 +431,7 @@ textarea {
 .img-big-format {
   margin: auto;
   height: 85%;
-  width: 70%;
+  width: 65%;
   position: absolute;
   border-radius: 0.6rem;
   background-color: #868686;
@@ -448,9 +448,10 @@ textarea {
 
 .section-inner-lightbox {
   color: #901c1c;
-  width: 100%;
-  height: 100%;
+  width: 800px;
+  height: 600px;
   position: relative;
+  margin: 0 auto;
 }
 
 .arrow-left,
@@ -497,7 +498,7 @@ textarea {
   position: absolute;
   margin-right: 10%;
   bottom: 2%;
-  left: 15%;
+  left: 17%;
   margin: auto;
   font-size: 1.5rem;
   font-weight: 500;
