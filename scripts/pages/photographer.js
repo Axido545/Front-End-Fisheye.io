@@ -93,7 +93,7 @@ async function displayPhotographerInfo() {
     const img = document.createElement("img");
     const picture = `assets/photographers/${portrait}`;
     img.setAttribute("src", picture);
-    img.setAttribute("alt", "La photo du photographe");
+    img.setAttribute("alt", `La photo du photographe ${photographer.name}`);
     sectionPicture.appendChild(img);
 
     const photographerName = document.createElement("h1");
