@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+/* eslint-disable radix */
+/* eslint-disable no-console */
 async function getPhotographerData() {
   try {
     const response = await fetch("data/photographers.json");
@@ -48,27 +51,11 @@ async function init() {
   }
 }
 init();
-async function getPhotographerPhotos(photographerId) {
-  try {
-    const response = await fetch("data/photographers.json");
-    if (!response.ok) {
-      throw new Error(
-        "Une erreur s'est produite lors de la récupération des données des photographes.",
-      );
-    }
-    const data = await response.json();
-    const photographerPhotos = data.media.filter(
-      (photo) => photo.photographerId === photographerId,
-    );
-    return photographerPhotos;
-  } catch (error) {
-    console.error(error);
-    return [];
-  }
-}
+
 // ajout du lien vers l'accueil
 const logo = document.querySelector(".logo");
 logo.setAttribute("alt", "Logo Fisheye");
+logo.setAttribute("aria-label", "Retour à la page d'accueil");
 const header = document.querySelector("header");
 const logoLink = document.createElement("a");
 logoLink.setAttribute("href", "index.html");
@@ -126,14 +113,6 @@ async function displayPhotographerInfo() {
 
     const contactBTN = document.querySelector(".contact_button");
     contactBTN.setAttribute("aria-label", "contactez le photographe");
-
-    const logo = document.querySelector(".logo");
-    logo.setAttribute("alt", "Fisheye Logo");
-    logo.setAttribute("aria-label", "Retour à la page d'accueil");
-
-    const headerPhotograph = document.querySelector("header");
-
-    // headerPhotograph.style.width = "1240px";
   } else {
     console.error(
       `Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`,

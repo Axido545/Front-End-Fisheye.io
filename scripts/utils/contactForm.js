@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable func-names */
-/* eslint-disable no-shadow */
-/* eslint-disable no-console */
 async function getPhotographerData() {
   try {
     const response = await fetch("data/photographers.json");
@@ -54,6 +50,12 @@ async function init() {
   }
 }
 init();
+
+
+/* eslint-disable no-unused-vars */
+/* eslint-disable func-names */
+/* eslint-disable no-shadow */
+/* eslint-disable no-console */
 
 const modal = document.getElementById("contact_modal");
 modal.setAttribute("aria-hidden", "false");
