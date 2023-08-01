@@ -1,38 +1,5 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-console */
-async function getPhotographerData() {
-  try {
-    const response = await fetch("data/photographers.json");
-    if (!response.ok) {
-      throw new Error(
-        "Une erreur s'est produite lors de la récupération des données des photographes.",
-      );
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-}
-
-function getPhotographerIdFromURL() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get("id");
-  return id ? parseInt(id, 10) : null;
-}
-
-async function getPhotographerById(photographerId) {
-  const data = await getPhotographerData();
-  if (data) {
-    const photographer = data.photographers.find(
-      (photographer) => photographer.id === photographerId,
-    );
-    return photographer ? { photographer } : { photographer: null };
-  }
-  return { photographer: null };
-}
-
 async function init() {
   const id = getPhotographerIdFromURL();
   if (id) {

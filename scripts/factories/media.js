@@ -3,52 +3,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 /* eslint-disable radix */
-async function getPhotographerData() {
-  try {
-    const response = await fetch("data/photographers.json");
-    if (!response.ok) {
-      throw new Error(
-        "Une erreur s'est produite lors de la récupération des données des photographes.",
-      );
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    return null;
-  }
-}
-function getPhotographerIdFromURL() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get("id");
-  return id ? parseInt(id) : null;
-}
-async function getPhotographerById(photographerId) {
-  const data = await getPhotographerData();
-  if (data) {
-    const photographer = data.photographers.find(
-      (photographer) => photographer.id === photographerId,
-    );
-    return photographer ? { photographer } : { photographer: null };
-  }
-  return { photographer: null };
-}
-async function init() {
-  const id = getPhotographerIdFromURL();
-  if (id) {
-    const { photographer } = await getPhotographerById(id);
-
-    if (photographer) {
-      // Utilisez les données du photographe pour afficher les informations nécessaires
-    } else {
-      console.error(
-        `Le photographe avec l'identifiant '${id}' n'a pas été trouvé.`,
-      );
-    }
-  } else {
-    console.error("Aucun identifiant de photographe spécifié dans l'URL.");
-  }
-}
-init();
 
 async function getPhotographerPhotos(photographerId) {
   try {
@@ -68,6 +22,7 @@ async function getPhotographerPhotos(photographerId) {
     return [];
   }
 }
+
 const body = document.querySelector("body");
 const headerTop = document.querySelector("header");
 const main = document.querySelector("main");
@@ -525,8 +480,12 @@ async function displayPhotographerInfo() {
           // Récupérez la prochaine photo et son titre
           const previewPhoto = photographerPhotos[previewPhotoIndex];
           // Mettez à jour la source de l'image et le titre de la lightbox avec la photo suivante
-          photoContainerLightbox.innerHTML = "";
-
+          // photoContainerLightbox.innerHTML = "";
+          // if (previewPhoto === undefined) {
+          //   arrowLeft.style.display = "none";
+          // } else {
+          //   arrowLeft.style.display = "block"; // Show the left arrow otherwise
+          // }
           if (previewPhoto.image) {
             const previewImgBigFormat = document.createElement("img");
             previewImgBigFormat.setAttribute("class", "img-big-format");
@@ -544,6 +503,7 @@ async function displayPhotographerInfo() {
               previewImgBigFormat.setAttribute("tabindex", index);
             });
           }
+        
           if (previewPhoto.video) {
             const previewVideoBigFormat = document.createElement("video");
             previewVideoBigFormat.setAttribute("class", "img-big-format");
@@ -551,7 +511,7 @@ async function displayPhotographerInfo() {
 
             const previewVideoSourceBigFormat =
               document.createElement("source");
-            previewVideoSourceBigFormat.src = `assets/photographers/${previewPhoto.image}`;
+            previewVideoSourceBigFormat.src = `assets/photographers/${previewPhoto.video}`;
             previewVideoSourceBigFormat.type = "video/mp4";
             previewVideoSourceBigFormat.setAttribute(
               "data-date",
@@ -569,11 +529,13 @@ async function displayPhotographerInfo() {
               // Ajouter un attribut tabindex à chaque élément
               previewVideoBigFormat.setAttribute("tabindex", index);
             });
-          }// Mettez à jour la variable "photo" avec la prochaine photo
+          }
+          // // Mettez à jour la variable "photo" avec la prochaine photo
           photo = previewPhoto;
           if (previewPhoto === undefined) {
             arrowLeft.style.display = "none";
           }
+
         }
 
         arrowRight.addEventListener("click", () => {
